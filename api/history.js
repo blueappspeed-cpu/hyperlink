@@ -1,4 +1,4 @@
-import db from "../lib/db.js";
+import { getFile } from "../lib/github.js";
 
 export default async function handler(req, res) {
     if (req.method !== "GET") {
@@ -7,7 +7,22 @@ export default async function handler(req, res) {
         });
     }
 
-    const history = await db.get("history");
+    const { content } = await getFile();
 
-    return res.status(200).json(history || []);
+    const history = Object.entries(content)
+        .map(([code, data]) => ({
+            code,
+            url: data.url,
+            type: data.type,
+            clicks: data.clicks,
+            createdAt: data.createdAt
+        }))
+        .sort((a, b) => b.createdAt - a.createdAt)
+        .slice(0, 50)
+        .map(link => ({
+            ...link,
+            shortUrl: `${req.headers.origin || `https://${req.headers.host}`}/${link.code}`
+        }));
+
+    return res.status(200).json(history);
 }
