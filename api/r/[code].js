@@ -1,29 +1,36 @@
-import { getFile, saveFile } from "../../lib/github.js";
+import db from "../../../lib/db.js";
 
 export default async function handler(req, res) {
     if (req.method !== "GET") {
-        return res.status(405).send("Method Not Allowed");
+        return res.status(405).send("Method not allowed");
     }
 
     const { code } = req.query;
 
-    const { sha, content } = await getFile();
+    try {
+        const result = await db`
+            SELECT id, url, clicks
+            FROM links
+            WHERE code = ${code}
+            LIMIT 1
+        `;
 
-    const link = content[code];
+        if (result.length === 0) {
+            return res.status(404).send("Link not found");
+        }
 
-    if (!link) {
-        return res.status(404).send("Link not found");
+        const link = result[0];
+
+        await db`
+            UPDATE links
+            SET clicks = ${link.clicks + 1}
+            WHERE id = ${link.id}
+        `;
+
+        return res.redirect(302, link.url);
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).send("Server error");
     }
-
-    link.clicks = (link.clicks || 0) + 1;
-
-    content[code] = link;
-
-    await saveFile(content, sha);
-
-    res.writeHead(302, {
-        Location: link.url
-    });
-
-    res.end();
 }
