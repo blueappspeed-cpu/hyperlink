@@ -1,15 +1,14 @@
+import db from "../lib/db.js";
 import { randomBytes } from "crypto";
-import { getFile, saveFile } from "../lib/github.js";
 
 function generateCode(length = 6) {
     const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
+    const bytes = randomBytes(length);
     let code = "";
 
-    code += chars[Math.floor(Math.random() * 26)];
+    code += chars[bytes[0] % 26];
 
-    const bytes = randomBytes(length - 1);
-
-    for (let i = 0; i < bytes.length; i++) {
+    for (let i = 1; i < length; i++) {
         code += chars[bytes[i] % chars.length];
     }
 
@@ -23,38 +22,53 @@ export default async function handler(req, res) {
         });
     }
 
-    const { url, type } = req.body;
+    try {
+        const { url, type } = req.body;
 
-    if (!url) {
-        return res.status(400).json({
-            error: "Missing URL"
+        if (!url) {
+            return res.status(400).json({
+                error: "URL required"
+            });
+        }
+
+        let code;
+
+        while (true) {
+            code = generateCode();
+
+            const exists = await db`
+                SELECT id FROM links WHERE code = ${code}
+            `;
+
+            if (exists.length === 0) break;
+        }
+
+        await db`
+            INSERT INTO links (
+                code,
+                url,
+                type
+            )
+            VALUES (
+                ${code},
+                ${url},
+                ${type || "Plain"}
+            )
+        `;
+
+        const base =
+            req.headers.origin ||
+            `https://${req.headers.host}`;
+
+        return res.status(200).json({
+            success: true,
+            code,
+            shortUrl: `${base}/${code}`
+        });
+
+    } catch (error) {
+        return res.status(500).json({
+            error: "Server error"
         });
     }
-
-    const { sha, content } = await getFile();
-
-    let code;
-
-    do {
-        code = generateCode();
-    } while (content[code]);
-
-    content[code] = {
-        url,
-        type,
-        clicks: 0,
-        createdAt: Date.now()
-    };
-
-    await saveFile(content, sha);
-
-    const origin =
-        req.headers.origin ||
-        `https://${req.headers.host}`;
-
-    return res.status(200).json({
-        success: true,
-        code,
-        shortUrl: `${origin}/${code}`
-    });
 }
