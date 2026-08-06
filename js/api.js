@@ -1,42 +1,34 @@
-const API_BASE = "/api";
+const API = "/api";
 
-async function request(path, options = {}) {
-    const response = await fetch(`${API_BASE}${path}`, {
+export async function createShortLink(url, type) {
+    const response = await fetch(`${API}/create`, {
+        method: "POST",
         headers: {
             "Content-Type": "application/json"
         },
-        ...options
-    });
-
-    const data = await response.json().catch(() => ({}));
-
-    if (!response.ok) {
-        throw new Error(data.error || "Request failed");
-    }
-
-    return data;
-}
-
-export async function createShortLink(url, type) {
-    return request("/create", {
-        method: "POST",
         body: JSON.stringify({
             url,
             type
         })
     });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+        throw new Error(data.error || "Failed to create link");
+    }
+
+    return data;
 }
 
 export async function getHistory() {
-    return request("/history");
-}
+    const response = await fetch(`${API}/history`);
 
-export async function getStats(code) {
-    return request(`/stats/${code}`);
-}
+    const data = await response.json();
 
-export async function deleteLink(code) {
-    return request(`/delete/${code}`, {
-        method: "DELETE"
-    });
+    if (!response.ok) {
+        throw new Error(data.error || "Failed to load history");
+    }
+
+    return data;
 }
