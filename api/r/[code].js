@@ -1,4 +1,4 @@
-import db from "../../lib/db.js";
+import { getFile, saveFile } from "../../lib/github.js";
 
 export default async function handler(req, res) {
     if (req.method !== "GET") {
@@ -7,7 +7,9 @@ export default async function handler(req, res) {
 
     const { code } = req.query;
 
-    const link = await db.get(`link:${code}`);
+    const { sha, content } = await getFile();
+
+    const link = content[code];
 
     if (!link) {
         return res.status(404).send("Link not found");
@@ -15,7 +17,13 @@ export default async function handler(req, res) {
 
     link.clicks = (link.clicks || 0) + 1;
 
-    await db.set(`link:${code}`, link);
+    content[code] = link;
 
-    return res.redirect(302, link.url);
+    await saveFile(content, sha);
+
+    res.writeHead(302, {
+        Location: link.url
+    });
+
+    res.end();
 }
