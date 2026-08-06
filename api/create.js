@@ -1,5 +1,5 @@
-import db from "../lib/db.js";
-import { randomUUID } from "crypto";
+import { randomBytes } from "crypto";
+import { getFile, saveFile } from "../lib/github.js";
 
 function generateCode(length = 6) {
     const chars = "abcdefghijklmnopqrstuvwxyz0123456789";
@@ -7,8 +7,10 @@ function generateCode(length = 6) {
 
     code += chars[Math.floor(Math.random() * 26)];
 
-    for (let i = 1; i < length; i++) {
-        code += chars[Math.floor(Math.random() * chars.length)];
+    const bytes = randomBytes(length - 1);
+
+    for (let i = 0; i < bytes.length; i++) {
+        code += chars[bytes[i] % chars.length];
     }
 
     return code;
@@ -21,44 +23,38 @@ export default async function handler(req, res) {
         });
     }
 
-    const { url, type } = req.body ?? {};
+    const { url, type } = req.body;
 
     if (!url) {
         return res.status(400).json({
-            error: "URL is required"
+            error: "Missing URL"
         });
     }
 
-    let code = generateCode();
+    const { sha, content } = await getFile();
 
-    while (await db.get(`link:${code}`)) {
+    let code;
+
+    do {
         code = generateCode();
-    }
+    } while (content[code]);
 
-    const link = {
-        id: randomUUID(),
-        code,
+    content[code] = {
         url,
         type,
-        createdAt: Date.now(),
-        clicks: 0
+        clicks: 0,
+        createdAt: Date.now()
     };
 
-    await db.set(`link:${code}`, link);
+    await saveFile(content, sha);
 
-    const history = (await db.get("history")) || [];
-
-    history.unshift({
-        code,
-        url,
-        shortUrl: `${req.headers.origin}/${code}`
-    });
-
-    await db.set("history", history.slice(0, 50));
+    const origin =
+        req.headers.origin ||
+        `https://${req.headers.host}`;
 
     return res.status(200).json({
         success: true,
         code,
-        shortUrl: `${req.headers.origin}/${code}`
+        shortUrl: `${origin}/${code}`
     });
 }
