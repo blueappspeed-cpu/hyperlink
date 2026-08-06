@@ -1,4 +1,4 @@
-import { getFile } from "../lib/github.js";
+import db from "../lib/db.js";
 
 export default async function handler(req, res) {
     if (req.method !== "GET") {
@@ -7,22 +7,37 @@ export default async function handler(req, res) {
         });
     }
 
-    const { content } = await getFile();
+    try {
+        const links = await db`
+            SELECT 
+                code,
+                url,
+                type,
+                clicks,
+                created_at
+            FROM links
+            ORDER BY created_at DESC
+            LIMIT 50
+        `;
 
-    const history = Object.entries(content)
-        .map(([code, data]) => ({
-            code,
-            url: data.url,
-            type: data.type,
-            clicks: data.clicks,
-            createdAt: data.createdAt
-        }))
-        .sort((a, b) => b.createdAt - a.createdAt)
-        .slice(0, 50)
-        .map(link => ({
-            ...link,
-            shortUrl: `${req.headers.origin || `https://${req.headers.host}`}/${link.code}`
+        const origin =
+            req.headers.origin ||
+            `https://${req.headers.host}`;
+
+        const history = links.map(link => ({
+            code: link.code,
+            url: link.url,
+            type: link.type,
+            clicks: link.clicks,
+            createdAt: link.created_at,
+            shortUrl: `${origin}/${link.code}`
         }));
 
-    return res.status(200).json(history);
+        return res.status(200).json(history);
+
+    } catch (error) {
+        return res.status(500).json({
+            error: "Database error"
+        });
+    }
 }
