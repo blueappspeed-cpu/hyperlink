@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -6,11 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MORTYX · hyperlink</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Special+Elite&family=Courier+Prime:wght@400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Anton&family=Archivo+Black&family=Black+Ops+One&family=Inter:wght@400;600;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           MORTYX — BLACK & WHITE HALLOWEEN
-           hand-drawn feel, monochrome, human made
+           MORTYX — BLACK & WHITE
+           raw, bold, humanized
+           background image is the hero
         ============================================================ */
         * {
             margin: 0;
@@ -20,694 +20,132 @@
 
         html, body {
             overflow-x: hidden;
+            width: 100%;
         }
 
         body {
-            background: #0a0a0a;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 3px),
-                repeating-linear-gradient(90deg, transparent, transparent 2px, rgba(255,255,255,0.015) 2px, rgba(255,255,255,0.015) 3px),
-                radial-gradient(ellipse at 50% 0%, rgba(255,255,255,0.06) 0%, transparent 60%),
-                radial-gradient(ellipse at 50% 100%, rgba(255,255,255,0.03) 0%, transparent 50%);
-            font-family: 'Courier Prime', 'Courier New', monospace;
             min-height: 100vh;
+            background: #000;
+            color: #fff;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 20px;
+            padding: 30px 20px;
             position: relative;
             overflow-x: hidden;
-            color: #d0d0d0;
         }
 
         /* ============================================================
-           PAPER GRAIN TEXTURE (human handmade feel)
+           FULL BACKGROUND — the Mortyx artwork
+           We reconstruct it in pure CSS/SVG so no external file needed.
+           Using a data-uri SVG that mimics the black-and-white graphic.
         ============================================================ */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.02) 0%, transparent 3%),
-                radial-gradient(circle at 70% 60%, rgba(255,255,255,0.02) 0%, transparent 3%),
-                radial-gradient(circle at 40% 80%, rgba(255,255,255,0.02) 0%, transparent 3%),
-                radial-gradient(circle at 85% 15%, rgba(255,255,255,0.02) 0%, transparent 3%);
-            pointer-events: none;
-            z-index: 1;
-            animation: grainShift 8s steps(6) infinite;
-        }
-
-        @keyframes grainShift {
-            0%, 100% { transform: translate(0, 0); }
-            20% { transform: translate(-2px, 1px); }
-            40% { transform: translate(1px, -1px); }
-            60% { transform: translate(-1px, 2px); }
-            80% { transform: translate(2px, 1px); }
-        }
-
-        /* ============================================================
-           MONOCHROME MOON
-        ============================================================ */
-        .moon {
-            position: fixed;
-            top: 60px;
-            right: 90px;
-            width: 130px;
-            height: 130px;
-            border-radius: 50%;
-            background: radial-gradient(circle at 35% 35%, #e8e8e8, #b0b0b0 45%, #707070 70%, #3a3a3a 100%);
-            box-shadow: 
-                0 0 40px rgba(255,255,255,0.25),
-                0 0 80px rgba(255,255,255,0.15),
-                inset -18px -18px 30px rgba(0,0,0,0.6);
-            z-index: 1;
-            pointer-events: none;
-            animation: moonBreath 10s infinite alternate;
-        }
-
-        .moon::before {
-            content: "";
-            position: absolute;
-            top: 18%;
-            left: 22%;
-            width: 26px;
-            height: 26px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.25);
-            box-shadow: inset 2px 2px 5px rgba(0,0,0,0.5);
-        }
-
-        .moon::after {
-            content: "";
-            position: absolute;
-            top: 60%;
-            left: 55%;
-            width: 18px;
-            height: 18px;
-            border-radius: 50%;
-            background: rgba(0,0,0,0.2);
-            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.4);
-        }
-
-        @keyframes moonBreath {
-            0% { filter: brightness(0.9); transform: scale(1); }
-            100% { filter: brightness(1.1); transform: scale(1.03); }
-        }
-
-        /* ============================================================
-           STARFIELD (subtle, monochrome)
-        ============================================================ */
-        .starfield {
+        .bg-art {
             position: fixed;
             inset: 0;
             z-index: 0;
-            pointer-events: none;
-            overflow: hidden;
-        }
-
-        .star {
-            position: absolute;
-            background: #fff;
-            border-radius: 50%;
-            animation: starTwinkle 4s infinite alternate;
-        }
-
-        @keyframes starTwinkle {
-            0% { opacity: 0.1; }
-            100% { opacity: 0.7; }
-        }
-
-        /* ============================================================
-           FOG (grayscale)
-        ============================================================ */
-        .fog {
-            position: fixed;
-            bottom: 0;
-            left: 0;
-            width: 200%;
-            height: 100%;
-            background: 
-                radial-gradient(ellipse at 20% 85%, rgba(200, 200, 200, 0.10) 0%, transparent 45%),
-                radial-gradient(ellipse at 60% 90%, rgba(180, 180, 180, 0.12) 0%, transparent 50%),
-                radial-gradient(ellipse at 90% 88%, rgba(160, 160, 160, 0.10) 0%, transparent 45%);
-            z-index: 2;
-            pointer-events: none;
-            animation: fogDrift 30s linear infinite;
-        }
-
-        .fog.fog-back {
-            bottom: 40%;
-            opacity: 0.4;
-            filter: blur(25px);
-            animation: fogDrift 50s linear infinite reverse;
-        }
-
-        @keyframes fogDrift {
-            0% { transform: translateX(0); }
-            100% { transform: translateX(-50%); }
-        }
-
-        /* ============================================================
-           HANGING SPIDERS (monochrome)
-        ============================================================ */
-        .festive-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 5;
-            overflow: hidden;
-        }
-
-        .spider-thread {
-            position: absolute;
-            width: 1px;
-            background: linear-gradient(180deg, 
-                rgba(230, 230, 230, 0.9) 0%, 
-                rgba(180, 180, 180, 0.5) 50%,
-                rgba(140, 140, 140, 0.2) 100%);
-            box-shadow: 0 0 3px rgba(255, 255, 255, 0.4);
-            top: 0;
-            transform-origin: top center;
-        }
-
-        .spider {
-            position: absolute;
-            width: 38px;
-            height: 38px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.9));
-        }
-
-        .spider .body {
-            position: absolute;
-            width: 20px;
-            height: 18px;
-            background: radial-gradient(circle at 40% 35%, #3a3a3a, #0a0a0a);
-            border-radius: 50% 50% 45% 45%;
-            left: 9px;
-            top: 12px;
-            box-shadow: inset -2px -2px 4px #000, inset 2px 2px 4px #4a4a4a, 0 0 10px #000;
-            border: 1px solid #2a2a2a;
-            z-index: 2;
-        }
-
-        .spider .eye {
-            position: absolute;
-            width: 4px;
-            height: 4px;
-            background: radial-gradient(circle, #ffffff, #888);
-            border-radius: 50%;
-            top: 16px;
-            box-shadow: 0 0 6px #fff, 0 0 12px #aaa;
-            z-index: 3;
-            animation: spiderEyeGlow 1s infinite alternate;
-        }
-        .spider .eye.left { left: 13px; }
-        .spider .eye.right { left: 21px; }
-
-        @keyframes spiderEyeGlow {
-            0% { opacity: 0.4; transform: scale(0.8); }
-            100% { opacity: 1; transform: scale(1.2); }
-        }
-
-        .spider .leg {
-            position: absolute;
-            width: 2px;
-            height: 16px;
-            background: linear-gradient(180deg, #2a2a2a, #000);
-            border-radius: 2px;
-            box-shadow: 0 0 3px #000;
-            transform-origin: top center;
-            animation: legWiggle 0.7s infinite alternate ease-in-out;
-            z-index: 1;
-        }
-        .leg.l1 { left: 2px; top: -3px; transform: rotate(-40deg); --rot: -40deg; }
-        .leg.l2 { left: 26px; top: -3px; transform: rotate(40deg); --rot: 40deg; }
-        .leg.l3 { left: 0px; top: 6px; transform: rotate(-55deg); --rot: -55deg; }
-        .leg.l4 { left: 28px; top: 6px; transform: rotate(55deg); --rot: 55deg; }
-        .leg.l5 { left: 3px; top: 18px; transform: rotate(-30deg); --rot: -30deg; }
-        .leg.l6 { left: 25px; top: 18px; transform: rotate(30deg); --rot: 30deg; }
-        .leg.l7 { left: 7px; top: 28px; transform: rotate(-15deg); --rot: -15deg; }
-        .leg.l8 { left: 21px; top: 28px; transform: rotate(15deg); --rot: 15deg; }
-
-        @keyframes legWiggle {
-            0% { transform: rotate(var(--rot, -40deg)) scaleY(0.85); }
-            100% { transform: rotate(calc(var(--rot, -40deg) * 1.15)) scaleY(1.1); }
-        }
-
-        .spider::after {
-            content: "🕸";
-            position: absolute;
-            font-size: 14px;
-            bottom: -18px;
-            left: 8px;
-            opacity: 0.7;
-            filter: drop-shadow(0 0 3px rgba(255,255,255,0.6)) grayscale(1);
-        }
-
-        /* ============================================================
-           CORNER SPIDER WEBS
-        ============================================================ */
-        .corner-web {
-            position: fixed;
-            width: 220px;
-            height: 220px;
-            z-index: 4;
-            pointer-events: none;
-            opacity: 0.4;
-            filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.3));
-        }
-
-        .corner-web.tl { top: 0; left: 0; transform: scaleX(-1); }
-        .corner-web.tr { top: 0; right: 0; }
-        .corner-web.bl { bottom: 0; left: 0; transform: scaleY(-1) scaleX(-1); }
-        .corner-web.br { bottom: 0; right: 0; transform: scaleY(-1); }
-
-        .corner-web svg { width: 100%; height: 100%; }
-
-        .corner-web path,
-        .corner-web line,
-        .corner-web circle {
-            stroke: rgba(220, 220, 220, 0.6);
-            fill: none;
-            stroke-width: 1;
-        }
-
-        /* ============================================================
-           FLOATING GHOSTS (monochrome)
-        ============================================================ */
-        .ghost {
-            position: fixed;
-            font-size: 55px;
-            z-index: 3;
-            pointer-events: none;
-            filter: grayscale(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.5)) brightness(1.5);
-            opacity: 0.6;
-        }
-
-        .ghost.g1 { top: 12%; left: -80px; animation: ghostFloat1 32s linear infinite; font-size: 60px; }
-        .ghost.g2 { top: 55%; left: -80px; animation: ghostFloat2 40s linear infinite; font-size: 45px; animation-delay: 12s; }
-        .ghost.g3 { top: 80%; left: -80px; animation: ghostFloat3 45s linear infinite; font-size: 55px; animation-delay: 22s; }
-
-        @keyframes ghostFloat1 {
-            0% { transform: translateX(0) translateY(0) rotate(-3deg); opacity: 0; }
-            10% { opacity: 0.6; }
-            50% { transform: translateX(50vw) translateY(-30px) rotate(3deg); }
-            90% { opacity: 0.6; }
-            100% { transform: translateX(120vw) translateY(0) rotate(-3deg); opacity: 0; }
-        }
-
-        @keyframes ghostFloat2 {
-            0% { transform: translateX(0) translateY(0); opacity: 0; }
-            10% { opacity: 0.5; }
-            50% { transform: translateX(60vw) translateY(40px); }
-            90% { opacity: 0.5; }
-            100% { transform: translateX(130vw) translateY(0); opacity: 0; }
-        }
-
-        @keyframes ghostFloat3 {
-            0% { transform: translateX(0) translateY(0) scale(1); opacity: 0; }
-            10% { opacity: 0.55; }
-            50% { transform: translateX(55vw) translateY(-20px) scale(0.9); }
-            90% { opacity: 0.55; }
-            100% { transform: translateX(125vw) translateY(0) scale(1); opacity: 0; }
-        }
-
-        /* ============================================================
-           BATS (monochrome)
-        ============================================================ */
-        .bat {
-            position: fixed;
-            font-size: 26px;
-            z-index: 4;
-            pointer-events: none;
-            filter: grayscale(1) drop-shadow(0 0 4px rgba(0,0,0,0.9)) brightness(0.7);
-        }
-
-        .bat::before {
-            content: "🦇";
-            display: inline-block;
-            animation: batFlap 0.35s infinite alternate;
-        }
-
-        @keyframes batFlap {
-            0% { transform: scaleY(1); }
-            100% { transform: scaleY(0.8); }
-        }
-
-        .bat.b1 { top: 10%; left: -50px; animation: batFly1 20s linear infinite; }
-        .bat.b2 { top: 30%; left: -50px; animation: batFly2 24s linear infinite; animation-delay: 5s; }
-        .bat.b3 { top: 65%; left: -50px; animation: batFly1 27s linear infinite; animation-delay: 11s; font-size: 20px; }
-        .bat.b4 { top: 45%; left: -50px; animation: batFly2 32s linear infinite; animation-delay: 17s; font-size: 30px; }
-
-        @keyframes batFly1 {
-            0% { transform: translateX(0) translateY(0); opacity: 0; }
-            5% { opacity: 1; }
-            25% { transform: translateX(30vw) translateY(-40px); }
-            50% { transform: translateX(60vw) translateY(20px); }
-            75% { transform: translateX(90vw) translateY(-30px); }
-            95% { opacity: 1; }
-            100% { transform: translateX(120vw) translateY(0); opacity: 0; }
-        }
-
-        @keyframes batFly2 {
-            0% { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
-            5% { opacity: 1; }
-            50% { transform: translateX(60vw) translateY(-50px) scaleX(-1); }
-            95% { opacity: 1; }
-            100% { transform: translateX(130vw) translateY(0) scaleX(-1); opacity: 0; }
-        }
-
-        /* ============================================================
-           DECORATION LAYER — pumpkins, tombstones, trees
-           using the provided emoji images (grayscale)
-        ============================================================ */
-        .decoration-layer {
-            position: fixed;
-            inset: 0;
-            pointer-events: none;
-            z-index: 6;
-            overflow: hidden;
-        }
-
-        /* Custom emoji image elements (from the user's sprite sheet) */
-        .emoji-icon {
-            position: absolute;
-            width: 80px;
-            height: 80px;
-            background-size: contain;
-            background-repeat: no-repeat;
+            background-color: #fff;
+            background-image: url("data:image/svg+xml;utf8,\
+<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 1600 900' preserveAspectRatio='xMidYMid slice'>\
+<defs>\
+<filter id='grain'>\
+<feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' seed='5'/>\
+<feColorMatrix type='saturate' values='0'/>\
+<feComponentTransfer><feFuncA type='linear' slope='0.35'/></feComponentTransfer>\
+<feComposite in='SourceGraphic' operator='over'/>\
+</filter>\
+</defs>\
+<rect width='1600' height='900' fill='%23f4f4f0'/>\
+<g fill='%23000'>\
+<!-- Wing (left) - big brush stroke mass -->\
+<path d='M -50 900 Q 150 600 350 500 Q 500 420 620 400 Q 700 390 780 420 Q 850 450 880 520 Q 900 580 870 660 Q 850 720 800 780 Q 760 830 720 880 L 700 900 Z'/>\
+<path d='M 100 620 Q 220 480 380 420 Q 480 380 560 400 Q 620 415 640 470 Q 640 520 600 560 Q 540 620 460 660 Q 380 700 300 720 Z'/>\
+<path d='M 250 500 Q 340 420 440 390 Q 520 370 580 400 Q 600 420 580 460 Q 540 510 480 540 Q 420 565 360 570 Q 300 570 260 545 Z'/>\
+<path d='M -20 400 Q 60 300 180 250 Q 260 220 320 250 Q 350 280 330 330 Q 290 400 220 440 Q 150 470 80 470 Q 20 465 -20 430 Z'/>\
+<path d='M 30 200 Q 90 130 170 110 Q 230 100 260 140 Q 270 180 240 220 Q 200 260 140 270 Q 80 275 40 245 Z'/>\
+<!-- Right shoulder mass -->\
+<path d='M 1650 900 Q 1500 700 1400 600 Q 1320 520 1280 500 Q 1250 490 1230 520 Q 1210 570 1220 640 Q 1230 720 1270 800 Q 1310 870 1360 900 Z'/>\
+<!-- Hooded figure body -->\
+<path d='M 1000 900 Q 1000 700 1030 600 Q 1060 500 1120 440 Q 1180 390 1240 400 Q 1300 420 1330 490 Q 1350 560 1350 650 Q 1350 780 1330 900 Z'/>\
+<!-- Hood top -->\
+<path d='M 1030 500 Q 1030 380 1090 300 Q 1150 230 1220 230 Q 1280 230 1310 290 Q 1330 350 1330 430 Q 1330 480 1310 510 Q 1280 480 1240 470 Q 1180 460 1130 480 Q 1090 490 1070 500 Z'/>\
+<!-- Eyes -->\
+<path d='M 1100 380 Q 1120 360 1150 365 Q 1165 370 1160 395 Q 1150 415 1125 410 Q 1105 405 1100 380 Z' fill='%23fff'/>\
+<path d='M 1210 375 Q 1230 355 1260 362 Q 1275 368 1268 392 Q 1258 412 1232 405 Q 1212 398 1210 375 Z' fill='%23fff'/>\
+<!-- Gas mask circles -->\
+<circle cx='1100' cy='600' r='75' fill='none' stroke='%23000' stroke-width='28'/>\
+<circle cx='1300' cy='620' r='75' fill='none' stroke='%23000' stroke-width='28'/>\
+<circle cx='1100' cy='600' r='34' fill='%23fff'/>\
+<circle cx='1300' cy='620' r='34' fill='%23fff'/>\
+<!-- Feathers / spikes on right -->\
+<path d='M 1290 500 L 1330 420 L 1360 480 L 1400 430 L 1420 510 Z'/>\
+<path d='M 1310 560 L 1370 500 L 1390 570 L 1440 540 L 1430 620 Z'/>\
+<!-- Bottom figure details -->\
+<path d='M 900 900 Q 950 780 1050 720 Q 1120 690 1180 700 Q 1250 715 1300 780 Q 1340 830 1350 900 Z'/>\
+<path d='M 950 830 Q 1000 760 1080 740 Q 1140 730 1180 750' fill='none' stroke='%23fff' stroke-width='6'/>\
+<path d='M 1000 870 Q 1040 800 1100 780' fill='none' stroke='%23fff' stroke-width='5'/>\
+<!-- Scattered specks -->\
+<circle cx='130' cy='820' r='4'/><circle cx='180' cy='860' r='3'/><circle cx='230' cy='790' r='5'/>\
+<circle cx='290' cy='850' r='3'/><circle cx='350' cy='810' r='4'/><circle cx='410' cy='870' r='3'/>\
+<circle cx='470' cy='830' r='4'/><circle cx='530' cy='880' r='3'/><circle cx='590' cy='840' r='5'/>\
+<circle cx='1500' cy='820' r='4'/><circle cx='1540' cy='870' r='3'/><circle cx='1480' cy='880' r='4'/>\
+</g>\
+<g fill='%23000' opacity='0.85'>\
+<!-- Additional texture strokes -->\
+<path d='M 700 850 Q 800 760 880 740 Q 940 730 980 760' fill='none' stroke='%23000' stroke-width='10' stroke-linecap='round'/>\
+<path d='M 720 800 Q 820 720 900 710' fill='none' stroke='%23000' stroke-width='8' stroke-linecap='round'/>\
+<path d='M 1200 480 Q 1260 440 1320 470' fill='none' stroke='%23fff' stroke-width='4' stroke-linecap='round'/>\
+</g>\
+<rect width='1600' height='900' filter='url(%23grain)' opacity='0.4'/>\
+</svg>");
+            background-size: cover;
             background-position: center;
-            filter: grayscale(1) drop-shadow(0 6px 10px rgba(0,0,0,0.8)) contrast(1.1);
-            animation: emojiBob 4s infinite alternate ease-in-out;
+            background-repeat: no-repeat;
         }
 
-        /* sprite sheet slices — using the provided image positions
-           Image is 4 icons in a row, we approximate positions */
-        
-        /* Icon 1 — leftmost (armored skull) */
-        .emoji-icon.skull-1 {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💀</text></svg>");
-        }
-        
-        /* Icon 2 — horn/trumpet */
-        .emoji-icon.horn {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📯</text></svg>");
-        }
-        
-        /* Icon 3 — winged helmet */
-        .emoji-icon.helm {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚔️</text></svg>");
-        }
-        
-        /* Icon 4 — rightmost (armored skull variant) */
-        .emoji-icon.skull-2 {
-            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>👹</text></svg>");
-        }
-
-        @keyframes emojiBob {
-            0% { transform: translateY(0) rotate(-3deg); }
-            100% { transform: translateY(-10px) rotate(3deg); }
-        }
-
-        /* ---- PUMPKINS (monochrome) ---- */
-        .pumpkin {
-            position: absolute;
-            width: 85px;
-            height: 75px;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.9));
-            animation: pumpkinBob 4s infinite alternate ease-in-out;
-        }
-
-        .pumpkin .body {
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 40% 35%, #d0d0d0, #909090 55%, #404040 100%);
-            border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
-            box-shadow: 
-                inset -8px -10px 16px #2a2a2a, 
-                inset 8px 10px 18px #e8e8e8,
-                0 0 15px rgba(255, 255, 255, 0.15);
-            border: 2px solid #1a1a1a;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .pumpkin .body::before {
+        /* subtle vignette so the UI pops */
+        .bg-art::after {
             content: "";
             position: absolute;
-            top: 20%;
-            left: 15%;
-            width: 12px;
-            height: 20px;
-            border-radius: 50%;
-            background: rgba(255, 255, 255, 0.3);
-            filter: blur(3px);
+            inset: 0;
+            background: radial-gradient(ellipse at 50% 50%, transparent 30%, rgba(0,0,0,0.55) 100%);
+            pointer-events: none;
         }
-
-        .pumpkin .stem {
-            position: absolute;
-            top: -14px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-5deg);
-            width: 12px;
-            height: 20px;
-            background: linear-gradient(180deg, #4a4a4a, #1a1a1a);
-            border-radius: 4px 4px 2px 2px;
-            border: 1px solid #000;
-            z-index: 2;
-        }
-
-        .pumpkin .stem::after {
-            content: "";
-            position: absolute;
-            top: -5px;
-            left: 4px;
-            width: 14px;
-            height: 5px;
-            background: #3a3a3a;
-            border-radius: 50%;
-            transform: rotate(-30deg);
-        }
-
-        .pumpkin .face {
-            position: absolute;
-            top: 45%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            width: 85%;
-            height: 50%;
-        }
-
-        .pumpkin .eye {
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #f0f0f0;
-            border-radius: 50%;
-            top: 10%;
-            box-shadow: 0 0 15px #fff, inset 0 0 6px #888;
-            animation: pumpkinEyeFlicker 2s infinite alternate;
-            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
-        }
-        .pumpkin .eye.left { left: 15%; }
-        .pumpkin .eye.right { right: 15%; }
-
-        @keyframes pumpkinEyeFlicker {
-            0%, 100% { opacity: 0.6; transform: scale(1); }
-            50% { opacity: 1; transform: scale(1.1); }
-        }
-
-        .pumpkin .nose {
-            position: absolute;
-            top: 30%;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 0;
-            height: 0;
-            border-left: 8px solid transparent;
-            border-right: 8px solid transparent;
-            border-top: 12px solid #f0f0f0;
-            filter: drop-shadow(0 0 6px #fff);
-        }
-
-        .pumpkin .mouth {
-            position: absolute;
-            bottom: 0;
-            left: 50%;
-            transform: translateX(-50%);
-            width: 50px;
-            height: 22px;
-            background: #f0f0f0;
-            border-radius: 0 0 40px 40px;
-            box-shadow: 0 0 15px #fff, inset 0 0 8px #888;
-            filter: drop-shadow(0 0 8px #fff);
-        }
-
-        .pumpkin .mouth::before,
-        .pumpkin .mouth::after {
-            content: "";
-            position: absolute;
-            top: -8px;
-            width: 10px;
-            height: 14px;
-            background: #f0f0f0;
-            box-shadow: 0 0 10px #fff;
-        }
-        .pumpkin .mouth::before { left: 4px; transform: rotate(-25deg); }
-        .pumpkin .mouth::after { right: 4px; transform: rotate(25deg); }
-
-        @keyframes pumpkinBob {
-            0% { transform: translateY(0px) rotate(-3deg); }
-            100% { transform: translateY(-10px) rotate(3deg); }
-        }
-
-        /* ---- TOMBSTONES ---- */
-        .tombstone {
-            position: absolute;
-            width: 65px;
-            height: 85px;
-            background: linear-gradient(180deg, #808080 0%, #505050 60%, #2a2a2a 100%);
-            border-radius: 32px 32px 4px 4px;
-            box-shadow: 
-                inset -4px -4px 10px #1a1a1a,
-                inset 4px 4px 10px #a0a0a0,
-                0 8px 16px rgba(0,0,0,0.8);
-            border: 2px solid #1a1a1a;
-            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.8));
-            animation: tombstoneSway 7s infinite alternate ease-in-out;
-        }
-
-        .tombstone::before {
-            content: "R.I.P";
-            position: absolute;
-            top: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-family: 'Special Elite', cursive;
-            font-size: 16px;
-            color: #c0c0c0;
-            text-shadow: 0 0 4px #000, 0 1px 0 #000;
-            letter-spacing: 2px;
-        }
-
-        .tombstone::after {
-            content: "†";
-            position: absolute;
-            bottom: 18px;
-            left: 50%;
-            transform: translateX(-50%);
-            font-size: 22px;
-            color: #d0d0d0;
-            text-shadow: 0 0 6px #000;
-        }
-
-        @keyframes tombstoneSway {
-            0% { transform: rotate(-1deg); }
-            100% { transform: rotate(1deg); }
-        }
-
-        /* ---- DEAD TREES ---- */
-        .dead-tree {
-            position: absolute;
-            bottom: 0;
-            width: 180px;
-            height: 290px;
-            filter: drop-shadow(0 0 15px rgba(0,0,0,0.9));
-            opacity: 0.7;
-        }
-
-        .dead-tree svg { width: 100%; height: 100%; }
 
         /* ============================================================
-           MAIN CONTAINER — MORTYX UI (monochrome, handmade)
+           MAIN CONTAINER
+           Bold, sharp, humanized. Sits on top of the art.
         ============================================================ */
         .container {
             position: relative;
-            z-index: 30;
-            max-width: 800px;
+            z-index: 10;
             width: 100%;
-            background: #0e0e0e;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.01) 3px, rgba(255,255,255,0.01) 4px);
-            backdrop-filter: blur(8px);
-            -webkit-backdrop-filter: blur(8px);
-            border: 2px solid #4a4a4a;
-            border-radius: 30px 6px 30px 6px;
-            padding: 42px 36px 36px;
+            max-width: 640px;
+            background: #000;
+            border: 4px solid #fff;
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.95),
-                0 0 0 1px rgba(255, 255, 255, 0.05),
-                0 0 60px rgba(255, 255, 255, 0.08),
-                inset 0 0 80px rgba(0, 0, 0, 0.6),
-                inset 0 1px 0 rgba(255, 255, 255, 0.08);
-            color: #c8c8c8;
-            font-family: 'Courier Prime', 'Courier New', monospace;
-            border-top: 3px solid #6a6a6a;
-            border-left: 2px solid #2a2a2a;
-            position: relative;
+                12px 12px 0 #fff,
+                24px 24px 0 #000,
+                24px 24px 0 4px #fff;
+            padding: 0;
+            overflow: hidden;
         }
 
-        /* Hand-drawn ink splatter on top */
-        .container::before {
-            content: "";
-            position: absolute;
-            top: -1px;
-            left: 0;
-            right: 0;
-            height: 100%;
-            border-radius: 30px 6px 30px 6px;
-            background: 
-                radial-gradient(circle at 6% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 6%),
-                radial-gradient(circle at 24% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 4%),
-                radial-gradient(circle at 52% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 5%),
-                radial-gradient(circle at 74% 0%, rgba(255, 255, 255, 0.06) 0%, transparent 4%),
-                radial-gradient(circle at 92% 0%, rgba(255, 255, 255, 0.08) 0%, transparent 7%);
-            pointer-events: none;
-            z-index: 1;
+        /* Top accent bar — bold black/white split */
+        .top-bar {
+            display: flex;
+            align-items: stretch;
+            border-bottom: 4px solid #fff;
+            height: 14px;
         }
 
-        /* Ink drip lines */
-        .container::after {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: 12%;
-            width: 2px;
-            height: 50px;
-            background: linear-gradient(180deg, #4a4a4a, transparent);
-            border-radius: 0 0 2px 2px;
-            box-shadow: 
-                210px 0 0 -1px #4a4a4a,
-                210px 25px 0 -1px #4a4a4a,
-                430px 18px 0 -1px #4a4a4a,
-                430px 48px 0 -1px #4a4a4a,
-                640px 12px 0 -1px #4a4a4a,
-                640px 38px 0 -1px #4a4a4a;
-            pointer-events: none;
-            z-index: 2;
+        .top-bar span {
+            flex: 1;
         }
 
-        /* Tiny crawling spider */
-        .container-spider {
-            position: absolute;
-            font-size: 14px;
-            opacity: 0.5;
-            filter: grayscale(1);
-            animation: containerSpiderCrawl 14s linear infinite;
-        }
-        .container-spider.s1 { top: -8px; right: 50px; animation-delay: 0s; }
-        .container-spider.s2 { bottom: -8px; left: 70px; animation-delay: 4s; transform: scaleX(-1); }
-
-        @keyframes containerSpiderCrawl {
-            0% { transform: translate(0, 0) rotate(0deg); }
-            25% { transform: translate(8px, 4px) rotate(8deg); }
-            50% { transform: translate(-4px, 8px) rotate(-8deg); }
-            75% { transform: translate(6px, -4px) rotate(4deg); }
-            100% { transform: translate(0, 0) rotate(0deg); }
-        }
+        .top-bar span:nth-child(odd) { background: #fff; }
+        .top-bar span:nth-child(even) { background: #000; }
 
         /* ============================================================
            HEADER
@@ -716,269 +154,236 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 38px;
-            flex-wrap: wrap;
+            padding: 26px 30px 22px;
+            border-bottom: 4px solid #fff;
             gap: 16px;
-            position: relative;
-            z-index: 5;
+            flex-wrap: wrap;
+        }
+
+        .brand {
+            display: flex;
+            flex-direction: column;
+            line-height: 0.9;
         }
 
         .brand h1 {
-            font-family: 'Creepster', cursive;
-            font-size: 3.8rem;
-            font-weight: 400;
-            letter-spacing: 10px;
+            font-family: 'Archivo Black', 'Anton', sans-serif;
+            font-size: 3.4rem;
+            font-weight: 900;
+            letter-spacing: -2px;
             text-transform: uppercase;
-            background: linear-gradient(180deg, #f0f0f0 0%, #b0b0b0 50%, #606060 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            filter: drop-shadow(0 0 12px rgba(255, 255, 255, 0.3)) drop-shadow(0 2px 4px #000);
-            line-height: 1;
+            color: #fff;
+            line-height: 0.85;
             position: relative;
-            text-shadow: 0 0 30px rgba(255,255,255,0.2);
+            display: inline-block;
         }
 
         .brand h1::after {
             content: "";
             position: absolute;
-            bottom: -6px;
-            left: 0;
+            bottom: 6px;
+            left: 4px;
             width: 100%;
-            height: 2px;
-            background: linear-gradient(90deg, transparent, #808080, transparent);
-            opacity: 0.6;
+            height: 6px;
+            background: #fff;
+            z-index: -1;
+            transform: skewX(-12deg);
         }
 
-        .brand span {
-            display: block;
-            font-size: 0.8rem;
-            letter-spacing: 14px;
-            color: #808080;
-            margin-top: 6px;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            font-weight: 700;
-            padding-left: 8px;
-            font-family: 'Special Elite', cursive;
+        .brand .tag {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            padding: 4px 10px 4px 14px;
+            margin-top: 8px;
+            display: inline-block;
+            align-self: flex-start;
         }
 
         .nav {
             display: flex;
-            gap: 12px;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         .nav-btn {
-            background: #1a1a1a;
-            border: 1px solid #4a4a4a;
-            color: #c0c0c0;
-            padding: 12px 22px;
-            border-radius: 24px 4px 24px 4px;
-            font-weight: 700;
-            font-size: 0.85rem;
-            cursor: pointer;
-            transition: all 0.25s;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 1.5px;
+            text-transform: uppercase;
             text-decoration: none;
+            color: #000;
+            background: #fff;
+            padding: 12px 18px;
+            border: 3px solid #fff;
+            cursor: pointer;
+            transition: all 0.12s ease;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,255,255,0.05);
-            font-family: 'Special Elite', cursive;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
+            box-shadow: 4px 4px 0 #000;
             position: relative;
-            overflow: hidden;
-        }
-
-        .nav-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-            transition: left 0.5s;
-        }
-
-        .nav-btn:hover::before {
-            left: 100%;
         }
 
         .nav-btn:hover {
-            background: #2a2a2a;
-            border-color: #909090;
-            color: #f0f0f0;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15), 0 4px 10px rgba(0,0,0,0.8);
-            transform: translateY(-2px);
+            transform: translate(-2px, -2px);
+            box-shadow: 6px 6px 0 #000;
+        }
+
+        .nav-btn:active {
+            transform: translate(2px, 2px);
+            box-shadow: 2px 2px 0 #000;
+        }
+
+        .nav-btn.ghost {
+            background: #000;
+            color: #fff;
+            border-color: #fff;
+            box-shadow: 4px 4px 0 #fff;
+        }
+
+        .nav-btn.ghost:hover {
+            box-shadow: 6px 6px 0 #fff;
+        }
+
+        .nav-btn.ghost:active {
+            box-shadow: 2px 2px 0 #fff;
         }
 
         /* ============================================================
-           CARD / FORM
+           BODY / CARD
         ============================================================ */
         .card {
-            background: #0a0a0a;
-            background-image: 
-                repeating-linear-gradient(45deg, transparent, transparent 10px, rgba(255,255,255,0.01) 10px, rgba(255,255,255,0.01) 11px);
-            border-radius: 20px 4px 20px 4px;
-            padding: 34px 30px;
-            border: 1px solid #3a3a3a;
-            box-shadow: 
-                inset 0 0 40px rgba(0, 0, 0, 0.8),
-                0 10px 25px rgba(0, 0, 0, 0.6),
-                0 0 30px rgba(255, 255, 255, 0.04);
-            margin-bottom: 24px;
-            position: relative;
-            z-index: 5;
-        }
-
-        .card::before {
-            content: "🕷";
-            position: absolute;
-            top: 12px;
-            right: 16px;
-            font-size: 18px;
-            opacity: 0.3;
-            filter: grayscale(1);
-            animation: cardSpider 10s infinite ease-in-out;
-        }
-
-        @keyframes cardSpider {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.3; }
-            25% { transform: translate(-6px, 3px) rotate(12deg); opacity: 0.5; }
-            50% { transform: translate(3px, -5px) rotate(-8deg); opacity: 0.4; }
-            75% { transform: translate(-3px, -2px) rotate(4deg); opacity: 0.45; }
+            padding: 30px 30px 34px;
         }
 
         .field {
-            margin-bottom: 26px;
-            text-align: left;
-            position: relative;
+            margin-bottom: 22px;
         }
 
         .field label {
             display: block;
-            font-size: 0.9rem;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.72rem;
+            font-weight: 900;
+            letter-spacing: 3px;
             text-transform: uppercase;
-            letter-spacing: 5px;
-            color: #a0a0a0;
-            margin-bottom: 10px;
-            font-weight: 700;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            font-family: 'Special Elite', cursive;
-            font-size: 1rem;
+            color: #fff;
+            margin-bottom: 8px;
+            padding-left: 2px;
+        }
+
+        .field label::before {
+            content: "▌";
+            color: #fff;
+            margin-right: 6px;
+            font-size: 0.9rem;
         }
 
         .field select,
         .field input {
             width: 100%;
-            padding: 16px 20px;
-            border-radius: 10px 2px 10px 2px;
-            border: 1px solid #3a3a3a;
-            background: #050505;
-            color: #e0e0e0;
+            font-family: 'Inter', sans-serif;
             font-size: 1rem;
-            font-family: 'Courier Prime', 'Courier New', monospace;
-            transition: all 0.25s;
+            font-weight: 600;
+            color: #000;
+            background: #fff;
+            border: 3px solid #fff;
+            padding: 15px 18px;
             outline: none;
-            box-shadow: inset 0 2px 8px rgba(0,0,0,0.9), 0 1px 3px rgba(0,0,0,0.5);
-            letter-spacing: 0.5px;
+            transition: all 0.12s;
+            appearance: none;
+            -webkit-appearance: none;
+            box-shadow: 4px 4px 0 #fff;
+        }
+
+        .field select {
+            background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='20' height='20' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='3' stroke-linecap='square'><polyline points='6 9 12 15 18 9'/></svg>");
+            background-repeat: no-repeat;
+            background-position: right 16px center;
+            padding-right: 48px;
+            cursor: pointer;
         }
 
         .field select:focus,
         .field input:focus {
-            border-color: #808080;
-            box-shadow: 
-                inset 0 2px 8px rgba(0,0,0,0.9),
-                0 0 15px rgba(255, 255, 255, 0.15),
-                0 0 30px rgba(255, 255, 255, 0.05);
-            background: #0a0a0a;
+            background: #000;
+            color: #fff;
+            border-color: #fff;
+            box-shadow: 6px 6px 0 #fff;
+            transform: translate(-2px, -2px);
         }
 
-        .field select option {
-            background: #1a1a1a;
-            color: #e0e0e0;
+        .field input::placeholder {
+            color: #888;
+            font-weight: 500;
+        }
+
+        .field input:focus::placeholder {
+            color: #666;
         }
 
         /* ============================================================
-           BUTTONS
+           PRIMARY BUTTON
         ============================================================ */
         .primary-btn {
             width: 100%;
-            padding: 20px;
-            border-radius: 14px 2px 14px 2px;
-            border: 1px solid #6a6a6a;
-            background: #1a1a1a;
-            background-image: linear-gradient(180deg, #2a2a2a, #0a0a0a);
-            color: #e8e8e8;
-            font-weight: 700;
-            font-size: 1.35rem;
-            letter-spacing: 8px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 6px;
             text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: 4px solid #fff;
+            padding: 20px;
             cursor: pointer;
-            box-shadow: 
-                0 6px 0 #000,
-                0 10px 25px rgba(0, 0, 0, 0.9),
-                inset 0 1px 0 rgba(255, 255, 255, 0.1),
-                0 0 20px rgba(255, 255, 255, 0.05);
             transition: all 0.12s;
-            font-family: 'Creepster', cursive;
-            margin-top: 8px;
+            box-shadow: 6px 6px 0 #fff;
+            margin-top: 6px;
             position: relative;
             overflow: hidden;
-            text-shadow: 0 0 12px rgba(255, 255, 255, 0.4);
-        }
-
-        .primary-btn::before {
-            content: "";
-            position: absolute;
-            top: 0;
-            left: -100%;
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.15), transparent);
-            transition: left 0.6s;
-        }
-
-        .primary-btn:hover::before {
-            left: 100%;
         }
 
         .primary-btn:hover {
-            background: #2a2a2a;
-            background-image: linear-gradient(180deg, #3a3a3a, #1a1a1a);
-            box-shadow: 
-                0 4px 0 #000,
-                0 12px 35px rgba(255, 255, 255, 0.1),
-                inset 0 1px 0 rgba(255, 255, 255, 0.15),
-                0 0 40px rgba(255, 255, 255, 0.1);
-            transform: translateY(2px);
-            letter-spacing: 11px;
+            transform: translate(-3px, -3px);
+            box-shadow: 9px 9px 0 #fff;
+            background: #fff;
+            letter-spacing: 9px;
         }
 
         .primary-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 0 0 #000, 0 4px 15px rgba(0, 0, 0, 0.8);
+            transform: translate(3px, 3px);
+            box-shadow: 3px 3px 0 #fff;
         }
 
+        /* ============================================================
+           ERROR
+        ============================================================ */
         .error {
-            color: #d0d0d0;
-            background: #1a1a1a;
-            padding: 16px 20px;
-            border-radius: 10px 2px 10px 2px;
             margin-top: 20px;
-            font-weight: 700;
-            text-align: center;
-            border-left: 5px solid #808080;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.3);
-            font-family: 'Courier Prime', monospace;
+            padding: 14px 18px;
+            font-family: 'Inter', sans-serif;
+            font-weight: 800;
+            font-size: 0.9rem;
+            text-transform: uppercase;
             letter-spacing: 1px;
-            animation: errorShake 0.5s;
+            color: #000;
+            background: #fff;
+            border: 3px solid #fff;
+            box-shadow: 4px 4px 0 #fff;
+            animation: shake 0.4s;
         }
 
-        @keyframes errorShake {
+        @keyframes shake {
             0%, 100% { transform: translateX(0); }
-            25% { transform: translateX(-6px); }
-            75% { transform: translateX(6px); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .hidden {
@@ -986,223 +391,231 @@
         }
 
         /* ============================================================
-           RESULT ROWS
+           RESULT SECTION
         ============================================================ */
-        .result-row {
-            display: flex;
-            align-items: center;
-            gap: 14px;
-            background: #101010;
-            padding: 18px 22px;
-            border-radius: 10px 2px 10px 2px;
-            margin-top: 28px;
-            border: 1px solid #4a4a4a;
-            flex-wrap: wrap;
-            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 0 15px rgba(255, 255, 255, 0.05);
-            position: relative;
+        .result-block {
+            margin-top: 26px;
+            border: 3px solid #fff;
+            padding: 18px;
+            background: #000;
+            box-shadow: 4px 4px 0 #fff;
         }
 
-        .result-row::before {
-            content: "🕸";
-            position: absolute;
-            top: -12px;
-            left: 20px;
-            font-size: 16px;
-            opacity: 0.5;
-            filter: grayscale(1);
+        .result-block .label {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #fff;
+            margin-bottom: 10px;
+            display: block;
+        }
+
+        .result-row {
+            display: flex;
+            align-items: stretch;
+            gap: 0;
+            flex-wrap: wrap;
         }
 
         .result-row a {
             flex: 1;
-            color: #d0d0d0;
-            text-decoration: none;
+            min-width: 200px;
+            font-family: 'Inter', sans-serif;
             font-weight: 700;
+            font-size: 0.95rem;
+            color: #000;
+            background: #fff;
+            padding: 14px 18px;
+            text-decoration: none;
             word-break: break-all;
-            font-size: 1rem;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.2);
-            font-family: 'Courier Prime', monospace;
-            letter-spacing: 0.5px;
+            border: 3px solid #fff;
+            display: flex;
+            align-items: center;
+            transition: all 0.12s;
         }
 
         .result-row a:hover {
-            text-decoration: underline;
-            color: #f0f0f0;
+            background: #000;
+            color: #fff;
         }
 
-        .result-row button,
-        .code-item button {
-            background: #1a1a1a;
-            border: 1px solid #4a4a4a;
-            color: #b0b0b0;
-            padding: 10px 22px;
-            border-radius: 6px 2px 6px 2px;
-            font-weight: 700;
-            cursor: pointer;
+        .result-row button {
+            font-family: 'Archivo Black', sans-serif;
             font-size: 0.8rem;
-            transition: all 0.2s;
-            font-family: 'Special Elite', cursive;
-            text-transform: uppercase;
+            font-weight: 900;
             letter-spacing: 2px;
-            box-shadow: 0 2px 5px rgba(0,0,0,0.6);
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: 3px solid #fff;
+            padding: 14px 22px;
+            cursor: pointer;
+            transition: all 0.12s;
+            border-left: none;
+            flex-shrink: 0;
         }
 
-        .result-row button:hover,
-        .code-item button:hover {
-            background: #2a2a2a;
-            color: #f0f0f0;
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.15);
-            transform: translateY(-1px);
+        .result-row button:hover {
+            background: #000;
+            color: #fff;
         }
 
         /* ============================================================
-           MARKDOWN SECTION
+           MARKDOWN
         ============================================================ */
         #markdownSection {
-            margin-top: 24px;
-            background: #080808;
-            border-radius: 10px 2px 10px 2px;
-            padding: 20px;
-            border: 1px solid #2a2a2a;
-            box-shadow: inset 0 0 25px rgba(0,0,0,0.8);
-            position: relative;
+            margin-top: 22px;
+            border: 3px solid #fff;
+            background: #000;
+            box-shadow: 4px 4px 0 #fff;
+            padding: 0;
+            overflow: hidden;
         }
 
-        #markdownSection::before {
-            content: "💀";
-            position: absolute;
-            top: -12px;
-            right: 16px;
-            font-size: 16px;
-            opacity: 0.5;
-            filter: grayscale(1);
+        #markdownSection .label {
+            display: block;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.7rem;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            padding: 8px 18px;
+            border-bottom: 3px solid #fff;
         }
 
-        #markdownSection pre {
-            background: #030303;
+        #markdownText {
+            margin: 0;
             padding: 18px;
-            border-radius: 6px;
-            color: #d0d0d0;
-            font-family: 'Courier Prime', 'Courier New', monospace;
+            font-family: 'Inter', monospace;
             font-size: 0.9rem;
+            font-weight: 600;
+            color: #fff;
+            background: #000;
             white-space: pre-wrap;
             word-break: break-all;
-            border-left: 5px solid #6a6a6a;
-            box-shadow: inset 0 0 20px #000;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+            min-height: 20px;
         }
 
-        #markdownSection button {
-            margin-top: 16px;
+        #copyMarkdownBtn {
             width: 100%;
-            padding: 14px;
-            border-radius: 6px 2px 6px 2px;
-            background: #1a1a1a;
-            border: 1px solid #4a4a4a;
-            color: #b0b0b0;
-            font-weight: 700;
-            cursor: pointer;
-            transition: 0.2s;
-            text-transform: uppercase;
-            font-family: 'Special Elite', cursive;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 900;
             letter-spacing: 3px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-top: 3px solid #fff;
+            padding: 14px;
+            cursor: pointer;
+            transition: all 0.12s;
         }
 
-        #markdownSection button:hover {
-            background: #2a2a2a;
-            color: #f0f0f0;
-            box-shadow: 0 0 20px rgba(255, 255, 255, 0.15);
+        #copyMarkdownBtn:hover {
+            background: #000;
+            color: #fff;
         }
 
         /* ============================================================
-           LINKS SECTION
+           LINKS / CODE ITEMS
         ============================================================ */
         #linksSection {
+            margin-top: 22px;
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-top: 28px;
         }
 
         .code-item {
             display: flex;
-            align-items: center;
-            gap: 14px;
-            background: #0c0c0c;
-            padding: 16px 20px;
-            border-radius: 10px 2px 10px 2px;
-            border: 1px dashed #4a4a4a;
+            align-items: stretch;
+            border: 3px solid #fff;
+            background: #000;
+            box-shadow: 4px 4px 0 #fff;
             flex-wrap: wrap;
-            box-shadow: inset 0 0 15px rgba(0,0,0,0.5);
         }
 
-        .code-item span {
-            font-size: 0.85rem;
+        .code-item .tag {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.7rem;
+            font-weight: 900;
+            letter-spacing: 2px;
             text-transform: uppercase;
-            color: #a0a0a0;
-            font-weight: 700;
-            letter-spacing: 3px;
-            min-width: 85px;
-            font-family: 'Special Elite', cursive;
-            text-shadow: 0 0 8px rgba(255, 255, 255, 0.15);
+            color: #000;
+            background: #fff;
+            padding: 14px 16px;
+            border-right: 3px solid #fff;
+            display: flex;
+            align-items: center;
+            min-width: 90px;
+            justify-content: center;
         }
 
         .code-item code {
             flex: 1;
-            color: #d0d0d0;
-            font-family: 'Courier Prime', 'Courier New', monospace;
-            font-size: 0.85rem;
+            font-family: 'Inter', monospace;
+            font-size: 0.82rem;
+            font-weight: 600;
+            color: #fff;
+            background: #000;
+            padding: 14px 16px;
             word-break: break-all;
-            background: #030303;
-            padding: 10px 16px;
-            border-radius: 6px;
-            border-left: 3px solid #6a6a6a;
+            display: flex;
+            align-items: center;
+            min-width: 180px;
+        }
+
+        .code-item button {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.75rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-left: 3px solid #fff;
+            padding: 14px 20px;
+            cursor: pointer;
+            transition: all 0.12s;
+            flex-shrink: 0;
+        }
+
+        .code-item button:hover {
+            background: #000;
+            color: #fff;
         }
 
         /* ============================================================
            HISTORY
         ============================================================ */
         .history {
-            margin-top: 40px;
-            border-top: 2px dashed #3a3a3a;
-            padding-top: 26px;
-            position: relative;
-        }
-
-        .history::before {
-            content: "🕸";
-            position: absolute;
-            top: -14px;
-            left: 20px;
-            background: #0e0e0e;
-            padding: 0 10px;
-            font-size: 18px;
-            opacity: 0.5;
-            filter: grayscale(1);
+            margin-top: 30px;
+            border-top: 4px solid #fff;
+            padding-top: 22px;
         }
 
         .history h2 {
-            font-family: 'Creepster', cursive;
-            font-size: 1.8rem;
-            color: #c8c8c8;
-            text-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.15rem;
+            font-weight: 900;
             letter-spacing: 4px;
+            text-transform: uppercase;
+            color: #fff;
             margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 12px;
-            font-weight: 400;
+            gap: 10px;
         }
 
         .history h2::after {
-            content: "🕷";
-            font-size: 1.3rem;
-            filter: grayscale(1) drop-shadow(0 0 6px rgba(255,255,255,0.5));
-            animation: spiderCrawl 3s infinite alternate ease-in-out;
-        }
-
-        @keyframes spiderCrawl {
-            0% { transform: translateX(0) rotate(0deg); }
-            100% { transform: translateX(8px) rotate(12deg); }
+            content: "";
+            flex: 1;
+            height: 4px;
+            background: #fff;
         }
 
         #historyList {
@@ -1211,56 +624,60 @@
             gap: 10px;
             max-height: 220px;
             overflow-y: auto;
-            padding-right: 8px;
+            padding-right: 4px;
         }
 
         #historyList .history-item {
-            background: #0a0a0a;
-            border-radius: 8px 2px 8px 2px;
-            padding: 14px 20px;
-            border: 1px solid #2a2a2a;
-            color: #b0b0b0;
-            font-size: 0.9rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: all 0.25s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        #historyList .history-item::before {
-            content: "";
-            position: absolute;
-            left: 0;
-            top: 0;
-            bottom: 0;
-            width: 3px;
-            background: linear-gradient(180deg, #a0a0a0, #4a4a4a);
+            gap: 10px;
+            border: 3px solid #fff;
+            background: #000;
+            padding: 12px 16px;
+            transition: all 0.12s;
+            box-shadow: 3px 3px 0 #fff;
         }
 
         #historyList .history-item:hover {
-            border-color: #6a6a6a;
-            background: #151515;
-            transform: translateX(4px);
-            box-shadow: 0 0 15px rgba(255, 255, 255, 0.08);
+            transform: translate(-2px, -2px);
+            box-shadow: 5px 5px 0 #fff;
         }
 
         #historyList .history-item a {
-            color: #c0c0c0;
+            font-family: 'Inter', monospace;
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: #fff;
             text-decoration: none;
-            font-weight: 500;
-            max-width: 220px;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-            font-family: 'Courier Prime', monospace;
-            text-shadow: 0 0 6px rgba(255, 255, 255, 0.15);
+            word-break: break-all;
+            flex: 1;
         }
 
         #historyList .history-item a:hover {
-            color: #f0f0f0;
             text-decoration: underline;
+        }
+
+        #historyList .history-item .type {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.6rem;
+            font-weight: 900;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            padding: 4px 8px;
+            flex-shrink: 0;
+        }
+
+        #historyList .empty {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #666;
+            text-align: center;
+            padding: 18px;
+            border: 3px dashed #444;
         }
 
         /* ============================================================
@@ -1268,149 +685,127 @@
         ============================================================ */
         .modal {
             position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.95);
-            backdrop-filter: blur(8px);
+            inset: 0;
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(4px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
-            animation: modalFadeIn 0.3s;
+            padding: 20px;
+            animation: fadeIn 0.15s;
         }
 
-        @keyframes modalFadeIn {
-            0% { opacity: 0; }
-            100% { opacity: 1; }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
         }
 
         .modal-box {
-            background: #0e0e0e;
-            background-image: 
-                repeating-linear-gradient(0deg, transparent, transparent 3px, rgba(255,255,255,0.015) 3px, rgba(255,255,255,0.015) 4px);
-            border: 2px solid #5a5a5a;
-            border-radius: 30px 6px 30px 6px;
-            padding: 40px;
+            background: #000;
+            border: 4px solid #fff;
+            box-shadow: 10px 10px 0 #fff;
             max-width: 440px;
-            width: 90%;
-            text-align: center;
-            box-shadow: 
-                0 0 80px rgba(255, 255, 255, 0.1),
-                inset 0 0 50px rgba(0,0,0,0.9);
-            color: #c8c8c8;
-            position: relative;
-            animation: modalPop 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            width: 100%;
+            padding: 0;
+            animation: pop 0.2s cubic-bezier(0.4, 1.6, 0.6, 1);
         }
 
-        @keyframes modalPop {
-            0% { transform: scale(0.8) rotate(-3deg); opacity: 0; }
-            100% { transform: scale(1) rotate(0deg); opacity: 1; }
+        @keyframes pop {
+            from { transform: scale(0.9); opacity: 0; }
+            to { transform: scale(1); opacity: 1; }
         }
 
-        .modal-box::before {
-            content: "🎃";
-            position: absolute;
-            top: -40px;
-            left: 24px;
-            font-size: 60px;
-            filter: grayscale(1) drop-shadow(0 0 15px rgba(255, 255, 255, 0.4)) brightness(1.3);
-            animation: pumpkinModalBob 1.5s infinite alternate;
+        .modal-box .modal-head {
+            background: #fff;
+            color: #000;
+            padding: 16px 24px;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.3rem;
+            font-weight: 900;
+            letter-spacing: 4px;
+            text-transform: uppercase;
+            border-bottom: 4px solid #fff;
         }
 
-        @keyframes pumpkinModalBob {
-            0% { transform: rotate(-8deg) translateY(0); }
-            100% { transform: rotate(8deg) translateY(-6px); }
+        .modal-box .modal-body {
+            padding: 24px;
         }
 
-        .modal-box h2 {
-            font-family: 'Creepster', cursive;
-            color: #e0e0e0;
-            margin-bottom: 24px;
-            font-size: 2.6rem;
-            letter-spacing: 5px;
-            text-shadow: 0 0 20px rgba(255, 255, 255, 0.3);
-            font-weight: 400;
-        }
-
-        .modal-box p {
+        .modal-box .modal-body p {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
             margin: 14px 0;
-            font-size: 1.1rem;
-            color: #b0b0b0;
-            font-family: 'Courier Prime', monospace;
-            letter-spacing: 1px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
         }
 
-        .modal-box p::before {
-            content: "🕷 ";
-            opacity: 0.5;
-            filter: grayscale(1);
+        .modal-box .modal-body p::before {
+            content: "▌";
+            font-size: 1.1rem;
+            color: #fff;
         }
 
         .modal-box button {
-            margin-top: 28px;
-            padding: 16px 44px;
-            border-radius: 10px 2px 10px 2px;
-            background: #1a1a1a;
-            border: 1px solid #6a6a6a;
-            color: #e0e0e0;
-            font-weight: 700;
-            font-size: 1.05rem;
+            width: 100%;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1rem;
+            font-weight: 900;
+            letter-spacing: 4px;
             text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-top: 4px solid #fff;
+            padding: 18px;
             cursor: pointer;
-            box-shadow: 0 6px 0 #000, 0 0 20px rgba(255, 255, 255, 0.08);
-            transition: 0.15s;
-            font-family: 'Creepster', cursive;
-            letter-spacing: 5px;
+            transition: all 0.12s;
         }
 
         .modal-box button:hover {
-            background: #2a2a2a;
-            transform: translateY(2px);
-            box-shadow: 0 4px 0 #000, 0 0 35px rgba(255, 255, 255, 0.15);
+            background: #000;
+            color: #fff;
         }
 
         /* ============================================================
            SCROLLBAR
         ============================================================ */
         ::-webkit-scrollbar { width: 10px; }
-        ::-webkit-scrollbar-track { background: #050505; }
-        ::-webkit-scrollbar-thumb { 
-            background: linear-gradient(180deg, #4a4a4a, #2a2a2a); 
-            border-radius: 5px;
-            border: 1px solid #1a1a1a;
-        }
-        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #6a6a6a, #4a4a4a); }
+        ::-webkit-scrollbar-track { background: #000; }
+        ::-webkit-scrollbar-thumb { background: #fff; border: 2px solid #000; }
+        ::-webkit-scrollbar-thumb:hover { background: #ccc; }
 
         /* ============================================================
            RESPONSIVE
         ============================================================ */
-        @media (max-width: 700px) {
-            .container { padding: 28px 20px; }
-            .brand h1 { font-size: 2.6rem; letter-spacing: 5px; }
-            .brand span { letter-spacing: 8px; font-size: 0.7rem; }
-            .nav-btn { padding: 10px 16px; font-size: 0.75rem; }
-            .code-item { flex-direction: column; align-items: stretch; gap: 8px; }
+        @media (max-width: 640px) {
+            body { padding: 20px 12px; }
+            .container { box-shadow: 8px 8px 0 #fff; }
+            .header { padding: 20px 20px 18px; }
+            .brand h1 { font-size: 2.4rem; }
+            .card { padding: 22px 20px 26px; }
+            .nav-btn { padding: 10px 14px; font-size: 0.68rem; }
+            .primary-btn { font-size: 1rem; letter-spacing: 3px; padding: 17px; }
+            .primary-btn:hover { letter-spacing: 5px; }
+            .code-item { flex-direction: column; }
+            .code-item .tag { border-right: none; border-bottom: 3px solid #fff; }
+            .code-item button { border-left: none; border-top: 3px solid #fff; }
             .result-row { flex-direction: column; }
-            .moon { width: 90px; height: 90px; top: 30px; right: 30px; }
-            .corner-web { width: 150px; height: 150px; }
-            .ghost { font-size: 40px; }
-            .pumpkin { transform: scale(0.75); }
-            .tombstone { transform: scale(0.8); }
-            .dead-tree { width: 120px; height: 190px; }
+            .result-row button { border-left: 3px solid #fff; border-top: none; }
         }
 
-        @media (max-width: 480px) {
-            .brand h1 { font-size: 2rem; letter-spacing: 3px; }
-            .field label { font-size: 0.85rem; letter-spacing: 3px; }
-            .primary-btn { font-size: 1rem; letter-spacing: 4px; padding: 16px; }
+        @media (max-width: 420px) {
+            .brand h1 { font-size: 1.9rem; }
+            .field label { font-size: 0.65rem; letter-spacing: 2px; }
         }
 
+        /* Reduced motion */
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
-                animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
             }
         }
@@ -1419,130 +814,38 @@
 <body>
 
 <!-- ============================================================
-     ATMOSPHERE LAYERS
+     BACKGROUND ART — the Mortyx figure (black & white)
 ============================================================ -->
-<div class="starfield" id="starfield"></div>
-<div class="moon"></div>
-<div class="fog"></div>
-<div class="fog fog-back"></div>
-
-<!-- ============================================================
-     CORNER SPIDER WEBS
-============================================================ -->
-<div class="corner-web tl">
-    <svg viewBox="0 0 200 200">
-        <line x1="0" y1="0" x2="200" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="140"/>
-        <line x1="0" y1="0" x2="200" y2="80"/>
-        <line x1="0" y1="0" x2="140" y2="200"/>
-        <line x1="0" y1="0" x2="80" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="40"/>
-        <line x1="0" y1="0" x2="40" y2="200"/>
-        <circle cx="40" cy="40" r="30" fill="none"/>
-        <circle cx="70" cy="70" r="50" fill="none"/>
-        <circle cx="100" cy="100" r="72" fill="none"/>
-        <circle cx="130" cy="130" r="95" fill="none"/>
-        <path d="M 40 40 Q 60 30 80 40" fill="none"/>
-        <path d="M 80 40 Q 90 60 80 80" fill="none"/>
-        <path d="M 80 80 Q 60 90 40 80" fill="none"/>
-        <path d="M 40 80 Q 30 60 40 40" fill="none"/>
-        <path d="M 70 70 Q 95 55 120 70" fill="none"/>
-        <path d="M 120 70 Q 135 95 120 120" fill="none"/>
-        <path d="M 120 120 Q 95 135 70 120" fill="none"/>
-        <path d="M 70 120 Q 55 95 70 70" fill="none"/>
-    </svg>
-</div>
-<div class="corner-web tr">
-    <svg viewBox="0 0 200 200">
-        <line x1="0" y1="0" x2="200" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="140"/>
-        <line x1="0" y1="0" x2="200" y2="80"/>
-        <line x1="0" y1="0" x2="140" y2="200"/>
-        <line x1="0" y1="0" x2="80" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="40"/>
-        <line x1="0" y1="0" x2="40" y2="200"/>
-        <circle cx="40" cy="40" r="30" fill="none"/>
-        <circle cx="70" cy="70" r="50" fill="none"/>
-        <circle cx="100" cy="100" r="72" fill="none"/>
-        <circle cx="130" cy="130" r="95" fill="none"/>
-        <path d="M 40 40 Q 60 30 80 40" fill="none"/>
-        <path d="M 80 40 Q 90 60 80 80" fill="none"/>
-        <path d="M 80 80 Q 60 90 40 80" fill="none"/>
-        <path d="M 40 80 Q 30 60 40 40" fill="none"/>
-    </svg>
-</div>
-<div class="corner-web bl">
-    <svg viewBox="0 0 200 200">
-        <line x1="0" y1="0" x2="200" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="140"/>
-        <line x1="0" y1="0" x2="200" y2="80"/>
-        <line x1="0" y1="0" x2="140" y2="200"/>
-        <line x1="0" y1="0" x2="80" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="40"/>
-        <line x1="0" y1="0" x2="40" y2="200"/>
-        <circle cx="40" cy="40" r="30" fill="none"/>
-        <circle cx="70" cy="70" r="50" fill="none"/>
-        <circle cx="100" cy="100" r="72" fill="none"/>
-        <circle cx="130" cy="130" r="95" fill="none"/>
-    </svg>
-</div>
-<div class="corner-web br">
-    <svg viewBox="0 0 200 200">
-        <line x1="0" y1="0" x2="200" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="140"/>
-        <line x1="0" y1="0" x2="200" y2="80"/>
-        <line x1="0" y1="0" x2="140" y2="200"/>
-        <line x1="0" y1="0" x2="80" y2="200"/>
-        <line x1="0" y1="0" x2="200" y2="40"/>
-        <line x1="0" y1="0" x2="40" y2="200"/>
-        <circle cx="40" cy="40" r="30" fill="none"/>
-        <circle cx="70" cy="70" r="50" fill="none"/>
-        <circle cx="100" cy="100" r="72" fill="none"/>
-        <circle cx="130" cy="130" r="95" fill="none"/>
-    </svg>
-</div>
-
-<!-- ============================================================
-     FLOATING GHOSTS & BATS
-============================================================ -->
-<div class="ghost g1">👻</div>
-<div class="ghost g2">👻</div>
-<div class="ghost g3">👻</div>
-
-<div class="bat b1"></div>
-<div class="bat b2"></div>
-<div class="bat b3"></div>
-<div class="bat b4"></div>
-
-<!-- ============================================================
-     DECORATION LAYER — emoji icons, pumpkins, tombstones, trees
-============================================================ -->
-<div class="decoration-layer" id="decorationLayer"></div>
-
-<!-- ============================================================
-     HANGING SPIDERS
-============================================================ -->
-<div class="festive-overlay" id="festiveOverlay"></div>
+<div class="bg-art" aria-hidden="true"></div>
 
 <!-- ============================================================
      MAIN UI — MORTYX
 ============================================================ -->
 <div class="container">
-    <span class="container-spider s1">🕷</span>
-    <span class="container-spider s2">🕷</span>
+
+    <!-- Bold split top accent -->
+    <div class="top-bar" aria-hidden="true">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
 
     <header class="header">
         <div class="brand">
             <h1>MORTYX</h1>
-            <span>HYPERLINK</span>
+            <span class="tag">Hyperlink</span>
         </div>
         <nav class="nav">
-            <button id="tutorialBtn" class="nav-btn"><i class="fas fa-book-dead"></i> Grimoire</button>
-            <a href="https://discord.gg/bestmethods" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Discord</a>
+            <button id="tutorialBtn" class="nav-btn ghost">
+                <i class="fas fa-book-open"></i> Tutorial
+            </button>
+            <a href="https://discord.gg/bestmethods" target="_blank" class="nav-btn">
+                <i class="fab fa-discord"></i> Discord
+            </a>
         </nav>
     </header>
 
     <main class="card">
+
         <div class="field">
             <label for="linkType">Type</label>
             <select id="linkType">
@@ -1558,444 +861,270 @@
             <input id="urlInput" type="url" placeholder="https://www.roblox.com/users/123/profile" autocomplete="off" spellcheck="false">
         </div>
 
-        <button id="shortenBtn" class="primary-btn">Summon</button>
+        <button id="shortenBtn" class="primary-btn">Generate</button>
         <p id="error" class="error hidden"></p>
 
+        <!-- Result -->
         <section id="resultSection" class="hidden">
-            <div class="result-row">
-                <a id="shortLink" href="#" target="_blank" rel="noopener"></a>
-                <button id="copyShortBtn">Copy</button>
+            <div class="result-block">
+                <span class="label">Short link</span>
+                <div class="result-row">
+                    <a id="shortLink" href="#" target="_blank" rel="noopener"></a>
+                    <button id="copyShortBtn">Copy</button>
+                </div>
             </div>
         </section>
 
+        <!-- Markdown -->
         <section id="markdownSection" class="hidden">
+            <span class="label">Markdown</span>
             <pre id="markdownText"></pre>
             <button id="copyMarkdownBtn">Copy markdown</button>
         </section>
 
+        <!-- Links -->
         <section id="linksSection" class="hidden">
             <div class="code-item">
-                <span>Original</span>
+                <span class="tag">Original</span>
                 <code id="originalText"></code>
                 <button data-copy="originalText">Copy</button>
             </div>
             <div class="code-item">
-                <span>Roblox</span>
+                <span class="tag">Roblox</span>
                 <code id="robloxText"></code>
                 <button data-copy="robloxText">Copy</button>
             </div>
             <div class="code-item">
-                <span>Short</span>
+                <span class="tag">Short</span>
                 <code id="shortText"></code>
                 <button data-copy="shortText">Copy</button>
             </div>
         </section>
 
+        <!-- History -->
         <section class="history">
-            <h2>Recent Curses</h2>
+            <h2>Recent Links</h2>
             <div id="historyList"></div>
         </section>
+
     </main>
 </div>
 
 <!-- Tutorial modal -->
 <div id="tutorialModal" class="modal hidden">
     <div class="modal-box">
-        <h2>Grimoire</h2>
-        <p>Paste a Roblox URL.</p>
-        <p>Click Summon.</p>
-        <p>Copy any generated output.</p>
-        <button id="closeTutorial">Banish</button>
+        <div class="modal-head">Tutorial</div>
+        <div class="modal-body">
+            <p>Paste a Roblox URL</p>
+            <p>Click Generate</p>
+            <p>Copy any output</p>
+        </div>
+        <button id="closeTutorial">Close</button>
     </div>
 </div>
 
 <script>
     (function() {
-        // ============================================================
-        // 1. STARFIELD — monochrome twinkling stars
-        // ============================================================
-        const starfield = document.getElementById('starfield');
-        const starCount = 100;
-        for (let i = 0; i < starCount; i++) {
-            const star = document.createElement('div');
-            star.className = 'star';
-            star.style.left = Math.random() * 100 + '%';
-            star.style.top = Math.random() * 100 + '%';
-            star.style.animationDelay = (Math.random() * 4) + 's';
-            star.style.animationDuration = (3 + Math.random() * 4) + 's';
-            const size = Math.random() * 2 + 1;
-            star.style.width = size + 'px';
-            star.style.height = size + 'px';
-            // Random brightness for organic feel
-            star.style.background = `rgb(${200 + Math.random() * 55}, ${200 + Math.random() * 55}, ${200 + Math.random() * 55})`;
-            starfield.appendChild(star);
-        }
+        'use strict';
 
         // ============================================================
-        // 2. HANGING SPIDERS — monochrome, come out & retract
+        // DOM REFS
         // ============================================================
-        const overlay = document.getElementById('festiveOverlay');
-
-        const spiderData = [
-            { left: '5%', baseThread: 170, spiderBaseTop: 170, speed: 1.3, range: 50 },
-            { left: '16%', baseThread: 250, spiderBaseTop: 250, speed: 1.7, range: 65 },
-            { left: '30%', baseThread: 120, spiderBaseTop: 120, speed: 1.1, range: 40 },
-            { left: '44%', baseThread: 210, spiderBaseTop: 210, speed: 1.5, range: 55 },
-            { left: '58%', baseThread: 150, spiderBaseTop: 150, speed: 1.4, range: 45 },
-            { left: '72%', baseThread: 280, spiderBaseTop: 280, speed: 1.9, range: 75 },
-            { left: '86%', baseThread: 100, spiderBaseTop: 100, speed: 1.2, range: 35 },
-            { left: '94%', baseThread: 230, spiderBaseTop: 230, speed: 1.6, range: 60 }
-        ];
-
-        const spiderInstances = [];
-
-        spiderData.forEach((data, index) => {
-            // Thread
-            const thread = document.createElement('div');
-            thread.className = 'spider-thread';
-            thread.style.left = data.left;
-            thread.style.height = data.baseThread + 'px';
-            overlay.appendChild(thread);
-
-            // Spider
-            const spider = document.createElement('div');
-            spider.className = 'spider';
-            spider.style.left = `calc(${data.left} - 19px)`;
-            spider.style.top = data.spiderBaseTop + 'px';
-
-            spider.innerHTML = `
-                <div class="leg l1"></div><div class="leg l2"></div>
-                <div class="leg l3"></div><div class="leg l4"></div>
-                <div class="leg l5"></div><div class="leg l6"></div>
-                <div class="leg l7"></div><div class="leg l8"></div>
-                <div class="body"></div>
-                <div class="eye left"></div><div class="eye right"></div>
-            `;
-            overlay.appendChild(spider);
-
-            spiderInstances.push({
-                thread,
-                spider,
-                baseTop: data.spiderBaseTop,
-                currentTop: data.spiderBaseTop,
-                direction: 1,
-                speed: data.speed,
-                range: data.range
-            });
-        });
-
-        function animateSpiders() {
-            spiderInstances.forEach((sp, idx) => {
-                const maxTop = sp.baseTop + 12;
-                const minTop = sp.baseTop - sp.range;
-
-                if (sp.direction === 1) {
-                    sp.currentTop += sp.speed * 0.65;
-                    if (sp.currentTop >= maxTop) sp.direction = -1;
-                } else {
-                    sp.currentTop -= sp.speed * 0.85;
-                    if (sp.currentTop <= minTop) sp.direction = 1;
-                }
-
-                sp.currentTop = Math.min(maxTop, Math.max(minTop, sp.currentTop));
-
-                sp.spider.style.top = sp.currentTop + 'px';
-
-                const newHeight = Math.max(50, sp.currentTop + 12);
-                sp.thread.style.height = newHeight + 'px';
-
-                // Slight organic sway
-                const sway = Math.sin(Date.now() * 0.0018 + idx * 1.7) * 2.5;
-                sp.thread.style.transform = `rotate(${sway * 0.12}deg)`;
-            });
-            requestAnimationFrame(animateSpiders);
-        }
-        requestAnimationFrame(animateSpiders);
-
-        // ============================================================
-        // 3. DECORATIONS — custom emoji icons, pumpkins, tombstones, trees
-        // ============================================================
-        const decorLayer = document.getElementById('decorationLayer');
-
-        // ---- Custom emoji icons from the user's sprite sheet ----
-        // These are the four icons: armored skull (left), horn, winged helm, armored skull (right)
-        function createEmojiIcon(type, left, top, scale, delay) {
-            const icon = document.createElement('div');
-            icon.className = `emoji-icon ${type}`;
-            icon.style.left = left;
-            icon.style.top = top;
-            icon.style.transform = `scale(${scale})`;
-            icon.style.animationDelay = (delay || 0) + 's';
-            decorLayer.appendChild(icon);
-        }
-
-        // Place the 4 unique icons around the screen
-        createEmojiIcon('skull-1', '3%', '8%', 1.0, 0);
-        createEmojiIcon('horn', '88%', '10%', 0.9, 0.5);
-        createEmojiIcon('helm', '15%', '85%', 0.85, 1.0);
-        createEmojiIcon('skull-2', '85%', '88%', 1.0, 0.3);
-
-        // Second row, smaller variants
-        createEmojiIcon('horn', '8%', '45%', 0.65, 1.5);
-        createEmojiIcon('skull-1', '90%', '45%', 0.7, 0.8);
-        createEmojiIcon('helm', '50%', '5%', 0.6, 1.2);
-
-        // ---- Pumpkin creator ----
-        function createPumpkin(left, bottom, scale) {
-            const p = document.createElement('div');
-            p.className = 'pumpkin';
-            p.style.left = left;
-            p.style.bottom = bottom;
-            p.style.transform = `scale(${scale})`;
-            p.innerHTML = `
-                <div class="body">
-                    <div class="stem"></div>
-                    <div class="face">
-                        <div class="eye left"></div>
-                        <div class="eye right"></div>
-                        <div class="nose"></div>
-                        <div class="mouth"></div>
-                    </div>
-                </div>
-            `;
-            decorLayer.appendChild(p);
-        }
-
-        // ---- Tombstone creator ----
-        function createTombstone(left, bottom, scale) {
-            const t = document.createElement('div');
-            t.className = 'tombstone';
-            t.style.left = left;
-            t.style.bottom = bottom;
-            t.style.transform = `scale(${scale})`;
-            decorLayer.appendChild(t);
-        }
-
-        // ---- Dead tree creator ----
-        function createDeadTree(left, bottom, scale, flip) {
-            const d = document.createElement('div');
-            d.className = 'dead-tree';
-            d.style.left = left;
-            d.style.bottom = bottom;
-            d.style.transform = `scale(${scale}) ${flip ? 'scaleX(-1)' : ''}`;
-            d.innerHTML = `
-                <svg viewBox="0 0 200 320" preserveAspectRatio="xMidYMax meet">
-                    <path d="M 100 320 L 100 180 
-                             M 100 240 Q 60 200 30 160 M 100 240 Q 140 200 170 160
-                             M 100 200 Q 70 160 40 120 M 100 200 Q 130 160 160 120
-                             M 100 160 Q 80 130 60 90 M 100 160 Q 120 130 140 90
-                             M 100 120 Q 90 90 80 50 M 100 120 Q 110 90 120 50
-                             M 100 90 L 100 40
-                             M 90 60 L 70 30 M 110 60 L 130 30
-                             M 80 40 L 60 15 M 120 40 L 140 15"
-                          stroke="#1a1a1a" stroke-width="9" fill="none" stroke-linecap="round"/>
-                    <path d="M 100 320 L 100 180 
-                             M 100 240 Q 60 200 30 160 M 100 240 Q 140 200 170 160
-                             M 100 200 Q 70 160 40 120 M 100 200 Q 130 160 160 120
-                             M 100 160 Q 80 130 60 90 M 100 160 Q 120 130 140 90
-                             M 100 120 Q 90 90 80 50 M 100 120 Q 110 90 120 50
-                             M 100 90 L 100 40
-                             M 90 60 L 70 30 M 110 60 L 130 30
-                             M 80 40 L 60 15 M 120 40 L 140 15"
-                          stroke="#2a2a2a" stroke-width="5" fill="none" stroke-linecap="round"/>
-                </svg>
-            `;
-            decorLayer.appendChild(d);
-        }
-
-        // ---- Place pumpkins (jack-o-lanterns) around the screen ----
-        createPumpkin('2%', '3%', 0.95);
-        createPumpkin('14%', '6%', 0.7);
-        createPumpkin('85%', '4%', 1.0);
-        createPumpkin('93%', '12%', 0.75);
-        createPumpkin('5%', '72%', 0.9);
-        createPumpkin('90%', '75%', 0.95);
-        createPumpkin('25%', '1%', 0.6);
-        createPumpkin('68%', '2%', 0.65);
-
-        // ---- Place tombstones ----
-        createTombstone('10%', '2%', 0.8);
-        createTombstone('20%', '1%', 0.65);
-        createTombstone('78%', '2%', 0.85);
-        createTombstone('90%', '1%', 0.7);
-        createTombstone('4%', '52%', 0.55);
-        createTombstone('93%', '58%', 0.6);
-
-        // ---- Place dead trees on edges ----
-        createDeadTree('-30px', '-20px', 0.95, false);
-        createDeadTree('calc(100% - 140px)', '-20px', 0.95, true);
-        createDeadTree('calc(50% - 75px)', '-30px', 0.55, false);
-
-        // ============================================================
-        // 4. MORTYX HYPERLINK LOGIC
-        // ============================================================
-        const shortenBtn = document.getElementById('shortenBtn');
-        const urlInput = document.getElementById('urlInput');
-        const linkType = document.getElementById('linkType');
-        const errorEl = document.getElementById('error');
-        const resultSection = document.getElementById('resultSection');
-        const shortLink = document.getElementById('shortLink');
-        const copyShortBtn = document.getElementById('copyShortBtn');
+        const shortenBtn      = document.getElementById('shortenBtn');
+        const urlInput        = document.getElementById('urlInput');
+        const linkType        = document.getElementById('linkType');
+        const errorEl         = document.getElementById('error');
+        const resultSection   = document.getElementById('resultSection');
+        const shortLink       = document.getElementById('shortLink');
+        const copyShortBtn    = document.getElementById('copyShortBtn');
         const markdownSection = document.getElementById('markdownSection');
-        const markdownText = document.getElementById('markdownText');
+        const markdownText    = document.getElementById('markdownText');
         const copyMarkdownBtn = document.getElementById('copyMarkdownBtn');
-        const linksSection = document.getElementById('linksSection');
-        const originalText = document.getElementById('originalText');
-        const robloxText = document.getElementById('robloxText');
-        const shortText = document.getElementById('shortText');
-        const historyList = document.getElementById('historyList');
+        const linksSection    = document.getElementById('linksSection');
+        const originalText    = document.getElementById('originalText');
+        const robloxText      = document.getElementById('robloxText');
+        const shortText       = document.getElementById('shortText');
+        const historyList     = document.getElementById('historyList');
+        const tutorialBtn     = document.getElementById('tutorialBtn');
+        const tutorialModal   = document.getElementById('tutorialModal');
+        const closeTutorial   = document.getElementById('closeTutorial');
 
+        // ============================================================
+        // HELPERS
+        // ============================================================
         function copyToClipboard(text, btn) {
-            navigator.clipboard.writeText(text).then(() => {
-                const original = btn.innerText;
-                btn.innerText = 'COPIED';
-                setTimeout(() => btn.innerText = original, 1200);
-            }).catch(() => alert('Press Ctrl+C to copy'));
+            if (!text) return;
+            const original = btn.textContent;
+            const done = () => {
+                btn.textContent = 'Copied';
+                setTimeout(() => btn.textContent = original, 1200);
+            };
+            if (navigator.clipboard && navigator.clipboard.writeText) {
+                navigator.clipboard.writeText(text).then(done).catch(() => {
+                    fallbackCopy(text); done();
+                });
+            } else {
+                fallbackCopy(text); done();
+            }
+        }
+
+        function fallbackCopy(text) {
+            const ta = document.createElement('textarea');
+            ta.value = text;
+            ta.style.position = 'fixed';
+            ta.style.opacity = '0';
+            document.body.appendChild(ta);
+            ta.select();
+            try { document.execCommand('copy'); } catch (e) {}
+            document.body.removeChild(ta);
         }
 
         function generateShortId() {
-            return Math.random().toString(36).substring(2, 8) + Math.random().toString(36).substring(2, 6);
+            return Math.random().toString(36).slice(2, 8) + Math.random().toString(36).slice(2, 6);
         }
 
         function buildShortLink(id) {
-            return `https://moryx.gg/${id}`;
+            return 'https://moryx.gg/' + id;
+        }
+
+        function escapeHtml(s) {
+            return String(s)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#39;');
         }
 
         function addToHistory(originalUrl, shortUrl, type) {
+            // Remove empty placeholder if present
+            const empty = historyList.querySelector('.empty');
+            if (empty) empty.remove();
+
             const item = document.createElement('div');
             item.className = 'history-item';
-            const shortA = document.createElement('a');
-            shortA.href = shortUrl;
-            shortA.target = '_blank';
-            shortA.rel = 'noopener';
-            shortA.textContent = shortUrl.replace('https://', '');
-            const typeSpan = document.createElement('span');
-            typeSpan.textContent = type;
-            typeSpan.style.color = '#808080';
-            typeSpan.style.fontSize = '0.7rem';
-            typeSpan.style.textTransform = 'uppercase';
-            typeSpan.style.letterSpacing = '2px';
-            typeSpan.style.fontWeight = '700';
-            item.appendChild(shortA);
-            item.appendChild(typeSpan);
+
+            const a = document.createElement('a');
+            a.href = shortUrl;
+            a.target = '_blank';
+            a.rel = 'noopener noreferrer';
+            a.textContent = shortUrl.replace(/^https?:\/\//, '');
+            a.title = originalUrl;
+
+            const tag = document.createElement('span');
+            tag.className = 'type';
+            tag.textContent = type;
+
+            item.appendChild(a);
+            item.appendChild(tag);
             historyList.prepend(item);
+
             while (historyList.children.length > 8) {
                 historyList.removeChild(historyList.lastChild);
             }
         }
 
-        shortenBtn.addEventListener('click', () => {
+        // ============================================================
+        // MAIN ACTION
+        // ============================================================
+        shortenBtn.addEventListener('click', function() {
             const rawUrl = urlInput.value.trim();
+
             if (!rawUrl) {
-                errorEl.textContent = '⚠ The void demands a URL ⚠';
+                errorEl.textContent = 'Enter a URL first.';
                 errorEl.classList.remove('hidden');
+                urlInput.focus();
                 return;
             }
 
-            if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
-                errorEl.textContent = '⚠ URL must start with http:// or https:// ⚠';
+            if (!/^https?:\/\//i.test(rawUrl)) {
+                errorEl.textContent = 'URL must start with http:// or https://';
                 errorEl.classList.remove('hidden');
+                urlInput.focus();
                 return;
             }
 
             errorEl.classList.add('hidden');
-            const type = linkType.value;
+
+            const type    = linkType.value;
             const shortId = generateShortId();
             const shortUrl = buildShortLink(shortId);
 
+            // Short link row
             shortLink.href = shortUrl;
             shortLink.textContent = shortUrl;
             resultSection.classList.remove('hidden');
 
-            markdownText.textContent = `[MORTYX](${shortUrl})`;
+            // Markdown
+            markdownText.textContent = '[MORTYX](' + shortUrl + ')';
             markdownSection.classList.remove('hidden');
 
+            // Code items
             originalText.textContent = rawUrl;
-            robloxText.textContent = `roblox://experiences/start?url=${encodeURIComponent(rawUrl)}`;
-            shortText.textContent = shortUrl;
+            robloxText.textContent   = 'roblox://experiences/start?url=' + encodeURIComponent(rawUrl);
+            shortText.textContent    = shortUrl;
             linksSection.classList.remove('hidden');
 
+            // History
             addToHistory(rawUrl, shortUrl, type);
         });
 
-        copyShortBtn.addEventListener('click', () => {
-            if (shortLink.textContent) copyToClipboard(shortLink.textContent, copyShortBtn);
-        });
-
-        copyMarkdownBtn.addEventListener('click', () => {
-            if (markdownText.textContent) copyToClipboard(markdownText.textContent, copyMarkdownBtn);
-        });
-
-        linksSection.addEventListener('click', (e) => {
-            const btn = e.target.closest('button[data-copy]');
-            if (!btn) return;
-            const targetId = btn.getAttribute('data-copy');
-            const targetEl = document.getElementById(targetId);
-            if (targetEl && targetEl.textContent) {
-                copyToClipboard(targetEl.textContent, btn);
+        // Enter key triggers generate
+        urlInput.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter') {
+                e.preventDefault();
+                shortenBtn.click();
             }
         });
 
-        // Tutorial modal
-        const tutorialBtn = document.getElementById('tutorialBtn');
-        const tutorialModal = document.getElementById('tutorialModal');
-        const closeTutorial = document.getElementById('closeTutorial');
+        // ============================================================
+        // COPY HANDLERS
+        // ============================================================
+        copyShortBtn.addEventListener('click', function() {
+            copyToClipboard(shortLink.textContent, copyShortBtn);
+        });
 
-        tutorialBtn.addEventListener('click', () => {
+        copyMarkdownBtn.addEventListener('click', function() {
+            copyToClipboard(markdownText.textContent, copyMarkdownBtn);
+        });
+
+        linksSection.addEventListener('click', function(e) {
+            const btn = e.target.closest('button[data-copy]');
+            if (!btn) return;
+            const id = btn.getAttribute('data-copy');
+            const el = document.getElementById(id);
+            if (el) copyToClipboard(el.textContent, btn);
+        });
+
+        // ============================================================
+        // TUTORIAL MODAL
+        // ============================================================
+        tutorialBtn.addEventListener('click', function() {
             tutorialModal.classList.remove('hidden');
         });
 
-        closeTutorial.addEventListener('click', () => {
+        closeTutorial.addEventListener('click', function() {
             tutorialModal.classList.add('hidden');
         });
 
-        tutorialModal.addEventListener('click', (e) => {
+        tutorialModal.addEventListener('click', function(e) {
             if (e.target === tutorialModal) tutorialModal.classList.add('hidden');
         });
 
-        // Seed history
-        window.addEventListener('load', () => {
-            addToHistory('https://www.roblox.com/users/123/profile', 'https://moryx.gg/abc123', 'Profile');
-            addToHistory('https://www.roblox.com/games/920587237/Adopt-Me', 'https://moryx.gg/xyz789', 'Community');
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && !tutorialModal.classList.contains('hidden')) {
+                tutorialModal.classList.add('hidden');
+            }
         });
 
         // ============================================================
-        // 5. HUMAN TOUCHES — random flickers, shakes
+        // INIT — empty history state
         // ============================================================
-        // Pumpkin eye flicker
-        setInterval(() => {
-            const eyes = document.querySelectorAll('.pumpkin .eye');
-            if (eyes.length) {
-                const e = eyes[Math.floor(Math.random() * eyes.length)];
-                e.style.opacity = '0.2';
-                setTimeout(() => e.style.opacity = '', 150);
-            }
-        }, 2400);
+        const emptyMsg = document.createElement('div');
+        emptyMsg.className = 'empty';
+        emptyMsg.textContent = 'No links yet. Generate one above.';
+        historyList.appendChild(emptyMsg);
 
-        // Rare subtle screen shake
-        setInterval(() => {
-            if (Math.random() > 0.94) {
-                document.body.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
-                setTimeout(() => {
-                    document.body.style.transform = '';
-                }, 80);
-            }
-        }, 7000);
-
-        // Random bat spawn
-        setInterval(() => {
-            if (Math.random() > 0.88) {
-                const bat = document.createElement('div');
-                bat.className = 'bat';
-                bat.style.top = (Math.random() * 60 + 5) + '%';
-                bat.style.left = '-50px';
-                bat.style.fontSize = (Math.random() * 16 + 16) + 'px';
-                const duration = (Math.random() * 12 + 14);
-                bat.style.animation = `batFly${Math.random() > 0.5 ? '1' : '2'} ${duration}s linear`;
-                document.body.appendChild(bat);
-                setTimeout(() => bat.remove(), duration * 1000);
-            }
-        }, 9000);
     })();
 </script>
 
