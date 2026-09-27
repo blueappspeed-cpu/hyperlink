@@ -5,10 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MORTYX · hyperlink</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Creepster&family=Nosifer&family=Eater&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           MORTYX — handcrafted halloween + christmas hybrid
-           humanized, warm, spider GIFs, pumpkins, custom trees
+           MORTYX — HALLOWEEN HAUNTED EDITION
+           handcrafted, atmospheric, no AI vibes
         ============================================================ */
         * {
             margin: 0;
@@ -16,53 +17,134 @@
             box-sizing: border-box;
         }
 
+        html, body {
+            overflow-x: hidden;
+        }
+
         body {
-            background-color: #070a0e;
+            background-color: #050208;
             background-image: 
-                radial-gradient(ellipse at 15% 20%, rgba(255, 140, 0, 0.10) 0%, transparent 45%),
-                radial-gradient(ellipse at 85% 75%, rgba(200, 0, 0, 0.12) 0%, transparent 50%),
-                radial-gradient(circle at 50% 50%, rgba(80, 0, 120, 0.08) 0%, transparent 70%),
-                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.015) 0px, rgba(255, 215, 0, 0.015) 2px, 
-                                          rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 8px);
-            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
+                radial-gradient(ellipse at 20% 30%, rgba(80, 0, 0, 0.4) 0%, transparent 50%),
+                radial-gradient(ellipse at 80% 70%, rgba(40, 0, 60, 0.5) 0%, transparent 55%),
+                radial-gradient(ellipse at 50% 100%, rgba(255, 100, 0, 0.08) 0%, transparent 60%),
+                radial-gradient(circle at 50% 50%, rgba(20, 0, 40, 0.6) 0%, transparent 80%);
+            font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 30px 20px;
+            padding: 40px 20px;
             position: relative;
             overflow-x: hidden;
-        }
-
-        /* ---- twinkling starfield background (human touch) ---- */
-        body::before {
-            content: "";
-            position: fixed;
-            inset: 0;
-            background-image: 
-                radial-gradient(2px 2px at 20px 30px, #ffffff88, transparent),
-                radial-gradient(2px 2px at 40px 70px, #ffdd8888, transparent),
-                radial-gradient(1px 1px at 90px 40px, #ffffffaa, transparent),
-                radial-gradient(2px 2px at 130px 80px, #ffaa8888, transparent),
-                radial-gradient(1px 1px at 160px 120px, #ffffff99, transparent),
-                radial-gradient(2px 2px at 200px 20px, #ffeeaaaa, transparent),
-                radial-gradient(1px 1px at 250px 150px, #ffffff88, transparent),
-                radial-gradient(2px 2px at 300px 60px, #ffcc8888, transparent);
-            background-size: 350px 200px;
-            background-repeat: repeat;
-            opacity: 0.5;
-            pointer-events: none;
-            z-index: 0;
-            animation: twinkle 6s infinite alternate;
-        }
-
-        @keyframes twinkle {
-            0% { opacity: 0.35; }
-            100% { opacity: 0.65; }
+            color: #e8e0d8;
         }
 
         /* ============================================================
-           FESTIVE OVERLAY — spiders that come out & retract, lights
+           ATMOSPHERE — fog, moon, stars, blood drips
+        ============================================================ */
+        
+        /* Big blood moon in corner */
+        .blood-moon {
+            position: fixed;
+            top: 60px;
+            right: 80px;
+            width: 140px;
+            height: 140px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 35% 35%, #ff6633, #cc2200 40%, #660000 80%, #330000 100%);
+            box-shadow: 
+                0 0 60px #ff3300,
+                0 0 120px #aa0000,
+                0 0 200px #660000,
+                inset -20px -20px 40px rgba(0,0,0,0.8);
+            z-index: 1;
+            animation: moonGlow 8s infinite alternate;
+            pointer-events: none;
+        }
+
+        .blood-moon::before {
+            content: "";
+            position: absolute;
+            top: 15%;
+            left: 20%;
+            width: 30px;
+            height: 30px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.35);
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.6);
+        }
+
+        .blood-moon::after {
+            content: "";
+            position: absolute;
+            top: 55%;
+            left: 55%;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(0,0,0,0.3);
+            box-shadow: inset 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        @keyframes moonGlow {
+            0% { filter: brightness(0.9) drop-shadow(0 0 40px #ff3300); }
+            100% { filter: brightness(1.15) drop-shadow(0 0 80px #ff5500); }
+        }
+
+        /* Starfield */
+        .starfield {
+            position: fixed;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            overflow: hidden;
+        }
+
+        .star {
+            position: absolute;
+            width: 2px;
+            height: 2px;
+            background: #fff;
+            border-radius: 50%;
+            box-shadow: 0 0 4px #fff, 0 0 8px #aaf;
+            animation: starTwinkle 3s infinite alternate;
+        }
+
+        @keyframes starTwinkle {
+            0% { opacity: 0.2; }
+            100% { opacity: 1; }
+        }
+
+        /* Fog layers */
+        .fog {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 200%;
+            height: 100%;
+            background: 
+                radial-gradient(ellipse at 20% 80%, rgba(120, 120, 140, 0.15) 0%, transparent 40%),
+                radial-gradient(ellipse at 60% 90%, rgba(80, 80, 100, 0.18) 0%, transparent 45%),
+                radial-gradient(ellipse at 90% 85%, rgba(100, 80, 120, 0.15) 0%, transparent 40%);
+            z-index: 2;
+            pointer-events: none;
+            animation: fogDrift 25s linear infinite;
+        }
+
+        .fog.fog-back {
+            bottom: 30%;
+            opacity: 0.5;
+            animation: fogDrift 40s linear infinite reverse;
+            filter: blur(20px);
+        }
+
+        @keyframes fogDrift {
+            0% { transform: translateX(0); }
+            100% { transform: translateX(-50%); }
+        }
+
+        /* ============================================================
+           HANGING SPIDERS — come out & retract (GIF feel)
         ============================================================ */
         .festive-overlay {
             position: fixed;
@@ -71,416 +153,585 @@
             width: 100%;
             height: 100%;
             pointer-events: none;
-            z-index: 2;
+            z-index: 5;
             overflow: hidden;
         }
 
-        /* ---------- spider threads ---------- */
         .spider-thread {
             position: absolute;
             width: 2px;
-            background: linear-gradient(180deg, rgba(230, 230, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%);
-            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 2px rgba(255, 255, 255, 0.9);
+            background: linear-gradient(180deg, 
+                rgba(240, 240, 255, 0.9) 0%, 
+                rgba(200, 200, 220, 0.6) 40%,
+                rgba(180, 180, 200, 0.3) 100%);
+            box-shadow: 0 0 6px rgba(255, 255, 255, 0.5);
             top: 0;
             transform-origin: top center;
-            transition: height 0.15s ease;
         }
 
-        /* ---------- the spider itself (GIF-like, comes out & goes back) ---------- */
         .spider {
             position: absolute;
-            width: 36px;
-            height: 36px;
-            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
-            transition: top 0.12s ease-out;
+            width: 40px;
+            height: 40px;
+            filter: drop-shadow(0 8px 12px rgba(0, 0, 0, 0.9));
         }
 
         .spider .body {
             position: absolute;
-            width: 20px;
+            width: 22px;
             height: 20px;
-            background: radial-gradient(circle at 40% 35%, #2a2a2a, #0a0a0a);
-            border-radius: 50%;
-            left: 8px;
-            top: 10px;
-            box-shadow: inset -3px -3px 6px #000, inset 3px 3px 6px #555, 0 0 10px #000;
-            border: 1px solid #333;
+            background: radial-gradient(circle at 40% 35%, #1a1a1a, #000);
+            border-radius: 50% 50% 45% 45%;
+            left: 9px;
+            top: 12px;
+            box-shadow: inset -3px -3px 6px #000, inset 3px 3px 6px #2a2a2a, 0 0 12px #000;
+            border: 1px solid #222;
+            z-index: 2;
         }
 
         .spider .eye {
             position: absolute;
             width: 5px;
             height: 5px;
-            background: radial-gradient(circle, #ff5555, #990000);
+            background: radial-gradient(circle, #ff2222, #660000);
             border-radius: 50%;
-            top: 14px;
-            box-shadow: 0 0 8px #ff0000, 0 0 14px #ff4444;
-            animation: eyeGlow 1.4s infinite alternate;
+            top: 16px;
+            box-shadow: 0 0 8px #ff0000, 0 0 16px #ff0000;
+            z-index: 3;
+            animation: spiderEyeGlow 0.8s infinite alternate;
         }
-        .spider .eye.left { left: 12px; }
-        .spider .eye.right { left: 20px; }
+        .spider .eye.left { left: 13px; }
+        .spider .eye.right { left: 22px; }
 
-        @keyframes eyeGlow {
-            0% { opacity: 0.7; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1.2); }
+        @keyframes spiderEyeGlow {
+            0% { opacity: 0.5; transform: scale(0.8); }
+            100% { opacity: 1; transform: scale(1.3); }
         }
 
         .spider .leg {
             position: absolute;
             width: 2px;
-            height: 16px;
-            background: linear-gradient(180deg, #333, #111);
+            height: 18px;
+            background: linear-gradient(180deg, #1a1a1a, #000);
             border-radius: 2px;
             box-shadow: 0 0 4px #000;
             transform-origin: top center;
-            animation: legWiggle 0.5s infinite alternate ease-in-out;
+            animation: legWiggle 0.6s infinite alternate ease-in-out;
+            z-index: 1;
         }
-        .leg.l1 { left: 2px; top: -5px; transform: rotate(-35deg); animation-delay: 0s; }
-        .leg.l2 { left: 24px; top: -5px; transform: rotate(35deg); animation-delay: 0.1s; }
-        .leg.l3 { left: 0px; top: 4px; transform: rotate(-50deg); animation-delay: 0.2s; }
-        .leg.l4 { left: 26px; top: 4px; transform: rotate(50deg); animation-delay: 0.15s; }
-        .leg.l5 { left: 2px; top: 16px; transform: rotate(-25deg); animation-delay: 0.3s; }
-        .leg.l6 { left: 24px; top: 16px; transform: rotate(25deg); animation-delay: 0.25s; }
-        .leg.l7 { left: 5px; top: 24px; transform: rotate(-12deg); animation-delay: 0.35s; }
-        .leg.l8 { left: 21px; top: 24px; transform: rotate(12deg); animation-delay: 0.4s; }
+        .leg.l1 { left: 2px; top: -3px; transform: rotate(-40deg); --rot: -40deg; }
+        .leg.l2 { left: 27px; top: -3px; transform: rotate(40deg); --rot: 40deg; }
+        .leg.l3 { left: 0px; top: 8px; transform: rotate(-55deg); --rot: -55deg; }
+        .leg.l4 { left: 29px; top: 8px; transform: rotate(55deg); --rot: 55deg; }
+        .leg.l5 { left: 3px; top: 20px; transform: rotate(-30deg); --rot: -30deg; }
+        .leg.l6 { left: 26px; top: 20px; transform: rotate(30deg); --rot: 30deg; }
+        .leg.l7 { left: 7px; top: 30px; transform: rotate(-15deg); --rot: -15deg; }
+        .leg.l8 { left: 22px; top: 30px; transform: rotate(15deg); --rot: 15deg; }
 
         @keyframes legWiggle {
-            0% { transform: rotate(var(--rot, -35deg)) scaleY(0.9); }
-            100% { transform: rotate(calc(var(--rot, -35deg) * 1.1)) scaleY(1.1); }
+            0% { transform: rotate(var(--rot, -40deg)) scaleY(0.85); }
+            100% { transform: rotate(calc(var(--rot, -40deg) * 1.15)) scaleY(1.1); }
         }
 
-        /* spider dangling web */
+        /* spider dangling web icon */
         .spider::after {
-            content: "🕸️";
+            content: "🕸";
             position: absolute;
-            font-size: 16px;
-            bottom: -18px;
-            left: 4px;
-            opacity: 0.75;
-            filter: drop-shadow(0 0 6px white);
+            font-size: 18px;
+            bottom: -20px;
+            left: 6px;
+            opacity: 0.8;
+            filter: drop-shadow(0 0 6px rgba(255,255,255,0.7));
+            animation: webSpin 4s linear infinite;
         }
 
-        /* ---------- christmas lights string ---------- */
-        .lights-string {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 140px;
-            pointer-events: none;
-            z-index: 3;
-        }
-
-        .bulb {
-            position: absolute;
-            width: 14px;
-            height: 20px;
-            border-radius: 50% 50% 40% 40%;
-            transform-origin: top center;
-            animation: lightGlow 2s infinite alternate;
-        }
-
-        .bulb.red { background: radial-gradient(circle at 30% 30%, #ffb3b3, #c62828); box-shadow: 0 0 18px #ff4d4d, 0 0 28px #b71c1c; }
-        .bulb.green { background: radial-gradient(circle at 30% 30%, #b9f6ca, #2e7d32); box-shadow: 0 0 18px #69f0ae, 0 0 28px #1b5e20; }
-        .bulb.blue { background: radial-gradient(circle at 30% 30%, #bbdefb, #1565c0); box-shadow: 0 0 18px #64b5f6, 0 0 28px #0d47a1; }
-        .bulb.gold { background: radial-gradient(circle at 30% 30%, #fff3e0, #ff8f00); box-shadow: 0 0 22px #ffb300, 0 0 32px #e65100; }
-        .bulb.purple { background: radial-gradient(circle at 30% 30%, #e1bee7, #6a1b9a); box-shadow: 0 0 18px #ce93d8, 0 0 28px #4a148c; }
-        .bulb.orange { background: radial-gradient(circle at 30% 30%, #ffe0b2, #e65100); box-shadow: 0 0 22px #ff9800, 0 0 32px #bf360c; }
-
-        @keyframes lightGlow {
-            0% { opacity: 0.75; filter: brightness(1); }
-            100% { opacity: 1; filter: brightness(1.5); }
+        @keyframes webSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         /* ============================================================
-           PUMPKINS & TREES — humanized decorations around edges
+           CORNER SPIDER WEBS (static, decorative)
+        ============================================================ */
+        .corner-web {
+            position: fixed;
+            width: 260px;
+            height: 260px;
+            z-index: 4;
+            pointer-events: none;
+            opacity: 0.55;
+            filter: drop-shadow(0 0 8px rgba(200, 200, 255, 0.4));
+        }
+
+        .corner-web.tl { top: 0; left: 0; transform: scaleX(-1); }
+        .corner-web.tr { top: 0; right: 0; }
+        .corner-web.bl { bottom: 0; left: 0; transform: scaleY(-1) scaleX(-1); }
+        .corner-web.br { bottom: 0; right: 0; transform: scaleY(-1); }
+
+        .corner-web svg {
+            width: 100%;
+            height: 100%;
+        }
+
+        .corner-web path,
+        .corner-web line,
+        .corner-web circle {
+            stroke: rgba(220, 220, 255, 0.7);
+            fill: none;
+            stroke-width: 1.2;
+        }
+
+        /* ============================================================
+           FLOATING GHOSTS
+        ============================================================ */
+        .ghost {
+            position: fixed;
+            font-size: 60px;
+            z-index: 3;
+            pointer-events: none;
+            filter: drop-shadow(0 0 20px rgba(200, 200, 255, 0.6));
+            opacity: 0.75;
+        }
+
+        .ghost.g1 {
+            top: 15%;
+            left: -80px;
+            animation: ghostFloat1 28s linear infinite;
+            font-size: 70px;
+        }
+
+        .ghost.g2 {
+            top: 55%;
+            left: -80px;
+            animation: ghostFloat2 35s linear infinite;
+            font-size: 50px;
+            animation-delay: 10s;
+        }
+
+        .ghost.g3 {
+            top: 80%;
+            left: -80px;
+            animation: ghostFloat3 40s linear infinite;
+            font-size: 65px;
+            animation-delay: 18s;
+        }
+
+        @keyframes ghostFloat1 {
+            0% { transform: translateX(0) translateY(0) rotate(-3deg); opacity: 0; }
+            10% { opacity: 0.75; }
+            50% { transform: translateX(50vw) translateY(-30px) rotate(3deg); }
+            90% { opacity: 0.75; }
+            100% { transform: translateX(120vw) translateY(0) rotate(-3deg); opacity: 0; }
+        }
+
+        @keyframes ghostFloat2 {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            10% { opacity: 0.6; }
+            50% { transform: translateX(60vw) translateY(40px); }
+            90% { opacity: 0.6; }
+            100% { transform: translateX(130vw) translateY(0); opacity: 0; }
+        }
+
+        @keyframes ghostFloat3 {
+            0% { transform: translateX(0) translateY(0) scale(1); opacity: 0; }
+            10% { opacity: 0.7; }
+            50% { transform: translateX(55vw) translateY(-20px) scale(0.9); }
+            90% { opacity: 0.7; }
+            100% { transform: translateX(125vw) translateY(0) scale(1); opacity: 0; }
+        }
+
+        /* ============================================================
+           BATS flying across screen
+        ============================================================ */
+        .bat {
+            position: fixed;
+            font-size: 28px;
+            z-index: 4;
+            pointer-events: none;
+            filter: drop-shadow(0 0 6px rgba(0,0,0,0.9));
+            color: #1a0a1a;
+        }
+
+        .bat::before {
+            content: "🦇";
+            display: inline-block;
+            animation: batFlap 0.3s infinite alternate;
+        }
+
+        @keyframes batFlap {
+            0% { transform: scaleY(1); }
+            100% { transform: scaleY(0.85); }
+        }
+
+        .bat.b1 { top: 12%; left: -50px; animation: batFly1 18s linear infinite; }
+        .bat.b2 { top: 28%; left: -50px; animation: batFly2 22s linear infinite; animation-delay: 4s; }
+        .bat.b3 { top: 65%; left: -50px; animation: batFly1 25s linear infinite; animation-delay: 9s; font-size: 22px; }
+        .bat.b4 { top: 42%; left: -50px; animation: batFly2 30s linear infinite; animation-delay: 15s; font-size: 32px; }
+
+        @keyframes batFly1 {
+            0% { transform: translateX(0) translateY(0); opacity: 0; }
+            5% { opacity: 1; }
+            25% { transform: translateX(30vw) translateY(-40px); }
+            50% { transform: translateX(60vw) translateY(20px); }
+            75% { transform: translateX(90vw) translateY(-30px); }
+            95% { opacity: 1; }
+            100% { transform: translateX(120vw) translateY(0); opacity: 0; }
+        }
+
+        @keyframes batFly2 {
+            0% { transform: translateX(0) translateY(0) scaleX(-1); opacity: 0; }
+            5% { opacity: 1; }
+            50% { transform: translateX(60vw) translateY(-50px) scaleX(-1); }
+            95% { opacity: 1; }
+            100% { transform: translateX(130vw) translateY(0) scaleX(-1); opacity: 0; }
+        }
+
+        /* ============================================================
+           PUMPKINS & JACK-O-LANTERNS
         ============================================================ */
         .decoration-layer {
             position: fixed;
             inset: 0;
             pointer-events: none;
-            z-index: 3;
+            z-index: 6;
             overflow: hidden;
         }
 
-        /* --- pumpkins (halloween) --- */
         .pumpkin {
             position: absolute;
-            width: 70px;
-            height: 60px;
-            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
-            animation: pumpkinBob 3s infinite alternate ease-in-out;
+            width: 90px;
+            height: 78px;
+            filter: drop-shadow(0 8px 16px rgba(0,0,0,0.9));
+            animation: pumpkinBob 4s infinite alternate ease-in-out;
         }
 
         .pumpkin .body {
             width: 100%;
             height: 100%;
-            background: radial-gradient(circle at 40% 35%, #ff8c1a, #b33c00);
+            background: radial-gradient(circle at 40% 35%, #ff9a2e, #cc4a00 60%, #7a2a00 100%);
             border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
-            box-shadow: inset -6px -8px 12px #7a2e00, inset 6px 8px 14px #ffb84d;
-            border: 2px solid #6b2600;
+            box-shadow: 
+                inset -8px -10px 16px #5a1e00, 
+                inset 8px 10px 18px #ffb84d,
+                0 0 20px rgba(255, 100, 0, 0.3);
+            border: 2px solid #5a1e00;
             position: relative;
+            overflow: hidden;
+        }
+
+        .pumpkin .body::before {
+            content: "";
+            position: absolute;
+            top: 20%;
+            left: 15%;
+            width: 12px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(255, 180, 80, 0.4);
+            filter: blur(3px);
         }
 
         .pumpkin .stem {
             position: absolute;
-            top: -12px;
+            top: -14px;
             left: 50%;
-            transform: translateX(-50%);
-            width: 10px;
-            height: 16px;
-            background: linear-gradient(180deg, #4a2e00, #2a1a00);
+            transform: translateX(-50%) rotate(-5deg);
+            width: 12px;
+            height: 20px;
+            background: linear-gradient(180deg, #4a2e00, #1a0f00);
             border-radius: 4px 4px 2px 2px;
-            border: 1px solid #1a1000;
+            border: 1px solid #000;
+            z-index: 2;
         }
 
         .pumpkin .stem::after {
             content: "";
             position: absolute;
-            top: -6px;
-            left: -3px;
-            width: 16px;
-            height: 6px;
+            top: -5px;
+            left: 4px;
+            width: 14px;
+            height: 5px;
             background: #2a4a0a;
             border-radius: 50%;
-            transform: rotate(-20deg);
+            transform: rotate(-30deg);
         }
 
         .pumpkin .face {
             position: absolute;
-            top: 50%;
+            top: 45%;
             left: 50%;
-            transform: translate(-50%, -40%);
-            width: 80%;
-            height: 40%;
+            transform: translate(-50%, -50%);
+            width: 85%;
+            height: 50%;
         }
 
         .pumpkin .eye {
             position: absolute;
-            width: 12px;
-            height: 12px;
-            background: #ffdd00;
+            width: 16px;
+            height: 16px;
+            background: #ffcc00;
             border-radius: 50%;
-            top: 0;
-            box-shadow: 0 0 14px #ffaa00, 0 0 24px #ff6b00, inset 0 0 6px #ff4400;
-            animation: eyeFlicker 1.6s infinite alternate;
+            top: 10%;
+            box-shadow: 0 0 20px #ff8800, 0 0 40px #ff4400, inset 0 0 8px #ff3300;
+            animation: pumpkinEyeFlicker 2s infinite alternate;
+            clip-path: polygon(50% 0%, 0% 100%, 100% 100%);
         }
-        .pumpkin .eye.left { left: 12%; }
-        .pumpkin .eye.right { right: 12%; }
+        .pumpkin .eye.left { left: 15%; }
+        .pumpkin .eye.right { right: 15%; }
+
+        @keyframes pumpkinEyeFlicker {
+            0%, 100% { opacity: 0.85; transform: scale(1); }
+            50% { opacity: 1; transform: scale(1.1); }
+        }
+
+        .pumpkin .nose {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 0;
+            height: 0;
+            border-left: 8px solid transparent;
+            border-right: 8px solid transparent;
+            border-top: 12px solid #ffcc00;
+            filter: drop-shadow(0 0 8px #ff8800);
+        }
 
         .pumpkin .mouth {
             position: absolute;
             bottom: 0;
             left: 50%;
             transform: translateX(-50%);
-            width: 40px;
-            height: 18px;
-            background: #ffdd00;
-            border-radius: 0 0 30px 30px;
-            box-shadow: 0 0 14px #ffaa00, inset 0 0 8px #ff4400;
+            width: 50px;
+            height: 22px;
+            background: #ffcc00;
+            border-radius: 0 0 40px 40px;
+            box-shadow: 0 0 20px #ff8800, inset 0 0 12px #ff3300;
+            filter: drop-shadow(0 0 10px #ff6600);
         }
 
         .pumpkin .mouth::before,
         .pumpkin .mouth::after {
             content: "";
             position: absolute;
-            top: -6px;
-            width: 8px;
-            height: 10px;
-            background: #ffdd00;
-            box-shadow: 0 0 10px #ffaa00;
+            top: -8px;
+            width: 10px;
+            height: 14px;
+            background: #ffcc00;
+            box-shadow: 0 0 12px #ff8800;
         }
-        .pumpkin .mouth::before { left: 4px; transform: rotate(-20deg); }
-        .pumpkin .mouth::after { right: 4px; transform: rotate(20deg); }
-
-        @keyframes eyeFlicker {
-            0% { opacity: 0.6; }
-            100% { opacity: 1; }
-        }
+        .pumpkin .mouth::before { left: 4px; transform: rotate(-25deg); }
+        .pumpkin .mouth::after { right: 4px; transform: rotate(25deg); }
 
         @keyframes pumpkinBob {
-            0% { transform: translateY(0px) rotate(-2deg); }
-            100% { transform: translateY(-8px) rotate(2deg); }
+            0% { transform: translateY(0px) rotate(-3deg); }
+            100% { transform: translateY(-12px) rotate(3deg); }
         }
 
-        /* --- custom christmas trees (different decorations) --- */
-        .tree {
+        /* small pumpkin variant */
+        .pumpkin.small { width: 60px; height: 52px; }
+        .pumpkin.small .eye { width: 11px; height: 11px; }
+        .pumpkin.small .mouth { width: 34px; height: 15px; }
+        .pumpkin.small .nose { border-left-width: 6px; border-right-width: 6px; border-top-width: 9px; }
+
+        /* ============================================================
+           TOMBSTONES
+        ============================================================ */
+        .tombstone {
             position: absolute;
-            width: 90px;
-            height: 130px;
-            filter: drop-shadow(0 8px 14px rgba(0,0,0,0.7));
-            animation: treeSway 4s infinite alternate ease-in-out;
+            width: 70px;
+            height: 90px;
+            background: linear-gradient(180deg, #4a4a52 0%, #2a2a32 60%, #1a1a22 100%);
+            border-radius: 35px 35px 4px 4px;
+            box-shadow: 
+                inset -4px -4px 10px #0a0a12,
+                inset 4px 4px 10px #6a6a72,
+                0 10px 20px rgba(0,0,0,0.7);
+            border: 2px solid #1a1a22;
+            filter: drop-shadow(0 8px 12px rgba(0,0,0,0.8));
+            animation: tombstoneSway 6s infinite alternate ease-in-out;
         }
 
-        .tree .layer {
+        .tombstone::before {
+            content: "R.I.P";
             position: absolute;
+            top: 20px;
             left: 50%;
             transform: translateX(-50%);
-            width: 100%;
-            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+            font-family: 'Creepster', cursive;
+            font-size: 18px;
+            color: #6a6a72;
+            text-shadow: 0 0 6px #000, 0 1px 0 #0a0a12;
+            letter-spacing: 2px;
         }
 
-        .tree .layer-1 {
-            bottom: 0;
-            width: 90px;
-            height: 50px;
-            background: linear-gradient(145deg, #1b5e20, #0d3b0f);
-            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
-            box-shadow: inset -6px -6px 12px #000, inset 6px 6px 14px #4caf50;
-        }
-
-        .tree .layer-2 {
-            bottom: 30px;
-            width: 72px;
-            height: 46px;
-            background: linear-gradient(145deg, #2e7d32, #1b5e20);
-            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
-            box-shadow: inset -5px -5px 10px #000, inset 5px 5px 12px #66bb6a;
-        }
-
-        .tree .layer-3 {
-            bottom: 58px;
-            width: 54px;
-            height: 40px;
-            background: linear-gradient(145deg, #388e3c, #2e7d32);
-            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
-            box-shadow: inset -4px -4px 8px #000, inset 4px 4px 10px #81c784;
-        }
-
-        .tree .layer-4 {
-            bottom: 84px;
-            width: 36px;
-            height: 34px;
-            background: linear-gradient(145deg, #43a047, #388e3c);
-            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
-            box-shadow: inset -3px -3px 6px #000, inset 3px 3px 8px #a5d6a7;
-        }
-
-        .tree .top-star {
+        .tombstone::after {
+            content: "†";
             position: absolute;
-            bottom: 112px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             font-size: 24px;
-            filter: drop-shadow(0 0 12px #ffdd00);
-            animation: starPulse 1.5s infinite alternate;
+            color: #8a8a92;
+            text-shadow: 0 0 8px #000;
         }
 
-        @keyframes starPulse {
-            0% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
-            100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+        @keyframes tombstoneSway {
+            0% { transform: rotate(-1deg); }
+            100% { transform: rotate(1deg); }
         }
 
-        /* tree ornaments — different decorations */
-        .ornament {
+        /* dead tree silhouette */
+        .dead-tree {
             position: absolute;
-            width: 10px;
-            height: 10px;
-            border-radius: 50%;
-            box-shadow: 0 0 8px currentColor, inset 0 0 4px rgba(255,255,255,0.6);
-            animation: ornamentGlow 1.8s infinite alternate;
+            bottom: 0;
+            width: 200px;
+            height: 320px;
+            filter: drop-shadow(0 0 20px rgba(0,0,0,0.9));
+            opacity: 0.75;
         }
 
-        @keyframes ornamentGlow {
-            0% { opacity: 0.7; transform: scale(0.9); }
-            100% { opacity: 1; transform: scale(1.1); }
-        }
-
-        @keyframes treeSway {
-            0% { transform: rotate(-2deg); }
-            100% { transform: rotate(2deg); }
+        .dead-tree svg {
+            width: 100%;
+            height: 100%;
         }
 
         /* ============================================================
-           MAIN UI — MORTYX
+           MAIN CONTAINER — MORTYX UI
         ============================================================ */
         .container {
             position: relative;
-            z-index: 20;
-            max-width: 780px;
+            z-index: 30;
+            max-width: 800px;
             width: 100%;
-            background: rgba(16, 16, 26, 0.88);
-            backdrop-filter: blur(14px);
-            -webkit-backdrop-filter: blur(14px);
-            border: 1px solid rgba(255, 215, 0, 0.35);
-            border-radius: 52px 22px 52px 22px;
-            padding: 36px 30px 32px;
+            background: linear-gradient(145deg, rgba(20, 12, 28, 0.94), rgba(10, 6, 16, 0.96));
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 2px solid rgba(180, 60, 30, 0.5);
+            border-radius: 40px 8px 40px 8px;
+            padding: 40px 34px 34px;
             box-shadow: 
-                0 30px 60px rgba(0, 0, 0, 0.8), 
-                0 0 0 2px rgba(255, 140, 0, 0.12), 
-                0 0 50px rgba(200, 0, 0, 0.35),
-                inset 0 0 80px rgba(255, 140, 0, 0.03);
-            color: #f5f0e6;
-            font-family: 'Segoe UI', 'Poppins', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
-            border-top: 4px solid #ffaa33;
-            border-left: 2px dashed #b71c1c;
-            border-bottom: 3px dotted #2e7d32;
+                0 40px 80px rgba(0, 0, 0, 0.95),
+                0 0 0 1px rgba(255, 100, 0, 0.1),
+                0 0 80px rgba(180, 0, 0, 0.35),
+                inset 0 0 100px rgba(80, 0, 0, 0.4),
+                inset 0 1px 0 rgba(255, 150, 100, 0.15);
+            color: #e8ddd0;
+            font-family: 'Segoe UI', 'Poppins', system-ui, sans-serif;
+            border-top: 4px solid #8b2500;
+            border-left: 2px solid #4a1000;
+            position: relative;
         }
 
+        /* Blood drip from top of container */
         .container::before {
-            content: "🎃";
+            content: "";
             position: absolute;
-            top: -26px;
-            left: 34px;
-            font-size: 52px;
-            filter: drop-shadow(0 0 16px #ff6f00);
-            transform: rotate(-10deg);
-            animation: floatEmoji 3s infinite alternate;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 100%;
+            border-radius: 40px 8px 40px 8px;
+            background: 
+                radial-gradient(circle at 8% 0%, rgba(180, 0, 0, 0.5) 0%, transparent 8%),
+                radial-gradient(circle at 22% 0%, rgba(140, 0, 0, 0.4) 0%, transparent 5%),
+                radial-gradient(circle at 47% 0%, rgba(160, 0, 0, 0.5) 0%, transparent 7%),
+                radial-gradient(circle at 68% 0%, rgba(180, 0, 0, 0.4) 0%, transparent 6%),
+                radial-gradient(circle at 88% 0%, rgba(140, 0, 0, 0.5) 0%, transparent 9%);
+            pointer-events: none;
+            z-index: 1;
         }
 
+        /* Blood drip lines */
         .container::after {
-            content: "🎄";
+            content: "";
             position: absolute;
-            bottom: -26px;
-            right: 34px;
-            font-size: 52px;
-            filter: drop-shadow(0 0 16px #00c853);
-            transform: rotate(8deg);
-            animation: floatEmoji 3s infinite alternate 0.8s;
+            top: 0;
+            left: 10%;
+            width: 3px;
+            height: 60px;
+            background: linear-gradient(180deg, #8b0000, transparent);
+            border-radius: 0 0 3px 3px;
+            box-shadow: 
+                220px 0 0 -1px #8b0000,
+                220px 30px 0 -1px #8b0000,
+                440px 20px 0 -1px #8b0000,
+                440px 55px 0 -1px #8b0000,
+                660px 15px 0 -1px #8b0000,
+                660px 45px 0 -1px #8b0000;
+            pointer-events: none;
+            z-index: 2;
         }
 
-        @keyframes floatEmoji {
-            0% { transform: translateY(0) rotate(-8deg); }
-            100% { transform: translateY(-8px) rotate(4deg); }
+        /* Tiny spiders on container */
+        .container-spider {
+            position: absolute;
+            font-size: 16px;
+            opacity: 0.7;
+            animation: containerSpiderCrawl 12s linear infinite;
+        }
+        .container-spider.s1 { top: -10px; right: 40px; animation-delay: 0s; }
+        .container-spider.s2 { bottom: -10px; left: 60px; animation-delay: 3s; transform: scaleX(-1); }
+        .container-spider.s3 { top: 50%; left: -12px; animation-delay: 6s; transform: rotate(90deg); }
+
+        @keyframes containerSpiderCrawl {
+            0% { transform: translate(0, 0) rotate(0deg); }
+            25% { transform: translate(10px, 5px) rotate(10deg); }
+            50% { transform: translate(-5px, 10px) rotate(-10deg); }
+            75% { transform: translate(8px, -5px) rotate(5deg); }
+            100% { transform: translate(0, 0) rotate(0deg); }
         }
 
-        /* header */
+        /* ============================================================
+           HEADER
+        ============================================================ */
         .header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 34px;
+            margin-bottom: 36px;
             flex-wrap: wrap;
-            gap: 14px;
+            gap: 16px;
+            position: relative;
+            z-index: 5;
         }
 
         .brand h1 {
-            font-size: 3rem;
-            font-weight: 900;
-            letter-spacing: 5px;
+            font-family: 'Creepster', 'Nosifer', cursive;
+            font-size: 4rem;
+            font-weight: 400;
+            letter-spacing: 8px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffbb33, #ff4d4d, #2ecc71, #ffbb33, #ff8c1a);
-            background-size: 400% 400%;
+            background: linear-gradient(180deg, #ff6622 0%, #cc2200 40%, #8b0000 70%, #4a0000 100%);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: shimmer 5s infinite alternate;
-            filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.5));
-            line-height: 1.1;
+            filter: drop-shadow(0 0 20px rgba(255, 60, 0, 0.6)) drop-shadow(0 2px 4px #000);
+            line-height: 1;
+            animation: brandFlicker 5s infinite;
+            position: relative;
+        }
+
+        @keyframes brandFlicker {
+            0%, 18%, 22%, 25%, 53%, 57%, 100% {
+                filter: drop-shadow(0 0 20px rgba(255, 60, 0, 0.6)) drop-shadow(0 2px 4px #000);
+                opacity: 1;
+            }
+            20%, 24%, 55% {
+                filter: drop-shadow(0 0 5px rgba(255, 60, 0, 0.2)) drop-shadow(0 2px 4px #000);
+                opacity: 0.6;
+            }
         }
 
         .brand span {
             display: block;
-            font-size: 0.8rem;
-            letter-spacing: 8px;
-            color: #c0a86a;
-            text-shadow: 0 0 10px #ffaa33;
-            margin-top: -2px;
-        }
-
-        @keyframes shimmer {
-            0% { background-position: 0% 50%; }
-            100% { background-position: 100% 50%; }
+            font-size: 0.85rem;
+            letter-spacing: 12px;
+            color: #8b6a5a;
+            margin-top: 4px;
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.4);
+            font-weight: 600;
+            padding-left: 6px;
         }
 
         .nav {
@@ -489,444 +740,773 @@
         }
 
         .nav-btn {
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.45);
-            color: #f0e6d2;
-            padding: 11px 22px;
-            border-radius: 40px;
+            background: linear-gradient(145deg, rgba(40, 15, 10, 0.9), rgba(20, 8, 5, 0.95));
+            border: 1px solid rgba(180, 60, 20, 0.6);
+            color: #e8a878;
+            padding: 12px 24px;
+            border-radius: 30px 6px 30px 6px;
             font-weight: 600;
-            font-size: 0.95rem;
+            font-size: 0.9rem;
             cursor: pointer;
-            transition: all 0.2s;
+            transition: all 0.25s;
             text-decoration: none;
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            backdrop-filter: blur(4px);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.6), inset 0 1px 0 rgba(255,150,100,0.15);
             font-family: inherit;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 100, 0, 0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .nav-btn:hover::before {
+            left: 100%;
         }
 
         .nav-btn:hover {
-            background: #ffaa33;
-            border-color: #ffaa33;
-            color: #0a0c10;
-            box-shadow: 0 0 25px #ffaa33;
-            transform: scale(1.03);
+            background: linear-gradient(145deg, #8b2500, #4a1000);
+            border-color: #ff6622;
+            color: #ffddbb;
+            box-shadow: 0 0 25px rgba(255, 100, 0, 0.5), 0 4px 12px rgba(0,0,0,0.8);
+            transform: translateY(-2px);
         }
 
-        /* card / main */
+        /* ============================================================
+           CARD / FORM
+        ============================================================ */
         .card {
-            background: rgba(8, 8, 16, 0.65);
-            border-radius: 30px;
-            padding: 30px 26px;
-            border: 1px solid rgba(255, 200, 100, 0.2);
-            box-shadow: inset 0 0 40px rgba(0,0,0,0.6), 0 12px 24px rgba(0,0,0,0.5);
+            background: linear-gradient(145deg, rgba(12, 6, 16, 0.9), rgba(6, 3, 10, 0.95));
+            border-radius: 24px 4px 24px 4px;
+            padding: 32px 28px;
+            border: 1px solid rgba(100, 40, 20, 0.6);
+            box-shadow: 
+                inset 0 0 50px rgba(0, 0, 0, 0.8),
+                0 12px 30px rgba(0, 0, 0, 0.6),
+                0 0 40px rgba(100, 0, 0, 0.15);
             margin-bottom: 24px;
+            position: relative;
+            z-index: 5;
+        }
+
+        .card::before {
+            content: "🕷";
+            position: absolute;
+            top: 12px;
+            right: 16px;
+            font-size: 20px;
+            opacity: 0.5;
+            animation: cardSpider 8s infinite ease-in-out;
+        }
+
+        @keyframes cardSpider {
+            0%, 100% { transform: translate(0, 0) rotate(0deg); opacity: 0.5; }
+            25% { transform: translate(-8px, 4px) rotate(15deg); opacity: 0.8; }
+            50% { transform: translate(4px, -6px) rotate(-10deg); opacity: 0.6; }
+            75% { transform: translate(-4px, -3px) rotate(5deg); opacity: 0.7; }
         }
 
         .field {
-            margin-bottom: 22px;
+            margin-bottom: 24px;
             text-align: left;
+            position: relative;
         }
 
         .field label {
             display: block;
-            font-size: 0.85rem;
+            font-size: 0.8rem;
             text-transform: uppercase;
+            letter-spacing: 4px;
+            color: #d4a060;
+            margin-bottom: 10px;
+            font-weight: 700;
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.4);
+            font-family: 'Creepster', cursive;
+            font-size: 1rem;
             letter-spacing: 3px;
-            color: #e0b87a;
-            margin-bottom: 8px;
-            font-weight: 600;
-            text-shadow: 0 0 8px #ffaa33;
         }
 
         .field select,
         .field input {
             width: 100%;
-            padding: 15px 20px;
-            border-radius: 40px;
-            border: 1px solid rgba(255, 200, 0, 0.35);
-            background: rgba(0, 0, 0, 0.65);
-            color: #fff5e6;
+            padding: 16px 20px;
+            border-radius: 12px 2px 12px 2px;
+            border: 1px solid rgba(140, 60, 20, 0.5);
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.8), rgba(15, 8, 5, 0.9));
+            color: #f0e0d0;
             font-size: 1rem;
-            font-family: 'Segoe UI', monospace;
-            transition: all 0.2s;
+            font-family: 'Courier New', monospace;
+            transition: all 0.25s;
             outline: none;
-            box-shadow: 0 6px 14px rgba(0,0,0,0.7);
+            box-shadow: inset 0 2px 8px rgba(0,0,0,0.9), 0 2px 4px rgba(0,0,0,0.5);
+            letter-spacing: 0.5px;
         }
 
         .field select:focus,
         .field input:focus {
-            border-color: #ffaa33;
-            box-shadow: 0 0 25px #ffaa33, 0 6px 14px black;
-            background: #12121e;
+            border-color: #ff6622;
+            box-shadow: 
+                inset 0 2px 8px rgba(0,0,0,0.9),
+                0 0 20px rgba(255, 100, 0, 0.5),
+                0 0 40px rgba(255, 60, 0, 0.2);
+            background: linear-gradient(145deg, rgba(20, 8, 4, 0.9), rgba(10, 4, 2, 0.95));
         }
 
         .field select option {
-            background: #12121c;
+            background: #1a0a08;
+            color: #e8ddd0;
         }
 
+        /* ============================================================
+           BUTTONS
+        ============================================================ */
         .primary-btn {
             width: 100%;
-            padding: 17px;
-            border-radius: 60px;
-            border: 1px solid #ffd966;
-            background: linear-gradient(145deg, #ffaa33, #ff6b00);
-            color: #0a0c10;
+            padding: 20px;
+            border-radius: 16px 2px 16px 2px;
+            border: 1px solid #cc4400;
+            background: linear-gradient(145deg, #8b2500, #4a1000);
+            color: #ffddaa;
             font-weight: 800;
-            font-size: 1.25rem;
-            letter-spacing: 3px;
+            font-size: 1.3rem;
+            letter-spacing: 6px;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 10px 0 #8b3a00, 0 12px 35px #ff6b00;
-            transition: all 0.1s;
-            font-family: inherit;
-            margin-top: 10px;
+            box-shadow: 
+                0 8px 0 #2a0800,
+                0 12px 30px rgba(0, 0, 0, 0.8),
+                inset 0 1px 0 rgba(255, 150, 100, 0.3),
+                0 0 30px rgba(255, 60, 0, 0.3);
+            transition: all 0.12s;
+            font-family: 'Creepster', cursive;
+            margin-top: 8px;
+            position: relative;
+            overflow: hidden;
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.6);
+        }
+
+        .primary-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 200, 100, 0.3), transparent);
+            transition: left 0.6s;
+        }
+
+        .primary-btn:hover::before {
+            left: 100%;
         }
 
         .primary-btn:hover {
-            background: #ffbb33;
-            box-shadow: 0 6px 0 #8b3a00, 0 14px 35px #ffaa33;
+            background: linear-gradient(145deg, #cc4400, #8b2500);
+            box-shadow: 
+                0 6px 0 #2a0800,
+                0 14px 40px rgba(255, 60, 0, 0.5),
+                inset 0 1px 0 rgba(255, 200, 150, 0.4),
+                0 0 50px rgba(255, 80, 0, 0.6);
             transform: translateY(2px);
+            letter-spacing: 8px;
         }
 
         .primary-btn:active {
-            transform: translateY(7px);
-            box-shadow: 0 2px 0 #8b3a00, 0 10px 30px #ffaa33;
+            transform: translateY(8px);
+            box-shadow: 0 0 0 #2a0800, 0 4px 15px rgba(255, 60, 0, 0.4);
         }
 
         .error {
-            color: #ff6b6b;
-            background: rgba(200, 0, 0, 0.25);
-            padding: 14px;
-            border-radius: 30px;
-            margin-top: 18px;
+            color: #ff8866;
+            background: linear-gradient(145deg, rgba(100, 0, 0, 0.5), rgba(60, 0, 0, 0.6));
+            padding: 16px 20px;
+            border-radius: 12px 2px 12px 2px;
+            margin-top: 20px;
             font-weight: 600;
             text-align: center;
-            border-left: 6px solid #b71c1c;
-            text-shadow: 0 0 8px #ff0000;
+            border-left: 6px solid #8b0000;
+            text-shadow: 0 0 10px #ff0000;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+            animation: errorShake 0.5s;
+        }
+
+        @keyframes errorShake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-6px); }
+            75% { transform: translateX(6px); }
         }
 
         .hidden {
             display: none !important;
         }
 
-        /* result rows */
+        /* ============================================================
+           RESULT ROWS
+        ============================================================ */
         .result-row {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(255, 215, 0, 0.1);
-            padding: 16px 20px;
-            border-radius: 50px;
-            margin-top: 26px;
-            border: 1px solid #ffaa33;
+            gap: 14px;
+            background: linear-gradient(145deg, rgba(60, 20, 10, 0.5), rgba(30, 10, 5, 0.6));
+            padding: 18px 22px;
+            border-radius: 12px 2px 12px 2px;
+            margin-top: 28px;
+            border: 1px solid #8b2500;
             flex-wrap: wrap;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.6), 0 0 20px rgba(180, 40, 0, 0.3);
+            position: relative;
+        }
+
+        .result-row::before {
+            content: "🕸";
+            position: absolute;
+            top: -12px;
+            left: 20px;
+            font-size: 18px;
+            opacity: 0.6;
+            color: #fff;
         }
 
         .result-row a {
             flex: 1;
-            color: #ffd966;
+            color: #ffaa66;
             text-decoration: none;
             font-weight: 600;
             word-break: break-all;
             font-size: 1rem;
-            text-shadow: 0 0 8px #ffaa33;
+            text-shadow: 0 0 10px rgba(255, 100, 0, 0.6);
+            font-family: 'Courier New', monospace;
+            letter-spacing: 0.5px;
         }
 
         .result-row a:hover {
             text-decoration: underline;
+            color: #ffcc88;
         }
 
         .result-row button,
         .code-item button {
-            background: #2a2a3a;
-            border: 1px solid #ffaa33;
-            color: #ffd966;
-            padding: 9px 20px;
-            border-radius: 30px;
+            background: linear-gradient(145deg, #2a1008, #1a0804);
+            border: 1px solid #8b2500;
+            color: #e8a060;
+            padding: 10px 22px;
+            border-radius: 8px 2px 8px 2px;
             font-weight: 700;
             cursor: pointer;
-            font-size: 0.85rem;
-            transition: all 0.15s;
+            font-size: 0.8rem;
+            transition: all 0.2s;
             font-family: inherit;
             text-transform: uppercase;
-            letter-spacing: 1px;
+            letter-spacing: 2px;
+            box-shadow: 0 2px 6px rgba(0,0,0,0.6);
         }
 
         .result-row button:hover,
         .code-item button:hover {
-            background: #ffaa33;
-            color: #0a0c10;
+            background: linear-gradient(145deg, #8b2500, #4a1000);
+            color: #ffddaa;
+            box-shadow: 0 0 20px rgba(255, 80, 0, 0.6);
+            transform: translateY(-1px);
         }
 
-        /* markdown section */
+        /* ============================================================
+           MARKDOWN SECTION
+        ============================================================ */
         #markdownSection {
-            margin-top: 22px;
-            background: #0a0a10;
-            border-radius: 20px;
-            padding: 18px;
-            border: 1px solid #3a3a4a;
+            margin-top: 24px;
+            background: linear-gradient(145deg, rgba(0, 0, 0, 0.9), rgba(10, 4, 2, 0.95));
+            border-radius: 12px 2px 12px 2px;
+            padding: 20px;
+            border: 1px solid #4a2000;
+            box-shadow: inset 0 0 30px rgba(0,0,0,0.8);
             position: relative;
         }
 
+        #markdownSection::before {
+            content: "💀";
+            position: absolute;
+            top: -12px;
+            right: 16px;
+            font-size: 18px;
+            opacity: 0.6;
+        }
+
         #markdownSection pre {
-            background: #101018;
-            padding: 16px;
-            border-radius: 16px;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 18px;
+            border-radius: 8px;
             color: #b9f6ca;
             font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
             word-break: break-all;
-            border-left: 6px solid #ffaa33;
+            border-left: 6px solid #8b2500;
             box-shadow: inset 0 0 20px #000;
+            text-shadow: 0 0 8px rgba(0, 255, 100, 0.3);
         }
 
         #markdownSection button {
-            margin-top: 14px;
+            margin-top: 16px;
             width: 100%;
-            padding: 13px;
-            border-radius: 30px;
-            background: #2a1a1a;
-            border: 1px solid #ff4d4d;
-            color: #ffb3b3;
+            padding: 14px;
+            border-radius: 8px 2px 8px 2px;
+            background: linear-gradient(145deg, #2a0a08, #1a0404);
+            border: 1px solid #8b0000;
+            color: #ff8888;
             font-weight: 700;
             cursor: pointer;
-            transition: 0.15s;
+            transition: 0.2s;
             text-transform: uppercase;
             font-family: inherit;
-            letter-spacing: 1px;
+            letter-spacing: 3px;
         }
 
         #markdownSection button:hover {
-            background: #b71c1c;
+            background: linear-gradient(145deg, #8b0000, #4a0000);
             color: white;
+            box-shadow: 0 0 25px rgba(255, 0, 0, 0.5);
         }
 
-        /* links section */
+        /* ============================================================
+           LINKS SECTION
+        ============================================================ */
         #linksSection {
             display: flex;
             flex-direction: column;
             gap: 14px;
-            margin-top: 26px;
+            margin-top: 28px;
         }
 
         .code-item {
             display: flex;
             align-items: center;
-            gap: 12px;
-            background: rgba(30, 30, 45, 0.85);
-            padding: 14px 20px;
-            border-radius: 40px;
-            border: 1px dashed #ffaa33;
+            gap: 14px;
+            background: linear-gradient(145deg, rgba(20, 10, 6, 0.85), rgba(10, 5, 3, 0.9));
+            padding: 16px 20px;
+            border-radius: 12px 2px 12px 2px;
+            border: 1px dashed rgba(180, 60, 20, 0.6);
             flex-wrap: wrap;
+            box-shadow: inset 0 0 20px rgba(0,0,0,0.5);
         }
 
         .code-item span {
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-transform: uppercase;
-            color: #ffaa33;
-            font-weight: 700;
-            letter-spacing: 2px;
-            min-width: 75px;
+            color: #d4a060;
+            font-weight: 800;
+            letter-spacing: 3px;
+            min-width: 85px;
+            font-family: 'Creepster', cursive;
+            font-size: 0.95rem;
+            text-shadow: 0 0 8px rgba(255, 100, 0, 0.4);
         }
 
         .code-item code {
             flex: 1;
             color: #b9f6ca;
-            font-family: 'Fira Code', monospace;
+            font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 0.85rem;
             word-break: break-all;
-            background: #00000040;
-            padding: 8px 14px;
-            border-radius: 30px;
+            background: rgba(0, 0, 0, 0.6);
+            padding: 10px 16px;
+            border-radius: 8px;
+            border-left: 3px solid #8b2500;
         }
 
-        /* history */
+        /* ============================================================
+           HISTORY
+        ============================================================ */
         .history {
-            margin-top: 36px;
-            border-top: 2px dotted #b8860b;
-            padding-top: 22px;
+            margin-top: 40px;
+            border-top: 2px dashed rgba(180, 60, 20, 0.5);
+            padding-top: 26px;
+            position: relative;
+        }
+
+        .history::before {
+            content: "🕸";
+            position: absolute;
+            top: -14px;
+            left: 20px;
+            background: #0a0410;
+            padding: 0 10px;
+            font-size: 20px;
+            opacity: 0.7;
+            color: #ccc;
         }
 
         .history h2 {
-            font-size: 1.5rem;
-            color: #ffbb33;
-            text-shadow: 0 0 14px #ff6b00;
-            letter-spacing: 2px;
-            margin-bottom: 14px;
+            font-family: 'Creepster', cursive;
+            font-size: 1.8rem;
+            color: #ffaa66;
+            text-shadow: 0 0 16px rgba(255, 100, 0, 0.7);
+            letter-spacing: 3px;
+            margin-bottom: 16px;
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
+            font-weight: 400;
         }
 
         .history h2::after {
-            content: "🕸️";
+            content: "🕷";
             font-size: 1.5rem;
-            filter: drop-shadow(0 0 8px silver);
+            filter: drop-shadow(0 0 8px rgba(255,255,255,0.7));
+            animation: spiderCrawl 3s infinite alternate ease-in-out;
+        }
+
+        @keyframes spiderCrawl {
+            0% { transform: translateX(0) rotate(0deg); }
+            100% { transform: translateX(10px) rotate(15deg); }
         }
 
         #historyList {
             display: flex;
             flex-direction: column;
             gap: 10px;
-            max-height: 190px;
+            max-height: 220px;
             overflow-y: auto;
             padding-right: 8px;
         }
 
         #historyList .history-item {
-            background: rgba(255, 255, 255, 0.03);
-            border-radius: 30px;
-            padding: 12px 18px;
-            border: 1px solid #2a2a3a;
+            background: linear-gradient(145deg, rgba(30, 15, 10, 0.6), rgba(15, 8, 5, 0.7));
+            border-radius: 10px 2px 10px 2px;
+            padding: 14px 20px;
+            border: 1px solid rgba(100, 40, 20, 0.4);
             color: #ccc;
             font-size: 0.9rem;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            transition: 0.1s;
+            transition: all 0.25s;
+            position: relative;
+            overflow: hidden;
+        }
+
+        #historyList .history-item::before {
+            content: "";
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 3px;
+            background: linear-gradient(180deg, #ff6622, #8b0000);
         }
 
         #historyList .history-item:hover {
-            border-color: #ffaa33;
-            background: rgba(255, 170, 0, 0.1);
+            border-color: #8b2500;
+            background: linear-gradient(145deg, rgba(60, 20, 10, 0.7), rgba(30, 10, 5, 0.8));
+            transform: translateX(4px);
+            box-shadow: 0 0 20px rgba(180, 40, 0, 0.3);
         }
 
         #historyList .history-item a {
-            color: #ffd966;
+            color: #ffaa66;
             text-decoration: none;
             font-weight: 500;
-            max-width: 200px;
+            max-width: 220px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
+            font-family: 'Courier New', monospace;
+            text-shadow: 0 0 6px rgba(255, 100, 0, 0.3);
         }
 
-        /* modal */
+        #historyList .history-item a:hover {
+            color: #ffcc88;
+            text-decoration: underline;
+        }
+
+        /* ============================================================
+           MODAL
+        ============================================================ */
         .modal {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.85);
-            backdrop-filter: blur(8px);
+            background: rgba(0, 0, 0, 0.92);
+            backdrop-filter: blur(10px);
             display: flex;
             align-items: center;
             justify-content: center;
             z-index: 1000;
+            animation: modalFadeIn 0.3s;
+        }
+
+        @keyframes modalFadeIn {
+            0% { opacity: 0; }
+            100% { opacity: 1; }
         }
 
         .modal-box {
-            background: #181824;
-            border: 3px solid #ffaa33;
-            border-radius: 52px 22px 52px 22px;
-            padding: 36px;
-            max-width: 420px;
+            background: linear-gradient(145deg, #1a0a08, #0a0402);
+            border: 2px solid #8b2500;
+            border-radius: 40px 8px 40px 8px;
+            padding: 40px;
+            max-width: 440px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 0 90px #ff6b00;
-            color: #f0e6d2;
+            box-shadow: 
+                0 0 100px rgba(255, 60, 0, 0.4),
+                inset 0 0 60px rgba(0,0,0,0.8);
+            color: #e8ddd0;
             position: relative;
+            animation: modalPop 0.4s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+        }
+
+        @keyframes modalPop {
+            0% { transform: scale(0.7) rotate(-5deg); opacity: 0; }
+            100% { transform: scale(1) rotate(0deg); opacity: 1; }
         }
 
         .modal-box::before {
-            content: "🕷️";
+            content: "🎃";
             position: absolute;
-            top: -34px;
+            top: -40px;
             left: 24px;
-            font-size: 56px;
-            transform: rotate(-15deg);
-            filter: drop-shadow(0 0 14px black);
+            font-size: 64px;
+            filter: drop-shadow(0 0 20px #ff6600);
+            animation: pumpkinModalBob 1.5s infinite alternate;
+        }
+
+        @keyframes pumpkinModalBob {
+            0% { transform: rotate(-8deg) translateY(0); }
+            100% { transform: rotate(8deg) translateY(-6px); }
         }
 
         .modal-box h2 {
-            color: #ffbb33;
-            margin-bottom: 22px;
-            font-size: 2.2rem;
-            text-transform: uppercase;
+            font-family: 'Creepster', cursive;
+            color: #ff8844;
+            margin-bottom: 24px;
+            font-size: 2.6rem;
             letter-spacing: 4px;
-            text-shadow: 0 0 20px #ff6b00;
+            text-shadow: 0 0 25px rgba(255, 80, 0, 0.8);
+            font-weight: 400;
         }
 
         .modal-box p {
             margin: 14px 0;
-            font-size: 1.15rem;
-            color: #ddd;
+            font-size: 1.1rem;
+            color: #c8b8a8;
+            font-family: 'Courier New', monospace;
+            letter-spacing: 1px;
+        }
+
+        .modal-box p::before {
+            content: "🕷 ";
+            opacity: 0.6;
         }
 
         .modal-box button {
-            margin-top: 26px;
-            padding: 15px 40px;
-            border-radius: 60px;
-            background: #ffaa33;
-            border: none;
-            color: #0a0c10;
+            margin-top: 28px;
+            padding: 16px 44px;
+            border-radius: 12px 2px 12px 2px;
+            background: linear-gradient(145deg, #8b2500, #4a1000);
+            border: 1px solid #cc4400;
+            color: #ffddaa;
             font-weight: 800;
             font-size: 1.05rem;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 7px 0 #8b3a00;
-            transition: 0.1s;
-            font-family: inherit;
-            letter-spacing: 2px;
+            box-shadow: 0 6px 0 #2a0800, 0 0 30px rgba(255, 60, 0, 0.4);
+            transition: 0.15s;
+            font-family: 'Creepster', cursive;
+            letter-spacing: 4px;
         }
 
         .modal-box button:hover {
-            background: #ffbb33;
+            background: linear-gradient(145deg, #cc4400, #8b2500);
             transform: translateY(2px);
-            box-shadow: 0 5px 0 #8b3a00;
+            box-shadow: 0 4px 0 #2a0800, 0 0 50px rgba(255, 80, 0, 0.7);
         }
 
-        /* scrollbar */
-        ::-webkit-scrollbar { width: 9px; }
-        ::-webkit-scrollbar-track { background: #0a0c10; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb { background: #ffaa33; border-radius: 10px; }
-        ::-webkit-scrollbar-thumb:hover { background: #ff6b00; }
+        /* ============================================================
+           SCROLLBAR
+        ============================================================ */
+        ::-webkit-scrollbar { width: 10px; }
+        ::-webkit-scrollbar-track { background: #0a0408; }
+        ::-webkit-scrollbar-thumb { 
+            background: linear-gradient(180deg, #8b2500, #4a1000); 
+            border-radius: 5px;
+            border: 1px solid #2a0800;
+        }
+        ::-webkit-scrollbar-thumb:hover { background: linear-gradient(180deg, #cc4400, #8b2500); }
 
-        /* responsive */
-        @media (max-width: 650px) {
-            .container { padding: 24px 18px; }
-            .brand h1 { font-size: 2.2rem; letter-spacing: 3px; }
-            .nav-btn { padding: 9px 14px; font-size: 0.8rem; }
-            .code-item { flex-direction: column; align-items: stretch; }
+        /* ============================================================
+           RESPONSIVE
+        ============================================================ */
+        @media (max-width: 700px) {
+            .container { padding: 28px 20px; }
+            .brand h1 { font-size: 2.6rem; letter-spacing: 4px; }
+            .brand span { letter-spacing: 6px; font-size: 0.7rem; }
+            .nav-btn { padding: 10px 16px; font-size: 0.75rem; }
+            .code-item { flex-direction: column; align-items: stretch; gap: 8px; }
             .result-row { flex-direction: column; }
-            .tree, .pumpkin { transform: scale(0.7); }
+            .blood-moon { width: 90px; height: 90px; top: 30px; right: 30px; }
+            .corner-web { width: 160px; height: 160px; }
+            .ghost { font-size: 40px; }
+            .pumpkin { transform: scale(0.75); }
+            .tombstone { transform: scale(0.8); }
+            .dead-tree { width: 130px; height: 200px; }
+        }
+
+        @media (max-width: 480px) {
+            .brand h1 { font-size: 2rem; letter-spacing: 2px; }
+            .field label { font-size: 0.85rem; letter-spacing: 2px; }
+            .primary-btn { font-size: 1rem; letter-spacing: 3px; padding: 16px; }
+        }
+
+        /* Reduce motion preference */
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+            }
         }
     </style>
 </head>
 <body>
 
 <!-- ============================================================
-     FESTIVE OVERLAY — spiders with retracting threads + lights
+     ATMOSPHERE LAYERS
 ============================================================ -->
-<div class="festive-overlay" id="festiveOverlay">
-    <div class="lights-string" id="lightsString"></div>
-    <!-- spider threads and spiders are added dynamically via JS -->
+<div class="starfield" id="starfield"></div>
+
+<div class="blood-moon"></div>
+
+<div class="fog"></div>
+<div class="fog fog-back"></div>
+
+<!-- ============================================================
+     CORNER SPIDER WEBS (4 corners)
+============================================================ -->
+<div class="corner-web tl">
+    <svg viewBox="0 0 200 200">
+        <line x1="0" y1="0" x2="200" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="140"/>
+        <line x1="0" y1="0" x2="200" y2="80"/>
+        <line x1="0" y1="0" x2="140" y2="200"/>
+        <line x1="0" y1="0" x2="80" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="40"/>
+        <line x1="0" y1="0" x2="40" y2="200"/>
+        <circle cx="40" cy="40" r="30" fill="none"/>
+        <circle cx="70" cy="70" r="50" fill="none"/>
+        <circle cx="100" cy="100" r="72" fill="none"/>
+        <circle cx="130" cy="130" r="95" fill="none"/>
+        <path d="M 40 40 Q 60 30 80 40" fill="none"/>
+        <path d="M 80 40 Q 90 60 80 80" fill="none"/>
+        <path d="M 80 80 Q 60 90 40 80" fill="none"/>
+        <path d="M 40 80 Q 30 60 40 40" fill="none"/>
+        <path d="M 70 70 Q 95 55 120 70" fill="none"/>
+        <path d="M 120 70 Q 135 95 120 120" fill="none"/>
+        <path d="M 120 120 Q 95 135 70 120" fill="none"/>
+        <path d="M 70 120 Q 55 95 70 70" fill="none"/>
+    </svg>
+</div>
+<div class="corner-web tr">
+    <svg viewBox="0 0 200 200">
+        <line x1="0" y1="0" x2="200" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="140"/>
+        <line x1="0" y1="0" x2="200" y2="80"/>
+        <line x1="0" y1="0" x2="140" y2="200"/>
+        <line x1="0" y1="0" x2="80" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="40"/>
+        <line x1="0" y1="0" x2="40" y2="200"/>
+        <circle cx="40" cy="40" r="30" fill="none"/>
+        <circle cx="70" cy="70" r="50" fill="none"/>
+        <circle cx="100" cy="100" r="72" fill="none"/>
+        <circle cx="130" cy="130" r="95" fill="none"/>
+        <path d="M 40 40 Q 60 30 80 40" fill="none"/>
+        <path d="M 80 40 Q 90 60 80 80" fill="none"/>
+        <path d="M 80 80 Q 60 90 40 80" fill="none"/>
+        <path d="M 40 80 Q 30 60 40 40" fill="none"/>
+    </svg>
+</div>
+<div class="corner-web bl">
+    <svg viewBox="0 0 200 200">
+        <line x1="0" y1="0" x2="200" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="140"/>
+        <line x1="0" y1="0" x2="200" y2="80"/>
+        <line x1="0" y1="0" x2="140" y2="200"/>
+        <line x1="0" y1="0" x2="80" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="40"/>
+        <line x1="0" y1="0" x2="40" y2="200"/>
+        <circle cx="40" cy="40" r="30" fill="none"/>
+        <circle cx="70" cy="70" r="50" fill="none"/>
+        <circle cx="100" cy="100" r="72" fill="none"/>
+        <circle cx="130" cy="130" r="95" fill="none"/>
+    </svg>
+</div>
+<div class="corner-web br">
+    <svg viewBox="0 0 200 200">
+        <line x1="0" y1="0" x2="200" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="140"/>
+        <line x1="0" y1="0" x2="200" y2="80"/>
+        <line x1="0" y1="0" x2="140" y2="200"/>
+        <line x1="0" y1="0" x2="80" y2="200"/>
+        <line x1="0" y1="0" x2="200" y2="40"/>
+        <line x1="0" y1="0" x2="40" y2="200"/>
+        <circle cx="40" cy="40" r="30" fill="none"/>
+        <circle cx="70" cy="70" r="50" fill="none"/>
+        <circle cx="100" cy="100" r="72" fill="none"/>
+        <circle cx="130" cy="130" r="95" fill="none"/>
+    </svg>
 </div>
 
 <!-- ============================================================
-     DECORATION LAYER — pumpkins & christmas trees
+     FLOATING GHOSTS & BATS
 ============================================================ -->
-<div class="decoration-layer" id="decorationLayer">
-    <!-- pumpkins and trees injected by JS -->
-</div>
+<div class="ghost g1">👻</div>
+<div class="ghost g2">👻</div>
+<div class="ghost g3">👻</div>
+
+<div class="bat b1"></div>
+<div class="bat b2"></div>
+<div class="bat b3"></div>
+<div class="bat b4"></div>
+
+<!-- ============================================================
+     DECORATION LAYER — pumpkins, tombstones, dead trees
+============================================================ -->
+<div class="decoration-layer" id="decorationLayer"></div>
+
+<!-- ============================================================
+     HANGING SPIDERS (come out & retract)
+============================================================ -->
+<div class="festive-overlay" id="festiveOverlay"></div>
 
 <!-- ============================================================
      MAIN UI — MORTYX
 ============================================================ -->
 <div class="container">
+    <span class="container-spider s1">🕷</span>
+    <span class="container-spider s2">🕷</span>
+    <span class="container-spider s3">🕷</span>
+
     <header class="header">
         <div class="brand">
             <h1>MORTYX</h1>
             <span>HYPERLINK</span>
         </div>
         <nav class="nav">
-            <button id="tutorialBtn" class="nav-btn"><i class="fas fa-book-open"></i> Tutorial</button>
-            <!-- Discord link: discord.gg/bestmethods -->
+            <button id="tutorialBtn" class="nav-btn"><i class="fas fa-book-dead"></i> Grimoire</button>
             <a href="https://discord.gg/bestmethods" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Discord</a>
         </nav>
     </header>
@@ -947,7 +1527,7 @@
             <input id="urlInput" type="url" placeholder="https://www.roblox.com/users/123/profile" autocomplete="off" spellcheck="false">
         </div>
 
-        <button id="shortenBtn" class="primary-btn">Shorten</button>
+        <button id="shortenBtn" class="primary-btn">Summon</button>
         <p id="error" class="error hidden"></p>
 
         <section id="resultSection" class="hidden">
@@ -981,7 +1561,7 @@
         </section>
 
         <section class="history">
-            <h2>Recent Links</h2>
+            <h2>Recent Curses</h2>
             <div id="historyList"></div>
         </section>
     </main>
@@ -990,222 +1570,213 @@
 <!-- Tutorial modal -->
 <div id="tutorialModal" class="modal hidden">
     <div class="modal-box">
-        <h2>Tutorial</h2>
+        <h2>Grimoire</h2>
         <p>Paste a Roblox URL.</p>
-        <p>Click Shorten.</p>
+        <p>Click Summon.</p>
         <p>Copy any generated output.</p>
-        <button id="closeTutorial">Close</button>
+        <button id="closeTutorial">Banish</button>
     </div>
 </div>
 
 <script>
     (function() {
         // ============================================================
-        // 1. FESTIVE DECOR — SPIDERS (COME OUT & GO BACK), LIGHTS
+        // 1. STARFIELD — random twinkling stars
         // ============================================================
-        const overlay = document.getElementById('festiveOverlay');
-        const lightsString = document.getElementById('lightsString');
-
-        // ---- Christmas lights string ----
-        const bulbColors = ['red', 'green', 'blue', 'gold', 'purple', 'orange'];
-        const bulbCount = 22;
-        for (let i = 0; i < bulbCount; i++) {
-            const bulb = document.createElement('div');
-            bulb.className = `bulb ${bulbColors[i % bulbColors.length]}`;
-            const left = (i / bulbCount) * 100 + (Math.random() * 5 - 2.5);
-            bulb.style.left = Math.min(98, Math.max(2, left)) + '%';
-            bulb.style.top = (Math.random() * 20 + 3) + 'px';
-            bulb.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
-            bulb.style.animationDelay = (Math.random() * 2) + 's';
-            lightsString.appendChild(bulb);
+        const starfield = document.getElementById('starfield');
+        const starCount = 120;
+        for (let i = 0; i < starCount; i++) {
+            const star = document.createElement('div');
+            star.className = 'star';
+            star.style.left = Math.random() * 100 + '%';
+            star.style.top = Math.random() * 100 + '%';
+            star.style.animationDelay = (Math.random() * 4) + 's';
+            star.style.animationDuration = (2 + Math.random() * 4) + 's';
+            const size = Math.random() * 2 + 1;
+            star.style.width = size + 'px';
+            star.style.height = size + 'px';
+            // some stars slightly orange
+            if (Math.random() > 0.7) {
+                star.style.background = '#ffaa66';
+                star.style.boxShadow = '0 0 4px #ffaa66, 0 0 8px #ff6600';
+            }
+            starfield.appendChild(star);
         }
 
-        // ---- Spider data: positions, thread lengths, movement ----
+        // ============================================================
+        // 2. HANGING SPIDERS — come out & retract (GIF feel)
+        // ============================================================
+        const overlay = document.getElementById('festiveOverlay');
+
         const spiderData = [
-            { left: '6%', baseThread: 160, spiderBaseTop: 160 },
-            { left: '18%', baseThread: 250, spiderBaseTop: 250 },
-            { left: '38%', baseThread: 120, spiderBaseTop: 120 },
-            { left: '55%', baseThread: 200, spiderBaseTop: 200 },
-            { left: '73%', baseThread: 150, spiderBaseTop: 150 },
-            { left: '88%', baseThread: 280, spiderBaseTop: 280 },
-            { left: '96%', baseThread: 100, spiderBaseTop: 100 }
+            { left: '5%', baseThread: 180, spiderBaseTop: 180, speed: 1.4, range: 55 },
+            { left: '15%', baseThread: 260, spiderBaseTop: 260, speed: 1.8, range: 70 },
+            { left: '28%', baseThread: 130, spiderBaseTop: 130, speed: 1.2, range: 40 },
+            { left: '42%', baseThread: 220, spiderBaseTop: 220, speed: 1.6, range: 60 },
+            { left: '58%', baseThread: 160, spiderBaseTop: 160, speed: 1.5, range: 50 },
+            { left: '72%', baseThread: 290, spiderBaseTop: 290, speed: 2.0, range: 80 },
+            { left: '85%', baseThread: 110, spiderBaseTop: 110, speed: 1.3, range: 35 },
+            { left: '94%', baseThread: 240, spiderBaseTop: 240, speed: 1.7, range: 65 }
         ];
 
-        // We'll keep references to update thread heights and spider tops dynamically
         const spiderInstances = [];
 
         spiderData.forEach((data, index) => {
-            // --- create thread ---
+            // Thread
             const thread = document.createElement('div');
             thread.className = 'spider-thread';
             thread.style.left = data.left;
             thread.style.height = data.baseThread + 'px';
-            thread.dataset.baseHeight = data.baseThread;
             overlay.appendChild(thread);
 
-            // --- create spider ---
+            // Spider
             const spider = document.createElement('div');
             spider.className = 'spider';
-            // center spider horizontally on thread
-            spider.style.left = `calc(${data.left} - 18px)`;
+            spider.style.left = `calc(${data.left} - 20px)`;
             spider.style.top = data.spiderBaseTop + 'px';
 
             spider.innerHTML = `
-                <div class="body"></div>
-                <div class="eye left"></div>
-                <div class="eye right"></div>
                 <div class="leg l1"></div><div class="leg l2"></div>
                 <div class="leg l3"></div><div class="leg l4"></div>
                 <div class="leg l5"></div><div class="leg l6"></div>
                 <div class="leg l7"></div><div class="leg l8"></div>
+                <div class="body"></div>
+                <div class="eye left"></div><div class="eye right"></div>
             `;
             overlay.appendChild(spider);
 
-            // Store references for animation
             spiderInstances.push({
                 thread,
                 spider,
-                baseHeight: data.baseThread,
                 baseTop: data.spiderBaseTop,
-                // movement state
-                direction: 1,           // 1 = coming down, -1 = going up
                 currentTop: data.spiderBaseTop,
-                currentHeight: data.baseThread,
-                speed: 1.8 + Math.random() * 1.5,   // different speeds per spider
-                range: 45 + Math.random() * 30,      // how far it travels up (retracts)
-                delay: index * 120                   // stagger updates
+                direction: 1,
+                speed: data.speed,
+                range: data.range
             });
         });
 
-        // --- Spider GIF-like loop: come out, then go back in (retract thread) ---
         function animateSpiders() {
-            spiderInstances.forEach((inst, idx) => {
-                // Use a small internal timer offset for organic feel
-                if (Math.random() > 0.97) return; // slight random skip for human touch
+            spiderInstances.forEach((sp, idx) => {
+                const maxTop = sp.baseTop + 14;
+                const minTop = sp.baseTop - sp.range;
 
-                const sp = inst;
-                const maxTop = sp.baseTop + 12;          // slight extension down
-                const minTop = sp.baseTop - sp.range;    // retract upward
-
-                // Update position based on direction
                 if (sp.direction === 1) {
-                    sp.currentTop += sp.speed * 0.8;
-                    if (sp.currentTop >= maxTop) {
-                        sp.direction = -1;
-                    }
+                    sp.currentTop += sp.speed * 0.7;
+                    if (sp.currentTop >= maxTop) sp.direction = -1;
                 } else {
-                    sp.currentTop -= sp.speed * 1.0;
-                    if (sp.currentTop <= minTop) {
-                        sp.direction = 1;
-                    }
+                    sp.currentTop -= sp.speed * 0.9;
+                    if (sp.currentTop <= minTop) sp.direction = 1;
                 }
 
-                // Clamp
                 sp.currentTop = Math.min(maxTop, Math.max(minTop, sp.currentTop));
 
-                // Move spider
                 sp.spider.style.top = sp.currentTop + 'px';
 
-                // Update thread height to match spider position (retracting effect)
-                // thread height should be roughly currentTop + a little
-                const newHeight = Math.max(60, sp.currentTop + 12);
+                const newHeight = Math.max(50, sp.currentTop + 14);
                 sp.thread.style.height = newHeight + 'px';
 
-                // Add a little sway to the thread
-                const sway = Math.sin(Date.now() * 0.003 + idx) * 3;
-                sp.thread.style.transform = `rotate(${sway * 0.1}deg)`;
+                // Slight sway
+                const sway = Math.sin(Date.now() * 0.002 + idx * 1.5) * 2;
+                sp.thread.style.transform = `rotate(${sway * 0.15}deg)`;
             });
             requestAnimationFrame(animateSpiders);
         }
-
-        // Start spider animation loop
         requestAnimationFrame(animateSpiders);
 
         // ============================================================
-        // 2. DECORATIONS — PUMPKINS & CUSTOM CHRISTMAS TREES
+        // 3. DECORATIONS — pumpkins, tombstones, dead trees
         // ============================================================
         const decorLayer = document.getElementById('decorationLayer');
 
-        // ---- helper: create a pumpkin ----
-        function createPumpkin(left, bottom, scale = 1) {
-            const pumpkin = document.createElement('div');
-            pumpkin.className = 'pumpkin';
-            pumpkin.style.left = left;
-            pumpkin.style.bottom = bottom;
-            pumpkin.style.transform = `scale(${scale})`;
-            pumpkin.innerHTML = `
+        // ---- Pumpkin creator ----
+        function createPumpkin(left, bottom, scale, isSmall) {
+            const p = document.createElement('div');
+            p.className = 'pumpkin' + (isSmall ? ' small' : '');
+            p.style.left = left;
+            p.style.bottom = bottom;
+            p.style.transform = `scale(${scale})`;
+            p.innerHTML = `
                 <div class="body">
                     <div class="stem"></div>
                     <div class="face">
                         <div class="eye left"></div>
                         <div class="eye right"></div>
+                        <div class="nose"></div>
                         <div class="mouth"></div>
                     </div>
                 </div>
             `;
-            decorLayer.appendChild(pumpkin);
+            decorLayer.appendChild(p);
         }
 
-        // ---- helper: create a tree with custom decorations ----
-        function createTree(left, bottom, scale = 1, variant = 0) {
-            const tree = document.createElement('div');
-            tree.className = 'tree';
-            tree.style.left = left;
-            tree.style.bottom = bottom;
-            tree.style.transform = `scale(${scale})`;
+        // ---- Tombstone creator ----
+        function createTombstone(left, bottom, scale) {
+            const t = document.createElement('div');
+            t.className = 'tombstone';
+            t.style.left = left;
+            t.style.bottom = bottom;
+            t.style.transform = `scale(${scale})`;
+            decorLayer.appendChild(t);
+        }
 
-            // Variant changes star and ornaments
-            const starEmoji = variant % 2 === 0 ? '⭐' : '🌟';
-            const ornamentColors = ['#ff4d4d', '#ffaa33', '#2ecc71', '#42a5f5', '#ab47bc', '#ffeb3b'];
-
-            let ornamentsHtml = '';
-            // Different ornament placement per variant
-            const positions = variant === 0 ? [
-                { l: '20%', t: '20%' }, { l: '70%', t: '25%' }, { l: '45%', t: '40%' },
-                { l: '15%', t: '50%' }, { l: '80%', t: '55%' }, { l: '35%', t: '70%' },
-                { l: '65%', t: '75%' }
-            ] : variant === 1 ? [
-                { l: '30%', t: '15%' }, { l: '60%', t: '30%' }, { l: '20%', t: '45%' },
-                { l: '75%', t: '50%' }, { l: '45%', t: '65%' }, { l: '70%', t: '80%' }
-            ] : [
-                { l: '25%', t: '25%' }, { l: '55%', t: '20%' }, { l: '80%', t: '40%' },
-                { l: '15%', t: '55%' }, { l: '50%', t: '60%' }, { l: '75%', t: '75%' },
-                { l: '35%', t: '85%' }
-            ];
-
-            positions.forEach((pos, i) => {
-                const color = ornamentColors[(i + variant) % ornamentColors.length];
-                ornamentsHtml += `<div class="ornament" style="left:${pos.l}; top:${pos.t}; background:${color}; color:${color};"></div>`;
-            });
-
-            tree.innerHTML = `
-                <div class="layer layer-1"></div>
-                <div class="layer layer-2"></div>
-                <div class="layer layer-3"></div>
-                <div class="layer layer-4"></div>
-                <div class="top-star">${starEmoji}</div>
-                ${ornamentsHtml}
+        // ---- Dead tree creator ----
+        function createDeadTree(left, bottom, scale, flip) {
+            const d = document.createElement('div');
+            d.className = 'dead-tree';
+            d.style.left = left;
+            d.style.bottom = bottom;
+            d.style.transform = `scale(${scale}) ${flip ? 'scaleX(-1)' : ''}`;
+            d.innerHTML = `
+                <svg viewBox="0 0 200 320" preserveAspectRatio="xMidYMax meet">
+                    <path d="M 100 320 L 100 180 
+                             M 100 240 Q 60 200 30 160 M 100 240 Q 140 200 170 160
+                             M 100 200 Q 70 160 40 120 M 100 200 Q 130 160 160 120
+                             M 100 160 Q 80 130 60 90 M 100 160 Q 120 130 140 90
+                             M 100 120 Q 90 90 80 50 M 100 120 Q 110 90 120 50
+                             M 100 90 L 100 40
+                             M 90 60 L 70 30 M 110 60 L 130 30
+                             M 80 40 L 60 15 M 120 40 L 140 15"
+                          stroke="#0a0508" stroke-width="9" fill="none" stroke-linecap="round"/>
+                    <path d="M 100 320 L 100 180 
+                             M 100 240 Q 60 200 30 160 M 100 240 Q 140 200 170 160
+                             M 100 200 Q 70 160 40 120 M 100 200 Q 130 160 160 120
+                             M 100 160 Q 80 130 60 90 M 100 160 Q 120 130 140 90
+                             M 100 120 Q 90 90 80 50 M 100 120 Q 110 90 120 50
+                             M 100 90 L 100 40
+                             M 90 60 L 70 30 M 110 60 L 130 30
+                             M 80 40 L 60 15 M 120 40 L 140 15"
+                          stroke="#1a0e18" stroke-width="5" fill="none" stroke-linecap="round"/>
+                </svg>
             `;
-            decorLayer.appendChild(tree);
+            decorLayer.appendChild(d);
         }
 
-        // ---- place pumpkins around edges (halloween) ----
-        createPumpkin('2%', '2%', 0.9);
-        createPumpkin('12%', '8%', 0.7);
-        createPumpkin('88%', '3%', 1.1);
-        createPumpkin('94%', '12%', 0.8);
-        createPumpkin('5%', '78%', 1.0);
-        createPumpkin('90%', '82%', 0.9);
+        // ---- Place pumpkins around the screen (jack-o-lanterns) ----
+        createPumpkin('2%', '3%', 1.0, false);
+        createPumpkin('15%', '8%', 0.75, true);
+        createPumpkin('88%', '4%', 1.1, false);
+        createPumpkin('95%', '14%', 0.8, true);
+        createPumpkin('4%', '75%', 0.95, false);
+        createPumpkin('92%', '78%', 1.0, false);
+        createPumpkin('25%', '1%', 0.65, true);
+        createPumpkin('70%', '2%', 0.7, true);
 
-        // ---- place custom christmas trees (different variants) ----
-        createTree('3%', '6%', 0.85, 0);    // classic
-        createTree('92%', '8%', 0.9, 1);    // gold star variant
-        createTree('8%', '72%', 0.75, 2);   // more ornaments
-        createTree('86%', '75%', 1.0, 0);   // large classic
-        createTree('48%', '1%', 0.65, 1);   // small top center (peeking)
+        // ---- Place tombstones ----
+        createTombstone('10%', '2%', 0.85);
+        createTombstone('20%', '1%', 0.7);
+        createTombstone('78%', '2%', 0.9);
+        createTombstone('90%', '1%', 0.75);
+        createTombstone('5%', '55%', 0.6);
+        createTombstone('93%', '60%', 0.65);
+
+        // ---- Place dead trees on edges ----
+        createDeadTree('-30px', '-20px', 1.0, false);
+        createDeadTree('calc(100% - 150px)', '-20px', 1.0, true);
+        createDeadTree('calc(50% - 80px)', '-30px', 0.6, false);
 
         // ============================================================
-        // 3. MORTYX HYPERLINK LOGIC (UI + HISTORY)
+        // 4. MORTYX HYPERLINK LOGIC
         // ============================================================
         const shortenBtn = document.getElementById('shortenBtn');
         const urlInput = document.getElementById('urlInput');
@@ -1226,7 +1797,7 @@
         function copyToClipboard(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.innerText;
-                btn.innerText = 'Copied!';
+                btn.innerText = 'COPIED';
                 setTimeout(() => btn.innerText = original, 1200);
             }).catch(() => alert('Press Ctrl+C to copy'));
         }
@@ -1249,9 +1820,11 @@
             shortA.textContent = shortUrl.replace('https://', '');
             const typeSpan = document.createElement('span');
             typeSpan.textContent = type;
-            typeSpan.style.color = '#ffaa33';
+            typeSpan.style.color = '#d4a060';
             typeSpan.style.fontSize = '0.7rem';
             typeSpan.style.textTransform = 'uppercase';
+            typeSpan.style.letterSpacing = '2px';
+            typeSpan.style.fontWeight = '700';
             item.appendChild(shortA);
             item.appendChild(typeSpan);
             historyList.prepend(item);
@@ -1263,13 +1836,13 @@
         shortenBtn.addEventListener('click', () => {
             const rawUrl = urlInput.value.trim();
             if (!rawUrl) {
-                errorEl.textContent = 'Please paste a Roblox URL.';
+                errorEl.textContent = '⚠ The void demands a URL ⚠';
                 errorEl.classList.remove('hidden');
                 return;
             }
 
             if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
-                errorEl.textContent = 'URL must start with http:// or https://';
+                errorEl.textContent = '⚠ URL must start with http:// or https:// ⚠';
                 errorEl.classList.remove('hidden');
                 return;
             }
@@ -1312,7 +1885,7 @@
             }
         });
 
-        // tutorial modal
+        // Tutorial modal
         const tutorialBtn = document.getElementById('tutorialBtn');
         const tutorialModal = document.getElementById('tutorialModal');
         const closeTutorial = document.getElementById('closeTutorial');
@@ -1329,22 +1902,49 @@
             if (e.target === tutorialModal) tutorialModal.classList.add('hidden');
         });
 
-        // Seed some history for that lived-in feel
+        // Seed history
         window.addEventListener('load', () => {
             addToHistory('https://www.roblox.com/users/123/profile', 'https://moryx.gg/abc123', 'Profile');
             addToHistory('https://www.roblox.com/games/920587237/Adopt-Me', 'https://moryx.gg/xyz789', 'Community');
         });
 
-        // Extra: make the lights string slightly interactive (nothing big, just human)
-        // occasional random flicker on a bulb
+        // ============================================================
+        // 5. LITTLE HUMAN TOUCHES
+        // ============================================================
+        // Random flicker on a pumpkin eye
         setInterval(() => {
-            const bulbs = document.querySelectorAll('.bulb');
-            if (bulbs.length) {
-                const randomBulb = bulbs[Math.floor(Math.random() * bulbs.length)];
-                randomBulb.style.opacity = '0.4';
-                setTimeout(() => randomBulb.style.opacity = '', 200);
+            const eyes = document.querySelectorAll('.pumpkin .eye');
+            if (eyes.length) {
+                const e = eyes[Math.floor(Math.random() * eyes.length)];
+                e.style.opacity = '0.3';
+                setTimeout(() => e.style.opacity = '', 150);
             }
-        }, 1800);
+        }, 2200);
+
+        // Occasional subtle screen shake (very rare, feels alive)
+        setInterval(() => {
+            if (Math.random() > 0.93) {
+                document.body.style.transform = `translate(${Math.random() * 2 - 1}px, ${Math.random() * 2 - 1}px)`;
+                setTimeout(() => {
+                    document.body.style.transform = '';
+                }, 80);
+            }
+        }, 6000);
+
+        // Random bat spawn (extra bat)
+        setInterval(() => {
+            if (Math.random() > 0.85) {
+                const bat = document.createElement('div');
+                bat.className = 'bat';
+                bat.style.top = (Math.random() * 60 + 5) + '%';
+                bat.style.left = '-50px';
+                bat.style.fontSize = (Math.random() * 18 + 18) + 'px';
+                const duration = (Math.random() * 12 + 14);
+                bat.style.animation = `batFly${Math.random() > 0.5 ? '1' : '2'} ${duration}s linear`;
+                document.body.appendChild(bat);
+                setTimeout(() => bat.remove(), duration * 1000);
+            }
+        }, 8000);
     })();
 </script>
 
