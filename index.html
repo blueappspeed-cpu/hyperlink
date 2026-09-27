@@ -4,10 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>MORTYX · hyperlink</title>
-    <!-- Font Awesome for tiny icons (optional) -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
-        /* ---------- MORTYX — human halloween + christmas hybrid ---------- */
+        /* ============================================================
+           MORTYX — handcrafted halloween + christmas hybrid
+           humanized, warm, spider GIFs, pumpkins, custom trees
+        ============================================================ */
         * {
             margin: 0;
             padding: 0;
@@ -15,185 +17,431 @@
         }
 
         body {
-            background: #0a0c10;
+            background-color: #070a0e;
             background-image: 
-                radial-gradient(circle at 20% 30%, rgba(255, 100, 0, 0.08) 0%, transparent 40%),
-                radial-gradient(circle at 90% 70%, rgba(200, 0, 0, 0.12) 0%, transparent 45%),
-                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.02) 0px, rgba(255, 215, 0, 0.02) 2px, 
-                                          rgba(0, 0, 0, 0.04) 2px, rgba(0, 0, 0, 0.04) 6px);
+                radial-gradient(ellipse at 15% 20%, rgba(255, 140, 0, 0.10) 0%, transparent 45%),
+                radial-gradient(ellipse at 85% 75%, rgba(200, 0, 0, 0.12) 0%, transparent 50%),
+                radial-gradient(circle at 50% 50%, rgba(80, 0, 120, 0.08) 0%, transparent 70%),
+                repeating-linear-gradient(45deg, rgba(255, 215, 0, 0.015) 0px, rgba(255, 215, 0, 0.015) 2px, 
+                                          rgba(0, 0, 0, 0.03) 2px, rgba(0, 0, 0, 0.03) 8px);
             font-family: 'Segoe UI', 'Poppins', system-ui, -apple-system, 'Helvetica Neue', sans-serif;
             min-height: 100vh;
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 20px;
+            padding: 30px 20px;
             position: relative;
             overflow-x: hidden;
         }
 
-        /* ---- hanging spider + lights overlay (dynamic gif-like) ---- */
+        /* ---- twinkling starfield background (human touch) ---- */
+        body::before {
+            content: "";
+            position: fixed;
+            inset: 0;
+            background-image: 
+                radial-gradient(2px 2px at 20px 30px, #ffffff88, transparent),
+                radial-gradient(2px 2px at 40px 70px, #ffdd8888, transparent),
+                radial-gradient(1px 1px at 90px 40px, #ffffffaa, transparent),
+                radial-gradient(2px 2px at 130px 80px, #ffaa8888, transparent),
+                radial-gradient(1px 1px at 160px 120px, #ffffff99, transparent),
+                radial-gradient(2px 2px at 200px 20px, #ffeeaaaa, transparent),
+                radial-gradient(1px 1px at 250px 150px, #ffffff88, transparent),
+                radial-gradient(2px 2px at 300px 60px, #ffcc8888, transparent);
+            background-size: 350px 200px;
+            background-repeat: repeat;
+            opacity: 0.5;
+            pointer-events: none;
+            z-index: 0;
+            animation: twinkle 6s infinite alternate;
+        }
+
+        @keyframes twinkle {
+            0% { opacity: 0.35; }
+            100% { opacity: 0.65; }
+        }
+
+        /* ============================================================
+           FESTIVE OVERLAY — spiders that come out & retract, lights
+        ============================================================ */
         .festive-overlay {
             position: fixed;
             top: 0;
             left: 0;
             width: 100%;
             height: 100%;
-            pointer-events: none;   /* let clicks pass through */
-            z-index: 1;
+            pointer-events: none;
+            z-index: 2;
             overflow: hidden;
         }
 
-        /* spider threads (silky lines) */
-        .thread {
+        /* ---------- spider threads ---------- */
+        .spider-thread {
             position: absolute;
             width: 2px;
-            background: linear-gradient(180deg, rgba(230, 230, 255, 0.9) 0%, rgba(255, 255, 255, 0.5) 100%);
-            box-shadow: 0 0 6px rgba(255, 255, 255, 0.6);
+            background: linear-gradient(180deg, rgba(230, 230, 255, 0.95) 0%, rgba(255, 255, 255, 0.4) 100%);
+            box-shadow: 0 0 8px rgba(255, 255, 255, 0.7), 0 0 2px rgba(255, 255, 255, 0.9);
             top: 0;
-            transform-origin: top;
+            transform-origin: top center;
+            transition: height 0.15s ease;
         }
 
-        /* spider bodies and legs — pure CSS, but they move like GIFs */
+        /* ---------- the spider itself (GIF-like, comes out & goes back) ---------- */
         .spider {
             position: absolute;
-            top: 0;
-            width: 30px;
-            height: 30px;
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.5));
-            transition: top 0.2s ease;
-            animation: spiderBob 1.8s infinite alternate ease-in-out;
+            width: 36px;
+            height: 36px;
+            filter: drop-shadow(0 6px 10px rgba(0, 0, 0, 0.6));
+            transition: top 0.12s ease-out;
         }
 
         .spider .body {
             position: absolute;
-            width: 16px;
-            height: 16px;
-            background: #1a1a1a;
+            width: 20px;
+            height: 20px;
+            background: radial-gradient(circle at 40% 35%, #2a2a2a, #0a0a0a);
             border-radius: 50%;
-            left: 7px;
-            top: 8px;
-            box-shadow: inset -2px -2px 4px #000, inset 2px 2px 4px #4a4a4a;
-            border: 1px solid #444;
+            left: 8px;
+            top: 10px;
+            box-shadow: inset -3px -3px 6px #000, inset 3px 3px 6px #555, 0 0 10px #000;
+            border: 1px solid #333;
         }
 
         .spider .eye {
             position: absolute;
-            width: 4px;
-            height: 4px;
-            background: #ff3b3b;
+            width: 5px;
+            height: 5px;
+            background: radial-gradient(circle, #ff5555, #990000);
             border-radius: 50%;
-            top: 11px;
-            box-shadow: 0 0 6px #ff0000;
+            top: 14px;
+            box-shadow: 0 0 8px #ff0000, 0 0 14px #ff4444;
+            animation: eyeGlow 1.4s infinite alternate;
         }
-        .spider .eye.left { left: 10px; }
-        .spider .eye.right { left: 16px; }
+        .spider .eye.left { left: 12px; }
+        .spider .eye.right { left: 20px; }
+
+        @keyframes eyeGlow {
+            0% { opacity: 0.7; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.2); }
+        }
 
         .spider .leg {
             position: absolute;
             width: 2px;
-            height: 14px;
-            background: #2b2b2b;
+            height: 16px;
+            background: linear-gradient(180deg, #333, #111);
             border-radius: 2px;
-            box-shadow: 0 0 3px #000;
+            box-shadow: 0 0 4px #000;
+            transform-origin: top center;
+            animation: legWiggle 0.5s infinite alternate ease-in-out;
         }
-        .leg.l1 { left: 2px; top: -4px; transform: rotate(-30deg); }
-        .leg.l2 { left: 20px; top: -4px; transform: rotate(30deg); }
-        .leg.l3 { left: 0px; top: 4px; transform: rotate(-45deg); }
-        .leg.l4 { left: 22px; top: 4px; transform: rotate(45deg); }
-        .leg.l5 { left: 2px; top: 14px; transform: rotate(-20deg); }
-        .leg.l6 { left: 20px; top: 14px; transform: rotate(20deg); }
-        .leg.l7 { left: 4px; top: 20px; transform: rotate(-10deg); }
-        .leg.l8 { left: 18px; top: 20px; transform: rotate(10deg); }
+        .leg.l1 { left: 2px; top: -5px; transform: rotate(-35deg); animation-delay: 0s; }
+        .leg.l2 { left: 24px; top: -5px; transform: rotate(35deg); animation-delay: 0.1s; }
+        .leg.l3 { left: 0px; top: 4px; transform: rotate(-50deg); animation-delay: 0.2s; }
+        .leg.l4 { left: 26px; top: 4px; transform: rotate(50deg); animation-delay: 0.15s; }
+        .leg.l5 { left: 2px; top: 16px; transform: rotate(-25deg); animation-delay: 0.3s; }
+        .leg.l6 { left: 24px; top: 16px; transform: rotate(25deg); animation-delay: 0.25s; }
+        .leg.l7 { left: 5px; top: 24px; transform: rotate(-12deg); animation-delay: 0.35s; }
+        .leg.l8 { left: 21px; top: 24px; transform: rotate(12deg); animation-delay: 0.4s; }
 
-        /* little web decoration at spider bottom */
+        @keyframes legWiggle {
+            0% { transform: rotate(var(--rot, -35deg)) scaleY(0.9); }
+            100% { transform: rotate(calc(var(--rot, -35deg) * 1.1)) scaleY(1.1); }
+        }
+
+        /* spider dangling web */
         .spider::after {
             content: "🕸️";
             position: absolute;
-            font-size: 14px;
-            bottom: -16px;
+            font-size: 16px;
+            bottom: -18px;
             left: 4px;
-            opacity: 0.7;
-            filter: drop-shadow(0 0 4px white);
+            opacity: 0.75;
+            filter: drop-shadow(0 0 6px white);
         }
 
-        /* --- christmas string lights (hanging + going back up) --- */
+        /* ---------- christmas lights string ---------- */
         .lights-string {
             position: absolute;
             top: 0;
             left: 0;
             width: 100%;
-            height: 120px;
+            height: 140px;
             pointer-events: none;
-            z-index: 2;
+            z-index: 3;
         }
 
         .bulb {
             position: absolute;
-            width: 12px;
-            height: 18px;
-            background: radial-gradient(circle at 30% 30%, #fff9c4, #ffb347);
+            width: 14px;
+            height: 20px;
             border-radius: 50% 50% 40% 40%;
-            box-shadow: 0 0 15px #ffaa33, 0 0 25px #ff8800;
             transform-origin: top center;
             animation: lightGlow 2s infinite alternate;
         }
 
-        /* different colors */
-        .bulb.red { background: radial-gradient(circle at 30% 30%, #ffb3b3, #c62828); box-shadow: 0 0 15px #ff4d4d, 0 0 25px #b71c1c; }
-        .bulb.green { background: radial-gradient(circle at 30% 30%, #b9f6ca, #2e7d32); box-shadow: 0 0 15px #69f0ae, 0 0 25px #1b5e20; }
-        .bulb.blue { background: radial-gradient(circle at 30% 30%, #bbdefb, #1565c0); box-shadow: 0 0 15px #64b5f6, 0 0 25px #0d47a1; }
-        .bulb.gold { background: radial-gradient(circle at 30% 30%, #fff3e0, #ff8f00); box-shadow: 0 0 20px #ffb300, 0 0 30px #e65100; }
-        .bulb.purple { background: radial-gradient(circle at 30% 30%, #e1bee7, #6a1b9a); box-shadow: 0 0 15px #ce93d8, 0 0 25px #4a148c; }
-
-        /* moving threads and spiders (GIF-like loop) */
-        @keyframes spiderBob {
-            0% { transform: translateY(0px) rotate(0deg); }
-            100% { transform: translateY(10px) rotate(3deg); }
-        }
+        .bulb.red { background: radial-gradient(circle at 30% 30%, #ffb3b3, #c62828); box-shadow: 0 0 18px #ff4d4d, 0 0 28px #b71c1c; }
+        .bulb.green { background: radial-gradient(circle at 30% 30%, #b9f6ca, #2e7d32); box-shadow: 0 0 18px #69f0ae, 0 0 28px #1b5e20; }
+        .bulb.blue { background: radial-gradient(circle at 30% 30%, #bbdefb, #1565c0); box-shadow: 0 0 18px #64b5f6, 0 0 28px #0d47a1; }
+        .bulb.gold { background: radial-gradient(circle at 30% 30%, #fff3e0, #ff8f00); box-shadow: 0 0 22px #ffb300, 0 0 32px #e65100; }
+        .bulb.purple { background: radial-gradient(circle at 30% 30%, #e1bee7, #6a1b9a); box-shadow: 0 0 18px #ce93d8, 0 0 28px #4a148c; }
+        .bulb.orange { background: radial-gradient(circle at 30% 30%, #ffe0b2, #e65100); box-shadow: 0 0 22px #ff9800, 0 0 32px #bf360c; }
 
         @keyframes lightGlow {
-            0% { opacity: 0.8; filter: brightness(1); }
-            100% { opacity: 1; filter: brightness(1.4); }
+            0% { opacity: 0.75; filter: brightness(1); }
+            100% { opacity: 1; filter: brightness(1.5); }
         }
 
-        /* main container – MORTYX */
+        /* ============================================================
+           PUMPKINS & TREES — humanized decorations around edges
+        ============================================================ */
+        .decoration-layer {
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 3;
+            overflow: hidden;
+        }
+
+        /* --- pumpkins (halloween) --- */
+        .pumpkin {
+            position: absolute;
+            width: 70px;
+            height: 60px;
+            filter: drop-shadow(0 6px 12px rgba(0,0,0,0.6));
+            animation: pumpkinBob 3s infinite alternate ease-in-out;
+        }
+
+        .pumpkin .body {
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(circle at 40% 35%, #ff8c1a, #b33c00);
+            border-radius: 50% 50% 45% 45% / 55% 55% 45% 45%;
+            box-shadow: inset -6px -8px 12px #7a2e00, inset 6px 8px 14px #ffb84d;
+            border: 2px solid #6b2600;
+            position: relative;
+        }
+
+        .pumpkin .stem {
+            position: absolute;
+            top: -12px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 10px;
+            height: 16px;
+            background: linear-gradient(180deg, #4a2e00, #2a1a00);
+            border-radius: 4px 4px 2px 2px;
+            border: 1px solid #1a1000;
+        }
+
+        .pumpkin .stem::after {
+            content: "";
+            position: absolute;
+            top: -6px;
+            left: -3px;
+            width: 16px;
+            height: 6px;
+            background: #2a4a0a;
+            border-radius: 50%;
+            transform: rotate(-20deg);
+        }
+
+        .pumpkin .face {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -40%);
+            width: 80%;
+            height: 40%;
+        }
+
+        .pumpkin .eye {
+            position: absolute;
+            width: 12px;
+            height: 12px;
+            background: #ffdd00;
+            border-radius: 50%;
+            top: 0;
+            box-shadow: 0 0 14px #ffaa00, 0 0 24px #ff6b00, inset 0 0 6px #ff4400;
+            animation: eyeFlicker 1.6s infinite alternate;
+        }
+        .pumpkin .eye.left { left: 12%; }
+        .pumpkin .eye.right { right: 12%; }
+
+        .pumpkin .mouth {
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 40px;
+            height: 18px;
+            background: #ffdd00;
+            border-radius: 0 0 30px 30px;
+            box-shadow: 0 0 14px #ffaa00, inset 0 0 8px #ff4400;
+        }
+
+        .pumpkin .mouth::before,
+        .pumpkin .mouth::after {
+            content: "";
+            position: absolute;
+            top: -6px;
+            width: 8px;
+            height: 10px;
+            background: #ffdd00;
+            box-shadow: 0 0 10px #ffaa00;
+        }
+        .pumpkin .mouth::before { left: 4px; transform: rotate(-20deg); }
+        .pumpkin .mouth::after { right: 4px; transform: rotate(20deg); }
+
+        @keyframes eyeFlicker {
+            0% { opacity: 0.6; }
+            100% { opacity: 1; }
+        }
+
+        @keyframes pumpkinBob {
+            0% { transform: translateY(0px) rotate(-2deg); }
+            100% { transform: translateY(-8px) rotate(2deg); }
+        }
+
+        /* --- custom christmas trees (different decorations) --- */
+        .tree {
+            position: absolute;
+            width: 90px;
+            height: 130px;
+            filter: drop-shadow(0 8px 14px rgba(0,0,0,0.7));
+            animation: treeSway 4s infinite alternate ease-in-out;
+        }
+
+        .tree .layer {
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100%;
+            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+        }
+
+        .tree .layer-1 {
+            bottom: 0;
+            width: 90px;
+            height: 50px;
+            background: linear-gradient(145deg, #1b5e20, #0d3b0f);
+            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+            box-shadow: inset -6px -6px 12px #000, inset 6px 6px 14px #4caf50;
+        }
+
+        .tree .layer-2 {
+            bottom: 30px;
+            width: 72px;
+            height: 46px;
+            background: linear-gradient(145deg, #2e7d32, #1b5e20);
+            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+            box-shadow: inset -5px -5px 10px #000, inset 5px 5px 12px #66bb6a;
+        }
+
+        .tree .layer-3 {
+            bottom: 58px;
+            width: 54px;
+            height: 40px;
+            background: linear-gradient(145deg, #388e3c, #2e7d32);
+            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+            box-shadow: inset -4px -4px 8px #000, inset 4px 4px 10px #81c784;
+        }
+
+        .tree .layer-4 {
+            bottom: 84px;
+            width: 36px;
+            height: 34px;
+            background: linear-gradient(145deg, #43a047, #388e3c);
+            border-radius: 50% 50% 20% 20% / 30% 30% 70% 70%;
+            box-shadow: inset -3px -3px 6px #000, inset 3px 3px 8px #a5d6a7;
+        }
+
+        .tree .top-star {
+            position: absolute;
+            bottom: 112px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 24px;
+            filter: drop-shadow(0 0 12px #ffdd00);
+            animation: starPulse 1.5s infinite alternate;
+        }
+
+        @keyframes starPulse {
+            0% { transform: translateX(-50%) scale(0.9); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
+        }
+
+        /* tree ornaments — different decorations */
+        .ornament {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            box-shadow: 0 0 8px currentColor, inset 0 0 4px rgba(255,255,255,0.6);
+            animation: ornamentGlow 1.8s infinite alternate;
+        }
+
+        @keyframes ornamentGlow {
+            0% { opacity: 0.7; transform: scale(0.9); }
+            100% { opacity: 1; transform: scale(1.1); }
+        }
+
+        @keyframes treeSway {
+            0% { transform: rotate(-2deg); }
+            100% { transform: rotate(2deg); }
+        }
+
+        /* ============================================================
+           MAIN UI — MORTYX
+        ============================================================ */
         .container {
             position: relative;
             z-index: 20;
-            max-width: 750px;
+            max-width: 780px;
             width: 100%;
-            background: rgba(18, 18, 28, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 215, 0, 0.3);
-            border-radius: 48px 20px 48px 20px;
-            padding: 32px 28px 28px;
-            box-shadow: 0 30px 50px rgba(0, 0, 0, 0.7), 0 0 0 2px rgba(255, 140, 0, 0.1), 0 0 40px rgba(200, 0, 0, 0.3);
+            background: rgba(16, 16, 26, 0.88);
+            backdrop-filter: blur(14px);
+            -webkit-backdrop-filter: blur(14px);
+            border: 1px solid rgba(255, 215, 0, 0.35);
+            border-radius: 52px 22px 52px 22px;
+            padding: 36px 30px 32px;
+            box-shadow: 
+                0 30px 60px rgba(0, 0, 0, 0.8), 
+                0 0 0 2px rgba(255, 140, 0, 0.12), 
+                0 0 50px rgba(200, 0, 0, 0.35),
+                inset 0 0 80px rgba(255, 140, 0, 0.03);
             color: #f5f0e6;
             font-family: 'Segoe UI', 'Poppins', 'Comic Sans MS', 'Chalkboard SE', cursive, sans-serif;
-            border-top: 3px solid #ffaa33;
+            border-top: 4px solid #ffaa33;
             border-left: 2px dashed #b71c1c;
+            border-bottom: 3px dotted #2e7d32;
         }
 
-        /* little hand-drawn decorations */
         .container::before {
             content: "🎃";
             position: absolute;
-            top: -22px;
-            left: 30px;
-            font-size: 44px;
-            filter: drop-shadow(0 0 12px #ff6f00);
-            transform: rotate(-8deg);
+            top: -26px;
+            left: 34px;
+            font-size: 52px;
+            filter: drop-shadow(0 0 16px #ff6f00);
+            transform: rotate(-10deg);
+            animation: floatEmoji 3s infinite alternate;
         }
 
         .container::after {
             content: "🎄";
             position: absolute;
-            bottom: -22px;
-            right: 30px;
-            font-size: 44px;
-            filter: drop-shadow(0 0 12px #00c853);
+            bottom: -26px;
+            right: 34px;
+            font-size: 52px;
+            filter: drop-shadow(0 0 16px #00c853);
             transform: rotate(8deg);
+            animation: floatEmoji 3s infinite alternate 0.8s;
+        }
+
+        @keyframes floatEmoji {
+            0% { transform: translateY(0) rotate(-8deg); }
+            100% { transform: translateY(-8px) rotate(4deg); }
         }
 
         /* header */
@@ -201,33 +449,33 @@
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 32px;
+            margin-bottom: 34px;
             flex-wrap: wrap;
-            gap: 12px;
+            gap: 14px;
         }
 
         .brand h1 {
-            font-size: 2.8rem;
+            font-size: 3rem;
             font-weight: 900;
-            letter-spacing: 4px;
+            letter-spacing: 5px;
             text-transform: uppercase;
-            background: linear-gradient(135deg, #ffbb33, #ff4d4d, #2ecc71, #ffbb33);
-            background-size: 300% 300%;
+            background: linear-gradient(135deg, #ffbb33, #ff4d4d, #2ecc71, #ffbb33, #ff8c1a);
+            background-size: 400% 400%;
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
-            animation: shimmer 4s infinite alternate;
-            filter: drop-shadow(0 0 18px rgba(255, 170, 0, 0.4));
+            animation: shimmer 5s infinite alternate;
+            filter: drop-shadow(0 0 20px rgba(255, 170, 0, 0.5));
             line-height: 1.1;
         }
 
         .brand span {
             display: block;
             font-size: 0.8rem;
-            letter-spacing: 6px;
+            letter-spacing: 8px;
             color: #c0a86a;
-            text-shadow: 0 0 8px #ffaa33;
-            margin-top: -4px;
+            text-shadow: 0 0 10px #ffaa33;
+            margin-top: -2px;
         }
 
         @keyframes shimmer {
@@ -237,14 +485,14 @@
 
         .nav {
             display: flex;
-            gap: 10px;
+            gap: 12px;
         }
 
         .nav-btn {
             background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 215, 0, 0.4);
+            border: 1px solid rgba(255, 215, 0, 0.45);
             color: #f0e6d2;
-            padding: 10px 20px;
+            padding: 11px 22px;
             border-radius: 40px;
             font-weight: 600;
             font-size: 0.95rem;
@@ -253,32 +501,32 @@
             text-decoration: none;
             display: inline-flex;
             align-items: center;
-            gap: 6px;
+            gap: 8px;
             backdrop-filter: blur(4px);
             font-family: inherit;
-            box-shadow: 0 4px 10px rgba(0,0,0,0.3);
+            box-shadow: 0 4px 12px rgba(0,0,0,0.4);
         }
 
         .nav-btn:hover {
             background: #ffaa33;
             border-color: #ffaa33;
             color: #0a0c10;
-            box-shadow: 0 0 20px #ffaa33;
-            transform: scale(1.02);
+            box-shadow: 0 0 25px #ffaa33;
+            transform: scale(1.03);
         }
 
         /* card / main */
         .card {
-            background: rgba(10, 10, 18, 0.6);
-            border-radius: 28px;
-            padding: 28px 24px;
+            background: rgba(8, 8, 16, 0.65);
+            border-radius: 30px;
+            padding: 30px 26px;
             border: 1px solid rgba(255, 200, 100, 0.2);
-            box-shadow: inset 0 0 30px rgba(0,0,0,0.5), 0 10px 20px rgba(0,0,0,0.4);
+            box-shadow: inset 0 0 40px rgba(0,0,0,0.6), 0 12px 24px rgba(0,0,0,0.5);
             margin-bottom: 24px;
         }
 
         .field {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
             text-align: left;
         }
 
@@ -286,33 +534,33 @@
             display: block;
             font-size: 0.85rem;
             text-transform: uppercase;
-            letter-spacing: 2px;
+            letter-spacing: 3px;
             color: #e0b87a;
-            margin-bottom: 6px;
+            margin-bottom: 8px;
             font-weight: 600;
-            text-shadow: 0 0 6px #ffaa33;
+            text-shadow: 0 0 8px #ffaa33;
         }
 
         .field select,
         .field input {
             width: 100%;
-            padding: 14px 18px;
+            padding: 15px 20px;
             border-radius: 40px;
-            border: 1px solid rgba(255, 200, 0, 0.3);
-            background: rgba(0, 0, 0, 0.6);
+            border: 1px solid rgba(255, 200, 0, 0.35);
+            background: rgba(0, 0, 0, 0.65);
             color: #fff5e6;
             font-size: 1rem;
             font-family: 'Segoe UI', monospace;
             transition: all 0.2s;
             outline: none;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.6);
+            box-shadow: 0 6px 14px rgba(0,0,0,0.7);
         }
 
         .field select:focus,
         .field input:focus {
             border-color: #ffaa33;
-            box-shadow: 0 0 20px #ffaa33, 0 4px 12px black;
-            background: #101018;
+            box-shadow: 0 0 25px #ffaa33, 0 6px 14px black;
+            background: #12121e;
         }
 
         .field select option {
@@ -321,43 +569,43 @@
 
         .primary-btn {
             width: 100%;
-            padding: 16px;
+            padding: 17px;
             border-radius: 60px;
-            border: none;
+            border: 1px solid #ffd966;
             background: linear-gradient(145deg, #ffaa33, #ff6b00);
             color: #0a0c10;
             font-weight: 800;
-            font-size: 1.2rem;
-            letter-spacing: 2px;
+            font-size: 1.25rem;
+            letter-spacing: 3px;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 10px 0 #8b3a00, 0 10px 30px #ff6b00;
+            box-shadow: 0 10px 0 #8b3a00, 0 12px 35px #ff6b00;
             transition: all 0.1s;
             font-family: inherit;
             margin-top: 10px;
-            border: 1px solid #ffd966;
         }
 
         .primary-btn:hover {
             background: #ffbb33;
-            box-shadow: 0 6px 0 #8b3a00, 0 12px 30px #ffaa33;
+            box-shadow: 0 6px 0 #8b3a00, 0 14px 35px #ffaa33;
             transform: translateY(2px);
         }
 
         .primary-btn:active {
-            transform: translateY(6px);
-            box-shadow: 0 2px 0 #8b3a00, 0 10px 25px #ffaa33;
+            transform: translateY(7px);
+            box-shadow: 0 2px 0 #8b3a00, 0 10px 30px #ffaa33;
         }
 
         .error {
             color: #ff6b6b;
-            background: rgba(200, 0, 0, 0.2);
-            padding: 12px;
+            background: rgba(200, 0, 0, 0.25);
+            padding: 14px;
             border-radius: 30px;
-            margin-top: 16px;
+            margin-top: 18px;
             font-weight: 600;
             text-align: center;
             border-left: 6px solid #b71c1c;
+            text-shadow: 0 0 8px #ff0000;
         }
 
         .hidden {
@@ -368,11 +616,11 @@
         .result-row {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 12px;
             background: rgba(255, 215, 0, 0.1);
-            padding: 14px 18px;
+            padding: 16px 20px;
             border-radius: 50px;
-            margin-top: 24px;
+            margin-top: 26px;
             border: 1px solid #ffaa33;
             flex-wrap: wrap;
         }
@@ -384,7 +632,7 @@
             font-weight: 600;
             word-break: break-all;
             font-size: 1rem;
-            text-shadow: 0 0 6px #ffaa33;
+            text-shadow: 0 0 8px #ffaa33;
         }
 
         .result-row a:hover {
@@ -396,7 +644,7 @@
             background: #2a2a3a;
             border: 1px solid #ffaa33;
             color: #ffd966;
-            padding: 8px 18px;
+            padding: 9px 20px;
             border-radius: 30px;
             font-weight: 700;
             cursor: pointer;
@@ -415,30 +663,31 @@
 
         /* markdown section */
         #markdownSection {
-            margin-top: 20px;
+            margin-top: 22px;
             background: #0a0a10;
-            border-radius: 18px;
-            padding: 16px;
+            border-radius: 20px;
+            padding: 18px;
             border: 1px solid #3a3a4a;
             position: relative;
         }
 
         #markdownSection pre {
             background: #101018;
-            padding: 14px;
-            border-radius: 14px;
+            padding: 16px;
+            border-radius: 16px;
             color: #b9f6ca;
             font-family: 'Fira Code', 'Courier New', monospace;
             font-size: 0.9rem;
             white-space: pre-wrap;
             word-break: break-all;
             border-left: 6px solid #ffaa33;
+            box-shadow: inset 0 0 20px #000;
         }
 
         #markdownSection button {
-            margin-top: 12px;
+            margin-top: 14px;
             width: 100%;
-            padding: 12px;
+            padding: 13px;
             border-radius: 30px;
             background: #2a1a1a;
             border: 1px solid #ff4d4d;
@@ -447,6 +696,8 @@
             cursor: pointer;
             transition: 0.15s;
             text-transform: uppercase;
+            font-family: inherit;
+            letter-spacing: 1px;
         }
 
         #markdownSection button:hover {
@@ -458,16 +709,16 @@
         #linksSection {
             display: flex;
             flex-direction: column;
-            gap: 12px;
-            margin-top: 24px;
+            gap: 14px;
+            margin-top: 26px;
         }
 
         .code-item {
             display: flex;
             align-items: center;
             gap: 12px;
-            background: rgba(30, 30, 45, 0.8);
-            padding: 12px 18px;
+            background: rgba(30, 30, 45, 0.85);
+            padding: 14px 20px;
             border-radius: 40px;
             border: 1px dashed #ffaa33;
             flex-wrap: wrap;
@@ -479,7 +730,7 @@
             color: #ffaa33;
             font-weight: 700;
             letter-spacing: 2px;
-            min-width: 70px;
+            min-width: 75px;
         }
 
         .code-item code {
@@ -489,47 +740,47 @@
             font-size: 0.85rem;
             word-break: break-all;
             background: #00000040;
-            padding: 6px 12px;
+            padding: 8px 14px;
             border-radius: 30px;
         }
 
         /* history */
         .history {
-            margin-top: 32px;
+            margin-top: 36px;
             border-top: 2px dotted #b8860b;
-            padding-top: 20px;
+            padding-top: 22px;
         }
 
         .history h2 {
-            font-size: 1.4rem;
+            font-size: 1.5rem;
             color: #ffbb33;
-            text-shadow: 0 0 12px #ff6b00;
+            text-shadow: 0 0 14px #ff6b00;
             letter-spacing: 2px;
-            margin-bottom: 12px;
+            margin-bottom: 14px;
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 10px;
         }
 
         .history h2::after {
             content: "🕸️";
-            font-size: 1.4rem;
-            filter: drop-shadow(0 0 6px silver);
+            font-size: 1.5rem;
+            filter: drop-shadow(0 0 8px silver);
         }
 
         #historyList {
             display: flex;
             flex-direction: column;
-            gap: 8px;
-            max-height: 180px;
+            gap: 10px;
+            max-height: 190px;
             overflow-y: auto;
-            padding-right: 6px;
+            padding-right: 8px;
         }
 
         #historyList .history-item {
             background: rgba(255, 255, 255, 0.03);
             border-radius: 30px;
-            padding: 10px 16px;
+            padding: 12px 18px;
             border: 1px solid #2a2a3a;
             color: #ccc;
             font-size: 0.9rem;
@@ -548,7 +799,7 @@
             color: #ffd966;
             text-decoration: none;
             font-weight: 500;
-            max-width: 180px;
+            max-width: 200px;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: nowrap;
@@ -561,8 +812,8 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(6px);
+            background: rgba(0, 0, 0, 0.85);
+            backdrop-filter: blur(8px);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -572,12 +823,12 @@
         .modal-box {
             background: #181824;
             border: 3px solid #ffaa33;
-            border-radius: 50px 20px 50px 20px;
-            padding: 32px;
-            max-width: 400px;
+            border-radius: 52px 22px 52px 22px;
+            padding: 36px;
+            max-width: 420px;
             width: 90%;
             text-align: center;
-            box-shadow: 0 0 80px #ff6b00;
+            box-shadow: 0 0 90px #ff6b00;
             color: #f0e6d2;
             position: relative;
         }
@@ -585,74 +836,88 @@
         .modal-box::before {
             content: "🕷️";
             position: absolute;
-            top: -30px;
-            left: 20px;
-            font-size: 48px;
+            top: -34px;
+            left: 24px;
+            font-size: 56px;
             transform: rotate(-15deg);
-            filter: drop-shadow(0 0 12px black);
+            filter: drop-shadow(0 0 14px black);
         }
 
         .modal-box h2 {
             color: #ffbb33;
-            margin-bottom: 20px;
-            font-size: 2rem;
+            margin-bottom: 22px;
+            font-size: 2.2rem;
             text-transform: uppercase;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
+            text-shadow: 0 0 20px #ff6b00;
         }
 
         .modal-box p {
-            margin: 12px 0;
-            font-size: 1.1rem;
+            margin: 14px 0;
+            font-size: 1.15rem;
             color: #ddd;
         }
 
         .modal-box button {
-            margin-top: 24px;
-            padding: 14px 36px;
+            margin-top: 26px;
+            padding: 15px 40px;
             border-radius: 60px;
             background: #ffaa33;
             border: none;
             color: #0a0c10;
             font-weight: 800;
-            font-size: 1rem;
+            font-size: 1.05rem;
             text-transform: uppercase;
             cursor: pointer;
-            box-shadow: 0 6px 0 #8b3a00;
+            box-shadow: 0 7px 0 #8b3a00;
             transition: 0.1s;
             font-family: inherit;
+            letter-spacing: 2px;
         }
 
         .modal-box button:hover {
             background: #ffbb33;
             transform: translateY(2px);
-            box-shadow: 0 4px 0 #8b3a00;
+            box-shadow: 0 5px 0 #8b3a00;
         }
 
         /* scrollbar */
-        ::-webkit-scrollbar { width: 8px; }
-        ::-webkit-scrollbar-track { background: #0a0c10; }
+        ::-webkit-scrollbar { width: 9px; }
+        ::-webkit-scrollbar-track { background: #0a0c10; border-radius: 10px; }
         ::-webkit-scrollbar-thumb { background: #ffaa33; border-radius: 10px; }
         ::-webkit-scrollbar-thumb:hover { background: #ff6b00; }
 
-        /* --- responsive --- */
-        @media (max-width: 600px) {
-            .container { padding: 22px 16px; }
-            .brand h1 { font-size: 2rem; }
-            .nav-btn { padding: 8px 12px; font-size: 0.8rem; }
+        /* responsive */
+        @media (max-width: 650px) {
+            .container { padding: 24px 18px; }
+            .brand h1 { font-size: 2.2rem; letter-spacing: 3px; }
+            .nav-btn { padding: 9px 14px; font-size: 0.8rem; }
             .code-item { flex-direction: column; align-items: stretch; }
             .result-row { flex-direction: column; }
+            .tree, .pumpkin { transform: scale(0.7); }
         }
     </style>
 </head>
 <body>
 
-<!-- hanging spiders and christmas lights (dynamic, gif-like) -->
+<!-- ============================================================
+     FESTIVE OVERLAY — spiders with retracting threads + lights
+============================================================ -->
 <div class="festive-overlay" id="festiveOverlay">
-    <!-- spiders and threads will be injected via JS, plus static lights -->
     <div class="lights-string" id="lightsString"></div>
+    <!-- spider threads and spiders are added dynamically via JS -->
 </div>
 
-<!-- MAIN UI — MORTYX -->
+<!-- ============================================================
+     DECORATION LAYER — pumpkins & christmas trees
+============================================================ -->
+<div class="decoration-layer" id="decorationLayer">
+    <!-- pumpkins and trees injected by JS -->
+</div>
+
+<!-- ============================================================
+     MAIN UI — MORTYX
+============================================================ -->
 <div class="container">
     <header class="header">
         <div class="brand">
@@ -661,7 +926,7 @@
         </div>
         <nav class="nav">
             <button id="tutorialBtn" class="nav-btn"><i class="fas fa-book-open"></i> Tutorial</button>
-            <!-- Discord link updated to discord.gg/bestmethods -->
+            <!-- Discord link: discord.gg/bestmethods -->
             <a href="https://discord.gg/bestmethods" target="_blank" class="nav-btn"><i class="fab fa-discord"></i> Discord</a>
         </nav>
     </header>
@@ -735,55 +1000,56 @@
 
 <script>
     (function() {
-        // -------- 1. FESTIVE DECOR: SPIDERS & LIGHTS (animated, gif-like) --------
+        // ============================================================
+        // 1. FESTIVE DECOR — SPIDERS (COME OUT & GO BACK), LIGHTS
+        // ============================================================
         const overlay = document.getElementById('festiveOverlay');
         const lightsString = document.getElementById('lightsString');
 
-        // ---- generate christmas lights string (they hang and glow) ----
-        const bulbColors = ['red', 'green', 'blue', 'gold', 'purple'];
-        const bulbCount = 18;
+        // ---- Christmas lights string ----
+        const bulbColors = ['red', 'green', 'blue', 'gold', 'purple', 'orange'];
+        const bulbCount = 22;
         for (let i = 0; i < bulbCount; i++) {
             const bulb = document.createElement('div');
             bulb.className = `bulb ${bulbColors[i % bulbColors.length]}`;
-            // random positions across width, hanging from top
-            const left = (i / bulbCount) * 100 + (Math.random() * 6 - 3);
+            const left = (i / bulbCount) * 100 + (Math.random() * 5 - 2.5);
             bulb.style.left = Math.min(98, Math.max(2, left)) + '%';
-            // slight random vertical drop
-            bulb.style.top = (Math.random() * 16 + 4) + 'px';
-            // rotation for organic look
-            bulb.style.transform = `rotate(${Math.random() * 8 - 4}deg)`;
-            // random animation delay
+            bulb.style.top = (Math.random() * 20 + 3) + 'px';
+            bulb.style.transform = `rotate(${Math.random() * 10 - 5}deg)`;
             bulb.style.animationDelay = (Math.random() * 2) + 's';
             lightsString.appendChild(bulb);
         }
 
-        // ---- generate spiders on threads (they bob up/down like GIF) ----
-        const spiderPositions = [
-            { left: '8%', threadHeight: 160, spiderTop: 160 },
-            { left: '22%', threadHeight: 230, spiderTop: 230 },
-            { left: '45%', threadHeight: 130, spiderTop: 130 },
-            { left: '68%', threadHeight: 200, spiderTop: 200 },
-            { left: '85%', threadHeight: 110, spiderTop: 110 },
-            { left: '94%', threadHeight: 260, spiderTop: 260 }
+        // ---- Spider data: positions, thread lengths, movement ----
+        const spiderData = [
+            { left: '6%', baseThread: 160, spiderBaseTop: 160 },
+            { left: '18%', baseThread: 250, spiderBaseTop: 250 },
+            { left: '38%', baseThread: 120, spiderBaseTop: 120 },
+            { left: '55%', baseThread: 200, spiderBaseTop: 200 },
+            { left: '73%', baseThread: 150, spiderBaseTop: 150 },
+            { left: '88%', baseThread: 280, spiderBaseTop: 280 },
+            { left: '96%', baseThread: 100, spiderBaseTop: 100 }
         ];
 
-        spiderPositions.forEach((pos, index) => {
-            // thread
+        // We'll keep references to update thread heights and spider tops dynamically
+        const spiderInstances = [];
+
+        spiderData.forEach((data, index) => {
+            // --- create thread ---
             const thread = document.createElement('div');
-            thread.className = 'thread';
-            thread.style.left = pos.left;
-            thread.style.height = pos.threadHeight + 'px';
-            thread.style.width = '2px';
+            thread.className = 'spider-thread';
+            thread.style.left = data.left;
+            thread.style.height = data.baseThread + 'px';
+            thread.dataset.baseHeight = data.baseThread;
             overlay.appendChild(thread);
 
-            // spider
+            // --- create spider ---
             const spider = document.createElement('div');
             spider.className = 'spider';
-            spider.style.left = `calc(${pos.left} - 14px)`; // center spider on thread
-            spider.style.top = pos.spiderTop + 'px';
-            spider.style.animationDelay = (index * 0.3) + 's';
+            // center spider horizontally on thread
+            spider.style.left = `calc(${data.left} - 18px)`;
+            spider.style.top = data.spiderBaseTop + 'px';
 
-            // build spider parts
             spider.innerHTML = `
                 <div class="body"></div>
                 <div class="eye left"></div>
@@ -795,31 +1061,152 @@
             `;
             overlay.appendChild(spider);
 
-            // --- make spider go back up (simulate retracting thread) ---
-            // we animate the spider top over time using JS for a "gif" back-and-up feel
-            let direction = 1; // 1 down, -1 up
-            let currentTop = pos.spiderTop;
-            const minTop = pos.spiderTop - 40;  // goes up by 40px
-            const maxTop = pos.spiderTop + 15;  // slight down
-            setInterval(() => {
-                if (direction === 1) {
-                    currentTop += 1.5;
-                    if (currentTop >= maxTop) direction = -1;
-                } else {
-                    currentTop -= 1.2;
-                    if (currentTop <= minTop) direction = 1;
-                }
-                spider.style.top = currentTop + 'px';
-                // also adjust thread height to match spider position (retracting thread)
-                // but we keep thread static length for simplicity; optional: update thread
-                // for realism, we could make thread shorter? but overlay effect is fine.
-            }, 80 + index * 20); // different speeds
+            // Store references for animation
+            spiderInstances.push({
+                thread,
+                spider,
+                baseHeight: data.baseThread,
+                baseTop: data.spiderBaseTop,
+                // movement state
+                direction: 1,           // 1 = coming down, -1 = going up
+                currentTop: data.spiderBaseTop,
+                currentHeight: data.baseThread,
+                speed: 1.8 + Math.random() * 1.5,   // different speeds per spider
+                range: 45 + Math.random() * 30,      // how far it travels up (retracts)
+                delay: index * 120                   // stagger updates
+            });
         });
 
-        // Add extra little web decoration to threads
-        // (already have 🕸️ in spider::after)
+        // --- Spider GIF-like loop: come out, then go back in (retract thread) ---
+        function animateSpiders() {
+            spiderInstances.forEach((inst, idx) => {
+                // Use a small internal timer offset for organic feel
+                if (Math.random() > 0.97) return; // slight random skip for human touch
 
-        // -------- 2. MORTYX HYPERLINK LOGIC (UI + history) --------
+                const sp = inst;
+                const maxTop = sp.baseTop + 12;          // slight extension down
+                const minTop = sp.baseTop - sp.range;    // retract upward
+
+                // Update position based on direction
+                if (sp.direction === 1) {
+                    sp.currentTop += sp.speed * 0.8;
+                    if (sp.currentTop >= maxTop) {
+                        sp.direction = -1;
+                    }
+                } else {
+                    sp.currentTop -= sp.speed * 1.0;
+                    if (sp.currentTop <= minTop) {
+                        sp.direction = 1;
+                    }
+                }
+
+                // Clamp
+                sp.currentTop = Math.min(maxTop, Math.max(minTop, sp.currentTop));
+
+                // Move spider
+                sp.spider.style.top = sp.currentTop + 'px';
+
+                // Update thread height to match spider position (retracting effect)
+                // thread height should be roughly currentTop + a little
+                const newHeight = Math.max(60, sp.currentTop + 12);
+                sp.thread.style.height = newHeight + 'px';
+
+                // Add a little sway to the thread
+                const sway = Math.sin(Date.now() * 0.003 + idx) * 3;
+                sp.thread.style.transform = `rotate(${sway * 0.1}deg)`;
+            });
+            requestAnimationFrame(animateSpiders);
+        }
+
+        // Start spider animation loop
+        requestAnimationFrame(animateSpiders);
+
+        // ============================================================
+        // 2. DECORATIONS — PUMPKINS & CUSTOM CHRISTMAS TREES
+        // ============================================================
+        const decorLayer = document.getElementById('decorationLayer');
+
+        // ---- helper: create a pumpkin ----
+        function createPumpkin(left, bottom, scale = 1) {
+            const pumpkin = document.createElement('div');
+            pumpkin.className = 'pumpkin';
+            pumpkin.style.left = left;
+            pumpkin.style.bottom = bottom;
+            pumpkin.style.transform = `scale(${scale})`;
+            pumpkin.innerHTML = `
+                <div class="body">
+                    <div class="stem"></div>
+                    <div class="face">
+                        <div class="eye left"></div>
+                        <div class="eye right"></div>
+                        <div class="mouth"></div>
+                    </div>
+                </div>
+            `;
+            decorLayer.appendChild(pumpkin);
+        }
+
+        // ---- helper: create a tree with custom decorations ----
+        function createTree(left, bottom, scale = 1, variant = 0) {
+            const tree = document.createElement('div');
+            tree.className = 'tree';
+            tree.style.left = left;
+            tree.style.bottom = bottom;
+            tree.style.transform = `scale(${scale})`;
+
+            // Variant changes star and ornaments
+            const starEmoji = variant % 2 === 0 ? '⭐' : '🌟';
+            const ornamentColors = ['#ff4d4d', '#ffaa33', '#2ecc71', '#42a5f5', '#ab47bc', '#ffeb3b'];
+
+            let ornamentsHtml = '';
+            // Different ornament placement per variant
+            const positions = variant === 0 ? [
+                { l: '20%', t: '20%' }, { l: '70%', t: '25%' }, { l: '45%', t: '40%' },
+                { l: '15%', t: '50%' }, { l: '80%', t: '55%' }, { l: '35%', t: '70%' },
+                { l: '65%', t: '75%' }
+            ] : variant === 1 ? [
+                { l: '30%', t: '15%' }, { l: '60%', t: '30%' }, { l: '20%', t: '45%' },
+                { l: '75%', t: '50%' }, { l: '45%', t: '65%' }, { l: '70%', t: '80%' }
+            ] : [
+                { l: '25%', t: '25%' }, { l: '55%', t: '20%' }, { l: '80%', t: '40%' },
+                { l: '15%', t: '55%' }, { l: '50%', t: '60%' }, { l: '75%', t: '75%' },
+                { l: '35%', t: '85%' }
+            ];
+
+            positions.forEach((pos, i) => {
+                const color = ornamentColors[(i + variant) % ornamentColors.length];
+                ornamentsHtml += `<div class="ornament" style="left:${pos.l}; top:${pos.t}; background:${color}; color:${color};"></div>`;
+            });
+
+            tree.innerHTML = `
+                <div class="layer layer-1"></div>
+                <div class="layer layer-2"></div>
+                <div class="layer layer-3"></div>
+                <div class="layer layer-4"></div>
+                <div class="top-star">${starEmoji}</div>
+                ${ornamentsHtml}
+            `;
+            decorLayer.appendChild(tree);
+        }
+
+        // ---- place pumpkins around edges (halloween) ----
+        createPumpkin('2%', '2%', 0.9);
+        createPumpkin('12%', '8%', 0.7);
+        createPumpkin('88%', '3%', 1.1);
+        createPumpkin('94%', '12%', 0.8);
+        createPumpkin('5%', '78%', 1.0);
+        createPumpkin('90%', '82%', 0.9);
+
+        // ---- place custom christmas trees (different variants) ----
+        createTree('3%', '6%', 0.85, 0);    // classic
+        createTree('92%', '8%', 0.9, 1);    // gold star variant
+        createTree('8%', '72%', 0.75, 2);   // more ornaments
+        createTree('86%', '75%', 1.0, 0);   // large classic
+        createTree('48%', '1%', 0.65, 1);   // small top center (peeking)
+
+        // ============================================================
+        // 3. MORTYX HYPERLINK LOGIC (UI + HISTORY)
+        // ============================================================
         const shortenBtn = document.getElementById('shortenBtn');
         const urlInput = document.getElementById('urlInput');
         const linkType = document.getElementById('linkType');
@@ -836,7 +1223,6 @@
         const shortText = document.getElementById('shortText');
         const historyList = document.getElementById('historyList');
 
-        // copy helper
         function copyToClipboard(text, btn) {
             navigator.clipboard.writeText(text).then(() => {
                 const original = btn.innerText;
@@ -845,17 +1231,14 @@
             }).catch(() => alert('Press Ctrl+C to copy'));
         }
 
-        // generate a short id (mock)
         function generateShortId() {
             return Math.random().toString(36).substring(2, 8) + Math.random().toString(36).substring(2, 6);
         }
 
-        // build a fake short link (domain: mortyx.gg)
         function buildShortLink(id) {
-            return `https://moryx.gg/${id}`; // moryx domain, consistent
+            return `https://moryx.gg/${id}`;
         }
 
-        // add history entry
         function addToHistory(originalUrl, shortUrl, type) {
             const item = document.createElement('div');
             item.className = 'history-item';
@@ -872,13 +1255,11 @@
             item.appendChild(shortA);
             item.appendChild(typeSpan);
             historyList.prepend(item);
-            // limit to 8 items
             while (historyList.children.length > 8) {
                 historyList.removeChild(historyList.lastChild);
             }
         }
 
-        // main shorten logic
         shortenBtn.addEventListener('click', () => {
             const rawUrl = urlInput.value.trim();
             if (!rawUrl) {
@@ -887,39 +1268,32 @@
                 return;
             }
 
-            // very basic validation
             if (!rawUrl.startsWith('http://') && !rawUrl.startsWith('https://')) {
                 errorEl.textContent = 'URL must start with http:// or https://';
                 errorEl.classList.remove('hidden');
                 return;
             }
 
-            // fake processing
             errorEl.classList.add('hidden');
             const type = linkType.value;
             const shortId = generateShortId();
             const shortUrl = buildShortLink(shortId);
 
-            // show result
             shortLink.href = shortUrl;
             shortLink.textContent = shortUrl;
             resultSection.classList.remove('hidden');
 
-            // markdown
             markdownText.textContent = `[MORTYX](${shortUrl})`;
             markdownSection.classList.remove('hidden');
 
-            // links section
             originalText.textContent = rawUrl;
-            robloxText.textContent = `roblox://experiences/start?url=${encodeURIComponent(rawUrl)}`; // fake deeplink
+            robloxText.textContent = `roblox://experiences/start?url=${encodeURIComponent(rawUrl)}`;
             shortText.textContent = shortUrl;
             linksSection.classList.remove('hidden');
 
-            // add to history
             addToHistory(rawUrl, shortUrl, type);
         });
 
-        // copy handlers
         copyShortBtn.addEventListener('click', () => {
             if (shortLink.textContent) copyToClipboard(shortLink.textContent, copyShortBtn);
         });
@@ -928,7 +1302,6 @@
             if (markdownText.textContent) copyToClipboard(markdownText.textContent, copyMarkdownBtn);
         });
 
-        // delegate copy buttons inside links section
         linksSection.addEventListener('click', (e) => {
             const btn = e.target.closest('button[data-copy]');
             if (!btn) return;
@@ -952,17 +1325,26 @@
             tutorialModal.classList.add('hidden');
         });
 
-        // close modal on background click
         tutorialModal.addEventListener('click', (e) => {
             if (e.target === tutorialModal) tutorialModal.classList.add('hidden');
         });
 
-        // prefill some history example
+        // Seed some history for that lived-in feel
         window.addEventListener('load', () => {
-            // some dummy history to make it feel alive
             addToHistory('https://www.roblox.com/users/123/profile', 'https://moryx.gg/abc123', 'Profile');
             addToHistory('https://www.roblox.com/games/920587237/Adopt-Me', 'https://moryx.gg/xyz789', 'Community');
         });
+
+        // Extra: make the lights string slightly interactive (nothing big, just human)
+        // occasional random flicker on a bulb
+        setInterval(() => {
+            const bulbs = document.querySelectorAll('.bulb');
+            if (bulbs.length) {
+                const randomBulb = bulbs[Math.floor(Math.random() * bulbs.length)];
+                randomBulb.style.opacity = '0.4';
+                setTimeout(() => randomBulb.style.opacity = '', 200);
+            }
+        }, 1800);
     })();
 </script>
 
