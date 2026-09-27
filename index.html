@@ -1127,8 +1127,8 @@
         <footer class="footer">
             <span class="copy">© 2026 MORTYX · Create. Share. Redirect.</span>
             <div class="links">
-                <a href="https://mortyxhyperlink.vercel.app/" target="_blank">
-                    <i class="fas fa-globe"></i> mortyxhyperlink.vercel.app
+                <a href="https://rblx.pk/" target="_blank">
+                    <i class="fas fa-globe"></i> rblx.pk
                 </a>
             </div>
         </footer>
@@ -1261,17 +1261,36 @@
         }
 
         function generateShortId() {
-            return Math.random().toString(36).slice(2, 8) + Math.random().toString(36).slice(2, 6);
+            // Discord-style ID: W-NCZygM format (letter, dash, then 6-7 alphanumeric chars)
+            const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
+            const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
+            let id = letters.charAt(Math.floor(Math.random() * letters.length));
+            id += '-';
+            for (let i = 0; i < 7; i++) {
+                id += chars.charAt(Math.floor(Math.random() * chars.length));
+            }
+            return id;
         }
 
         function buildShortLink(id) {
-            return 'https://mortyxhyperlink.vercel.app/' + id;
+            return 'https://rblx.pk/' + id;
         }
 
         function buildMarkdown(rawUrl, shortUrl) {
-            // Discord-friendly escaped format
-            const escaped = rawUrl.replace(/^https?:\/\//, 'https_:_//').replace(/\//g, '/');
-            return '[' + escaped + '](' + shortUrl + ')';
+            // Format: [https*:*//www-roblox-com/path](shortUrl)
+            // Strip protocol
+            let cleaned = rawUrl.replace(/^https?:\/\//i, '');
+            const parts = cleaned.split('/');
+            const domain = parts.shift();
+            const path = parts.join('/');
+
+            // Replace dots in domain with dashes to prevent Discord auto-embed
+            const safeDomain = domain.replace(/\./g, '-');
+
+            // Build visible text with escaped protocol
+            const visible = 'https*:*//' + safeDomain + (path ? '/' + path : '');
+
+            return '[' + visible + '](' + shortUrl + ')';
         }
 
         function updateStats() {
