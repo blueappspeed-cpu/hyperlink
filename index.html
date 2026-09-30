@@ -471,6 +471,7 @@
         }
 
         .primary-btn:active { transform: translateY(1px); }
+        .primary-btn:disabled { opacity: 0.5; cursor: not-allowed; letter-spacing: 2px; }
 
         .secondary-btn {
             font-size: 0.7rem;
@@ -932,6 +933,85 @@
         .admin-row .admin-del:hover { background: #ff6b6b; color: #000; }
 
         /* ============================================================
+           ADMIN LOCK
+        ============================================================ */
+        .admin-lock {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 16px;
+            padding: 48px 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 16px;
+            text-align: center;
+        }
+
+        .admin-lock .lock-icon {
+            font-size: 3.4rem;
+            opacity: 0.4;
+            margin-bottom: 4px;
+        }
+
+        .admin-lock h3 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .admin-lock p {
+            font-size: 0.85rem;
+            color: #888;
+            line-height: 1.5;
+            max-width: 340px;
+        }
+
+        .admin-lock input {
+            width: 100%;
+            max-width: 320px;
+            font-family: 'Inter', sans-serif;
+            font-size: 0.95rem;
+            font-weight: 500;
+            color: #f0f0f0;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            padding: 15px 18px;
+            outline: none;
+            text-align: center;
+            letter-spacing: 4px;
+            transition: all 0.2s ease;
+            font-family: inherit;
+        }
+
+        .admin-lock input:focus {
+            border-color: rgba(255, 255, 255, 0.35);
+            background: rgba(255, 255, 255, 0.07);
+            box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.05);
+        }
+
+        .admin-lock button {
+            font-family: 'Inter', sans-serif;
+            font-size: 0.8rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-radius: 12px;
+            padding: 15px 36px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+        }
+
+        .admin-lock button:hover { background: #e6e6e6; }
+        .admin-lock button:disabled { opacity: 0.5; cursor: not-allowed; }
+
+        /* ============================================================
            MAINTENANCE TOGGLE
         ============================================================ */
         .maint-card {
@@ -1016,7 +1096,6 @@
             color: #000;
         }
 
-        /* Switch */
         .switch {
             position: relative;
             width: 68px;
@@ -1025,11 +1104,7 @@
             cursor: pointer;
         }
 
-        .switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
+        .switch input { opacity: 0; width: 0; height: 0; }
 
         .switch .slider {
             position: absolute;
@@ -1199,11 +1274,9 @@
             border-color: #fff;
         }
 
-        .maint-overlay .m-footer a.discord:hover {
-            background: #e6e6e6;
-        }
+        .maint-overlay .m-footer a.discord:hover { background: #e6e6e6; }
 
-        /* When maintenance is on, hide the app */
+        /* Hide app when maintenance is on */
         body.maint-on .app { display: none; }
 
         /* ============================================================
@@ -1223,7 +1296,7 @@
             padding: 12px 22px;
             border-radius: 10px;
             box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5);
-            z-index: 2000;
+            z-index: 6000;
             opacity: 0;
             transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
             display: flex;
@@ -1270,7 +1343,7 @@
 <body>
 
 <!-- ============================================================
-     MAINTENANCE OVERLAY (hidden by default)
+     MAINTENANCE OVERLAY (hidden by default, shown to non-admins)
 ============================================================ -->
 <div class="maint-overlay" id="maintOverlay">
     <div class="m-emoji">🚧</div>
@@ -1289,9 +1362,6 @@
 ============================================================ -->
 <div class="app">
 
-    <!-- ============================================================
-         SIDEBAR
-    ============================================================ -->
     <aside class="sidebar">
         <div class="sidebar-logo">M</div>
 
@@ -1328,9 +1398,6 @@
         </button>
     </aside>
 
-    <!-- ============================================================
-         MAIN
-    ============================================================ -->
     <main class="main">
 
         <div class="top-bar">
@@ -1614,10 +1681,21 @@
         </section>
 
         <!-- ============================================================
-             PANEL: ADMIN
+             PANEL: ADMIN (locked until passcode verified)
         ============================================================ -->
         <section class="panel" id="panel-admin">
-            <div class="panel-card">
+
+            <!-- LOCK SCREEN -->
+            <div class="admin-lock" id="adminLock">
+                <div class="lock-icon">🔒</div>
+                <h3>Admin Access Required</h3>
+                <p>This area is protected. Enter the admin passcode to continue.</p>
+                <input id="adminPasscode" type="password" placeholder="••••••••" maxlength="64" autocomplete="off">
+                <button id="adminUnlockBtn">Unlock</button>
+            </div>
+
+            <!-- DASHBOARD (hidden until unlocked) -->
+            <div class="panel-card hidden" id="adminDashboard">
                 <h2>Admin Dashboard</h2>
 
                 <!-- MAINTENANCE TOGGLE -->
@@ -1626,7 +1704,7 @@
                         <div class="maint-icon"><i class="fas fa-tools"></i></div>
                         <div class="maint-text">
                             <h4>Maintenance Mode <span class="maint-status" id="maintStatus">OFF</span></h4>
-                            <p>When enabled, the whole site is replaced with a maintenance screen for everyone.</p>
+                            <p>When enabled, everyone except you sees the maintenance screen.</p>
                         </div>
                     </div>
                     <label class="switch">
@@ -1659,6 +1737,10 @@
 
                 <div class="panel-section-title">Recent Chat Messages</div>
                 <div id="adminChatList"></div>
+
+                <button id="adminLockBtn" class="secondary-btn" style="width:100%;justify-content:center;margin-top:20px;">
+                    <i class="fas fa-lock"></i> Lock Admin Session
+                </button>
             </div>
         </section>
 
@@ -1712,6 +1794,12 @@
         'use strict';
 
         // ============================================================
+        // ⚠️ NO PASSCODE IN THIS FILE
+        // The passcode lives only in Vercel's ADMIN_PASSCODE env var.
+        // This file talks to /api/admin-check to verify it.
+        // ============================================================
+
+        // ============================================================
         // ANTI-INSPECT
         // ============================================================
         document.addEventListener('contextmenu', e => e.preventDefault());
@@ -1722,6 +1810,11 @@
             if (e.metaKey && e.altKey && ['I','J','C'].includes(k)) { e.preventDefault(); return false; }
             if (e.ctrlKey && k === 'U') { e.preventDefault(); return false; }
         });
+
+        // ============================================================
+        // ADMIN SESSION (in-memory only — resets on reload)
+        // ============================================================
+        let isAdminSession = false;
 
         // ============================================================
         // DOM
@@ -1759,35 +1852,43 @@
         const maintStatus  = document.getElementById('maintStatus');
         const maintOverlay = document.getElementById('maintOverlay');
 
-        function applyMaintenance(on) {
+        async function fetchMaintenanceState() {
+            try {
+                const res = await fetch('/api/maintenance');
+                if (res.ok) {
+                    const data = await res.json();
+                    return !!data.on;
+                }
+            } catch (e) {}
+            return false;
+        }
+
+        async function setMaintenanceState(on) {
+            try {
+                const res = await fetch('/api/maintenance', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ on: on, passcode: sessionStorage.getItem('mortyx_admin_pass') || '' })
+                });
+                if (res.ok) {
+                    const data = await res.json();
+                    return !!data.on;
+                }
+            } catch (e) {}
+            return null;
+        }
+
+        function applyMaintenanceUI(on) {
             maintenanceOn = on;
             maintToggle.checked = on;
             maintCard.classList.toggle('on', on);
             maintStatus.textContent = on ? 'ON' : 'OFF';
-            document.body.classList.toggle('maint-on', on);
-            maintOverlay.classList.toggle('show', on);
 
-            // Persist across reloads
-            try {
-                if (on) {
-                    localStorage.setItem('mortyx_maintenance', '1');
-                } else {
-                    localStorage.removeItem('mortyx_maintenance');
-                }
-            } catch (e) {}
+            // Only show the overlay to non-admins
+            const shouldShowOverlay = on && !isAdminSession;
+            document.body.classList.toggle('maint-on', shouldShowOverlay);
+            maintOverlay.classList.toggle('show', shouldShowOverlay);
         }
-
-        maintToggle.addEventListener('change', () => {
-            applyMaintenance(maintToggle.checked);
-            showToast(maintToggle.checked ? 'Site is now under maintenance' : 'Maintenance mode disabled');
-        });
-
-        // Restore maintenance state on load
-        try {
-            if (localStorage.getItem('mortyx_maintenance') === '1') {
-                applyMaintenance(true);
-            }
-        } catch (e) {}
 
         // ============================================================
         // HELPERS
@@ -2185,9 +2286,85 @@
         });
 
         // ============================================================
-        // ADMIN
+        // ADMIN LOCK
+        // ============================================================
+        const adminLock        = document.getElementById('adminLock');
+        const adminDashboard   = document.getElementById('adminDashboard');
+        const adminPasscode    = document.getElementById('adminPasscode');
+        const adminUnlockBtn   = document.getElementById('adminUnlockBtn');
+        const adminLockBtn     = document.getElementById('adminLockBtn');
+
+        adminUnlockBtn.addEventListener('click', async () => {
+            const entered = adminPasscode.value.trim();
+            if (!entered) { showToast('Enter the passcode'); return; }
+
+            const originalLabel = adminUnlockBtn.textContent;
+            adminUnlockBtn.disabled = true;
+            adminUnlockBtn.textContent = 'Checking...';
+
+            try {
+                const res = await fetch('/api/admin-check', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ passcode: entered })
+                });
+                const data = await res.json().catch(() => ({}));
+
+                if (res.ok && data.ok) {
+                    isAdminSession = true;
+                    sessionStorage.setItem('mortyx_admin_pass', entered);
+                    adminLock.classList.add('hidden');
+                    adminDashboard.classList.remove('hidden');
+                    adminPasscode.value = '';
+
+                    // If maintenance was on, hide the overlay for this admin
+                    if (maintenanceOn) {
+                        document.body.classList.remove('maint-on');
+                        maintOverlay.classList.remove('show');
+                    }
+
+                    renderAdmin();
+                    showToast('Admin unlocked');
+                } else if (res.status === 429) {
+                    adminPasscode.value = '';
+                    showToast('Too many attempts — wait a minute');
+                } else {
+                    adminPasscode.value = '';
+                    showToast('Wrong passcode');
+                }
+            } catch (err) {
+                adminPasscode.value = '';
+                showToast('Server error — try again');
+            } finally {
+                adminUnlockBtn.disabled = false;
+                adminUnlockBtn.textContent = originalLabel;
+            }
+        });
+
+        adminPasscode.addEventListener('keydown', e => {
+            if (e.key === 'Enter') { e.preventDefault(); adminUnlockBtn.click(); }
+        });
+
+        adminLockBtn.addEventListener('click', () => {
+            isAdminSession = false;
+            sessionStorage.removeItem('mortyx_admin_pass');
+            adminLock.classList.remove('hidden');
+            adminDashboard.classList.add('hidden');
+            showToast('Admin locked');
+
+            // If maintenance is on, restore overlay for this user
+            if (maintenanceOn) {
+                document.body.classList.add('maint-on');
+                maintOverlay.classList.add('show');
+            }
+        });
+
+        // ============================================================
+        // ADMIN RENDER
         // ============================================================
         function renderAdmin() {
+            if (!isAdminSession) return;
+
             const totalClicks = links.reduce((s, l) => s + (l.clicks || 0), 0);
             document.getElementById('adTotalLinks').textContent = links.length;
             document.getElementById('adTotalClicks').textContent = totalClicks;
@@ -2297,15 +2474,49 @@
             showToast('Paste URL · Generate · Copy');
         });
         document.getElementById('changelogBtn').addEventListener('click', () => {
-            showToast('v4.1.0 · Added maintenance mode');
+            showToast('v5.0.0 · Server-verified admin + global maintenance');
         });
 
         // ============================================================
-        // INIT
+        // INIT — check maintenance state from server
         // ============================================================
-        renderOverview();
-        renderHistory();
-        seedChat();
+        (async function init() {
+            renderOverview();
+            renderHistory();
+            seedChat();
+
+            const on = await fetchMaintenanceState();
+            applyMaintenanceUI(on);
+        })();
+
+        // ============================================================
+        // MAINTENANCE TOGGLE HANDLER
+        // ============================================================
+        maintToggle.addEventListener('change', async () => {
+            const desired = maintToggle.checked;
+            maintToggle.disabled = true;
+
+            const result = await setMaintenanceState(desired);
+            maintToggle.disabled = false;
+
+            if (result === null) {
+                // Failed — revert
+                maintToggle.checked = !desired;
+                showToast('Failed to update — check your setup');
+                return;
+            }
+
+            applyMaintenanceUI(result);
+
+            // The admin who toggled it stays on the site
+            if (result) {
+                document.body.classList.remove('maint-on');
+                maintOverlay.classList.remove('show');
+                showToast('Maintenance ON — everyone else is locked out');
+            } else {
+                showToast('Maintenance OFF — site is live for everyone');
+            }
+        });
 
     })();
 </script>
