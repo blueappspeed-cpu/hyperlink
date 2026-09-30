@@ -7,10 +7,6 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
-        /* ============================================================
-           MORTYX HYPERLINK — v4.0.0
-           Dashboard · Chat · Admin · Live stats
-        ============================================================ */
         * { margin: 0; padding: 0; box-sizing: border-box; }
         html, body { width: 100%; overflow-x: hidden; }
 
@@ -31,9 +27,6 @@
 
         input, select, textarea, pre, code { -webkit-user-select: text; user-select: text; }
 
-        /* ============================================================
-           APP LAYOUT
-        ============================================================ */
         .app {
             display: grid;
             grid-template-columns: 68px 1fr;
@@ -183,7 +176,18 @@
         .top-btn.primary:hover { background: #e6e6e6; color: #000; }
 
         /* ============================================================
-           SUMMARY ROW
+           PANELS
+        ============================================================ */
+        .panel { display: none; }
+        .panel.active { display: block; animation: reveal 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
+
+        @keyframes reveal {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        /* ============================================================
+           SUMMARY ROW (overview only)
         ============================================================ */
         .summary-row {
             display: grid;
@@ -249,12 +253,9 @@
             background: rgba(255, 255, 255, 0.08);
             border-radius: 2px;
             min-height: 2px;
-            transition: all 0.2s;
         }
 
         .mini-graph span.active { background: rgba(255, 255, 255, 0.5); }
-        .summary-card:hover .mini-graph span { background: rgba(255, 255, 255, 0.15); }
-        .summary-card:hover .mini-graph span.active { background: #fff; }
 
         .author-row {
             display: flex;
@@ -291,12 +292,7 @@
         .summary-days span.active { color: #ccc; }
 
         /* ============================================================
-           CONTENT ROW
-        ============================================================ */
-        .content-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
-
-        /* ============================================================
-           CHART CARD
+           CHART
         ============================================================ */
         .chart-card {
             background: rgba(255, 255, 255, 0.02);
@@ -369,25 +365,13 @@
         .chart-x-labels span.active { color: #ccc; }
 
         /* ============================================================
-           PANELS
+           PANEL CARD WRAPPER
         ============================================================ */
         .panel-card {
-            margin-top: 20px;
             background: rgba(255, 255, 255, 0.02);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 16px;
             padding: 22px;
-            display: none;
-        }
-
-        .panel-card.active {
-            display: block;
-            animation: reveal 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        @keyframes reveal {
-            from { opacity: 0; transform: translateY(6px); }
-            to { opacity: 1; transform: translateY(0); }
         }
 
         .panel-card h2 {
@@ -400,6 +384,18 @@
             margin-bottom: 18px;
         }
 
+        .panel-section-title {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #777;
+            margin: 20px 0 12px;
+        }
+
+        /* ============================================================
+           FIELDS
+        ============================================================ */
         .field { margin-bottom: 16px; }
 
         .field label {
@@ -477,8 +473,28 @@
 
         .primary-btn:active { transform: translateY(1px); }
 
+        .secondary-btn {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #ccc;
+            background: rgba(255, 255, 255, 0.06);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            padding: 12px 18px;
+            cursor: pointer;
+            transition: all 0.15s ease;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .secondary-btn:hover { background: rgba(255, 255, 255, 0.12); color: #fff; }
+
         /* ============================================================
-           RESULT BLOCKS — hidden until link generated
+           RESULT BLOCKS
         ============================================================ */
         .result-block {
             margin-top: 18px;
@@ -590,6 +606,9 @@
             border-radius: 10px;
         }
 
+        /* ============================================================
+           HISTORY
+        ============================================================ */
         .history { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
         .history h3 {
@@ -733,11 +752,7 @@
         .chat-messages::-webkit-scrollbar { width: 6px; }
         .chat-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 3px; }
 
-        .chat-msg {
-            display: flex;
-            gap: 10px;
-            animation: msgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-        }
+        .chat-msg { display: flex; gap: 10px; animation: msgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1); }
 
         @keyframes msgIn {
             from { opacity: 0; transform: translateY(6px); }
@@ -768,12 +783,7 @@
             margin-bottom: 4px;
         }
 
-        .chat-msg .name {
-            font-size: 0.78rem;
-            font-weight: 800;
-            color: #fff;
-        }
-
+        .chat-msg .name { font-size: 0.78rem; font-weight: 800; color: #fff; }
         .chat-msg .name.self { color: #ab47bc; }
 
         .chat-msg .time {
@@ -844,23 +854,23 @@
         .chat-input-row button:hover { background: #e6e6e6; }
 
         /* ============================================================
-           ADMIN DASHBOARD
+           STATS / ADMIN GRID
         ============================================================ */
-        .admin-grid {
+        .stats-grid {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
             gap: 12px;
             margin-bottom: 20px;
         }
 
-        .admin-stat {
+        .stat-card {
             background: rgba(255, 255, 255, 0.025);
             border: 1px solid rgba(255, 255, 255, 0.06);
             border-radius: 14px;
             padding: 18px;
         }
 
-        .admin-stat .stat-label {
+        .stat-card .stat-label {
             font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 2px;
@@ -869,7 +879,7 @@
             margin-bottom: 8px;
         }
 
-        .admin-stat .stat-value {
+        .stat-card .stat-value {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.8rem;
             font-weight: 900;
@@ -877,16 +887,9 @@
             letter-spacing: -1px;
         }
 
-        .admin-section-title {
-            font-size: 0.7rem;
-            font-weight: 800;
-            letter-spacing: 2px;
-            text-transform: uppercase;
-            color: #777;
-            margin-bottom: 12px;
-            padding-top: 8px;
-        }
-
+        /* ============================================================
+           ADMIN ROWS
+        ============================================================ */
         .admin-row {
             display: flex;
             align-items: center;
@@ -930,6 +933,39 @@
         .admin-row .admin-del:hover { background: #ff6b6b; color: #000; }
 
         /* ============================================================
+           QR
+        ============================================================ */
+        .qr-wrap {
+            display: none;
+            margin-top: 20px;
+            padding: 24px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            text-align: center;
+        }
+
+        .qr-wrap.show { display: block; }
+
+        .qr-canvas-box {
+            background: #fff;
+            padding: 16px;
+            border-radius: 12px;
+            display: inline-block;
+        }
+
+        .qr-url {
+            margin-top: 14px;
+            font-family: 'Inter', monospace;
+            font-size: 0.8rem;
+            color: #d0d0d0;
+            padding: 10px 14px;
+            background: rgba(0, 0, 0, 0.4);
+            border-radius: 9px;
+            word-break: break-all;
+        }
+
+        /* ============================================================
            TOAST
         ============================================================ */
         .toast {
@@ -957,9 +993,6 @@
 
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
 
-        /* ============================================================
-           HIDDEN HELPER
-        ============================================================ */
         .hidden { display: none !important; }
 
         /* ============================================================
@@ -967,7 +1000,7 @@
         ============================================================ */
         @media (max-width: 1000px) {
             .summary-row { grid-template-columns: 1fr 1fr; }
-            .admin-grid { grid-template-columns: 1fr; }
+            .stats-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
@@ -1059,12 +1092,10 @@
         </div>
 
         <!-- ============================================================
-             OVERVIEW PANEL
+             PANEL: OVERVIEW
         ============================================================ -->
-        <section id="panel-overview">
-
+        <section class="panel active" id="panel-overview">
             <div class="summary-row">
-                <!-- Hyperlink links created -->
                 <div class="summary-card large">
                     <div class="summary-label">Hyperlink Links Created</div>
                     <div class="summary-value" id="sumTotalLinks">0</div>
@@ -1079,7 +1110,6 @@
                     </div>
                 </div>
 
-                <!-- Summary total (clicks) -->
                 <div class="summary-card">
                     <div class="summary-label">Summary Total</div>
                     <div class="summary-value" id="sumAllClicks">0</div>
@@ -1099,7 +1129,6 @@
                     </div>
                 </div>
 
-                <!-- Keys total -->
                 <div class="summary-card">
                     <div class="summary-label">Keys Total</div>
                     <div class="summary-value" id="sumKeys">0</div>
@@ -1119,12 +1148,11 @@
                     </div>
                 </div>
 
-                <!-- Total users -->
                 <div class="summary-card">
                     <div class="summary-label">Total Users</div>
-                    <div class="summary-value" id="sumUsers">0</div>
+                    <div class="summary-value" id="sumUsers">1</div>
                     <div class="summary-sub">
-                        <span class="up">+<span id="sumUsersToday">0</span></span>
+                        <span class="up">+<span id="sumUsersToday">1</span></span>
                         <span>today</span>
                     </div>
                     <div class="mini-graph">
@@ -1140,251 +1168,265 @@
                 </div>
             </div>
 
-            <!-- CHART -->
-            <div class="content-row">
-                <div class="chart-card">
-                    <div class="chart-header">
-                        <h3>Activity Graph</h3>
-                        <div class="chart-legend">
-                            <span><span class="dot"></span> Clicks</span>
+            <div class="chart-card">
+                <div class="chart-header">
+                    <h3>Activity Graph</h3>
+                    <div class="chart-legend">
+                        <span><span class="dot"></span> Clicks</span>
+                    </div>
+                </div>
+                <div class="chart-area">
+                    <div class="chart-y-labels">
+                        <span>3,000</span>
+                        <span>2,500</span>
+                        <span>2,000</span>
+                        <span>1,500</span>
+                        <span>1,000</span>
+                        <span>500</span>
+                    </div>
+                    <svg viewBox="0 0 700 300" preserveAspectRatio="none" id="lineChart">
+                        <defs>
+                            <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
+                                <stop offset="0%" stop-color="#ab47bc" stop-opacity="0.5"/>
+                                <stop offset="100%" stop-color="#ab47bc" stop-opacity="0"/>
+                            </linearGradient>
+                            <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0">
+                                <stop offset="0%" stop-color="#ab47bc"/>
+                                <stop offset="100%" stop-color="#e91e63"/>
+                            </linearGradient>
+                        </defs>
+                        <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
+                            <line x1="0" y1="0" x2="700" y2="0"/>
+                            <line x1="0" y1="60" x2="700" y2="60"/>
+                            <line x1="0" y1="120" x2="700" y2="120"/>
+                            <line x1="0" y1="180" x2="700" y2="180"/>
+                            <line x1="0" y1="240" x2="700" y2="240"/>
+                            <line x1="0" y1="300" x2="700" y2="300"/>
+                        </g>
+                        <path id="chartArea" fill="url(#chartFill)" d=""/>
+                        <path id="chartLine" fill="none" stroke="url(#chartStroke)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d=""/>
+                    </svg>
+                </div>
+                <div class="chart-x-labels">
+                    <span>Mon</span><span>Tue</span><span>Wed</span>
+                    <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: GENERATOR
+        ============================================================ -->
+        <section class="panel" id="panel-generator">
+            <div class="panel-card">
+                <h2>Generate Link</h2>
+
+                <div class="field">
+                    <label for="linkType">Type</label>
+                    <select id="linkType">
+                        <option>Plain</option>
+                        <option selected>Profile</option>
+                        <option>Community</option>
+                        <option>Private Server</option>
+                    </select>
+                </div>
+
+                <div class="field">
+                    <label for="urlInput">Destination URL</label>
+                    <input id="urlInput" type="url" placeholder="https://www.roblox.com/users/123/profile" autocomplete="off" spellcheck="false">
+                </div>
+
+                <div class="field">
+                    <label for="customSlug">Custom Short Code (optional)</label>
+                    <input id="customSlug" type="text" placeholder="e.g. my-profile" autocomplete="off" spellcheck="false" maxlength="20">
+                </div>
+
+                <button id="shortenBtn" class="primary-btn">Generate</button>
+                <p id="error" class="error hidden"></p>
+
+                <section id="resultSection" class="hidden">
+                    <div class="result-block">
+                        <span class="label">Short link</span>
+                        <div class="result-row">
+                            <a id="shortLink" href="#" target="_blank" rel="noopener"></a>
+                            <button id="copyShortBtn">Copy</button>
                         </div>
                     </div>
-                    <div class="chart-area">
-                        <div class="chart-y-labels">
-                            <span>3,000</span>
-                            <span>2,500</span>
-                            <span>2,000</span>
-                            <span>1,500</span>
-                            <span>1,000</span>
-                            <span>500</span>
+                </section>
+
+                <section id="linksSection" class="hidden">
+                    <div class="code-item">
+                        <span class="tag">Original</span>
+                        <code id="originalText"></code>
+                        <button data-copy="originalText">Copy</button>
+                    </div>
+                    <div class="code-item">
+                        <span class="tag">Roblox</span>
+                        <code id="robloxText"></code>
+                        <button data-copy="robloxText">Copy</button>
+                    </div>
+                    <div class="code-item">
+                        <span class="tag">Short</span>
+                        <code id="shortText"></code>
+                        <button data-copy="shortText">Copy</button>
+                    </div>
+                </section>
+
+                <section class="history">
+                    <h3>Recent Links</h3>
+                    <div id="historyList"></div>
+                </section>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: GLOBAL CHAT
+        ============================================================ -->
+        <section class="panel" id="panel-chat">
+            <div class="panel-card">
+                <h2>Global Chat</h2>
+                <div class="chat-container">
+                    <div class="chat-header">
+                        <h3><i class="fas fa-globe"></i> Global Room</h3>
+                        <span class="status">LIVE</span>
+                    </div>
+                    <div class="chat-messages" id="chatMessages"></div>
+                    <div class="chat-input-row">
+                        <input id="chatInput" type="text" placeholder="Type a message..." maxlength="200" autocomplete="off">
+                        <button id="chatSendBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: ANALYTICS
+        ============================================================ -->
+        <section class="panel" id="panel-analytics">
+            <div class="panel-card">
+                <h2>Analytics</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Links</div>
+                        <div class="stat-value" id="anTotalLinks">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Clicks</div>
+                        <div class="stat-value" id="anTotalClicks">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Top Type</div>
+                        <div class="stat-value" id="anTopType" style="font-size:1.3rem;">—</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Avg Clicks / Link</div>
+                        <div class="stat-value" id="anAvg" style="font-size:1.3rem;">0</div>
+                    </div>
+                </div>
+
+                <div class="panel-section-title">Top Performing Links</div>
+                <div id="topLinks"></div>
+
+                <div class="panel-section-title">Breakdown by Type</div>
+                <div id="typeBreakdown"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: QR CODE
+        ============================================================ -->
+        <section class="panel" id="panel-qr">
+            <div class="panel-card">
+                <h2>QR Code Generator</h2>
+
+                <div class="field">
+                    <label for="qrInput">Enter URL to generate QR code</label>
+                    <input id="qrInput" type="url" placeholder="https://rblx.pk/xxxxxxx" autocomplete="off" spellcheck="false">
+                </div>
+                <button id="qrGenerateBtn" class="primary-btn">Generate QR Code</button>
+
+                <div class="qr-wrap" id="qrContainer">
+                    <div class="qr-canvas-box" id="qrCanvas"></div>
+                    <div class="qr-url" id="qrUrl"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: ADMIN
+        ============================================================ -->
+        <section class="panel" id="panel-admin">
+            <div class="panel-card">
+                <h2>Admin Dashboard</h2>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Links (All Users)</div>
+                        <div class="stat-value" id="adTotalLinks">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Clicks (All Users)</div>
+                        <div class="stat-value" id="adTotalClicks">0</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Users</div>
+                        <div class="stat-value" id="adTotalUsers">1</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Chat Messages</div>
+                        <div class="stat-value" id="adTotalChat">0</div>
+                    </div>
+                </div>
+
+                <div class="panel-section-title">All Links</div>
+                <div id="adminLinksList"></div>
+
+                <div class="panel-section-title">Recent Chat Messages</div>
+                <div id="adminChatList"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             PANEL: ACCOUNT
+        ============================================================ -->
+        <section class="panel" id="panel-account">
+            <div class="panel-card">
+                <h2>Account</h2>
+
+                <div id="accountLoginForm">
+                    <div class="field">
+                        <label for="accUsername">Username</label>
+                        <input id="accUsername" type="text" placeholder="e.g. mortyx" autocomplete="username">
+                    </div>
+                    <div class="field">
+                        <label for="accPassword">Password</label>
+                        <input id="accPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+                    </div>
+                    <button id="accLoginBtn" class="primary-btn">Sign In</button>
+                </div>
+
+                <div id="accountInfo" class="hidden" style="margin-top:20px;">
+                    <div class="stats-grid">
+                        <div class="stat-card">
+                            <div class="stat-label">Your Links</div>
+                            <div class="stat-value" id="accLinks">0</div>
                         </div>
-                        <svg viewBox="0 0 700 300" preserveAspectRatio="none" id="lineChart">
-                            <defs>
-                                <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1">
-                                    <stop offset="0%" stop-color="#ab47bc" stop-opacity="0.5"/>
-                                    <stop offset="100%" stop-color="#ab47bc" stop-opacity="0"/>
-                                </linearGradient>
-                                <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0">
-                                    <stop offset="0%" stop-color="#ab47bc"/>
-                                    <stop offset="100%" stop-color="#e91e63"/>
-                                </linearGradient>
-                            </defs>
-                            <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
-                                <line x1="0" y1="0" x2="700" y2="0"/>
-                                <line x1="0" y1="60" x2="700" y2="60"/>
-                                <line x1="0" y1="120" x2="700" y2="120"/>
-                                <line x1="0" y1="180" x2="700" y2="180"/>
-                                <line x1="0" y1="240" x2="700" y2="240"/>
-                                <line x1="0" y1="300" x2="700" y2="300"/>
-                            </g>
-                            <path id="chartArea" fill="url(#chartFill)" d=""/>
-                            <path id="chartLine" fill="none" stroke="url(#chartStroke)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d=""/>
-                        </svg>
+                        <div class="stat-card">
+                            <div class="stat-label">Your Clicks</div>
+                            <div class="stat-value" id="accClicks">0</div>
+                        </div>
                     </div>
-                    <div class="chart-x-labels">
-                        <span>Mon</span><span>Tue</span><span>Wed</span>
-                        <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
-                    </div>
+                    <div class="panel-section-title">Your Recent Links</div>
+                    <div id="accLinksList"></div>
+                    <button id="accLogoutBtn" class="secondary-btn" style="width:100%;justify-content:center;margin-top:14px;">Sign Out</button>
                 </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             GENERATOR PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-generator">
-            <h2>Generate Link</h2>
-
-            <div class="field">
-                <label for="linkType">Type</label>
-                <select id="linkType">
-                    <option>Plain</option>
-                    <option selected>Profile</option>
-                    <option>Community</option>
-                    <option>Private Server</option>
-                </select>
-            </div>
-
-            <div class="field">
-                <label for="urlInput">Destination URL</label>
-                <input id="urlInput" type="url" placeholder="https://www.roblox.com/users/123/profile" autocomplete="off" spellcheck="false">
-            </div>
-
-            <div class="field">
-                <label for="customSlug">Custom Short Code (optional)</label>
-                <input id="customSlug" type="text" placeholder="e.g. my-profile" autocomplete="off" spellcheck="false" maxlength="20">
-            </div>
-
-            <button id="shortenBtn" class="primary-btn">Generate</button>
-            <p id="error" class="error hidden"></p>
-
-            <!-- These start hidden until a link is generated -->
-            <section id="resultSection" class="hidden">
-                <div class="result-block">
-                    <span class="label">Short link</span>
-                    <div class="result-row">
-                        <a id="shortLink" href="#" target="_blank" rel="noopener"></a>
-                        <button id="copyShortBtn">Copy</button>
-                    </div>
-                </div>
-            </section>
-
-            <section id="linksSection" class="hidden">
-                <div class="code-item">
-                    <span class="tag">Original</span>
-                    <code id="originalText"></code>
-                    <button data-copy="originalText">Copy</button>
-                </div>
-                <div class="code-item">
-                    <span class="tag">Roblox</span>
-                    <code id="robloxText"></code>
-                    <button data-copy="robloxText">Copy</button>
-                </div>
-                <div class="code-item">
-                    <span class="tag">Short</span>
-                    <code id="shortText"></code>
-                    <button data-copy="shortText">Copy</button>
-                </div>
-            </section>
-
-            <section class="history">
-                <h3>Recent Links</h3>
-                <div id="historyList"></div>
-            </section>
-        </section>
-
-        <!-- ============================================================
-             GLOBAL CHAT PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-chat">
-            <h2>Global Chat</h2>
-            <div class="chat-container">
-                <div class="chat-header">
-                    <h3><i class="fas fa-globe"></i> Global Room</h3>
-                    <span class="status">LIVE</span>
-                </div>
-                <div class="chat-messages" id="chatMessages"></div>
-                <div class="chat-input-row">
-                    <input id="chatInput" type="text" placeholder="Type a message..." maxlength="200" autocomplete="off">
-                    <button id="chatSendBtn"><i class="fas fa-paper-plane"></i> Send</button>
-                </div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             ANALYTICS PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-analytics">
-            <h2>Analytics</h2>
-
-            <div class="admin-grid">
-                <div class="admin-stat">
-                    <div class="stat-label">Total Links</div>
-                    <div class="stat-value" id="anTotalLinks">0</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Total Clicks</div>
-                    <div class="stat-value" id="anTotalClicks">0</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Top Type</div>
-                    <div class="stat-value" id="anTopType" style="font-size:1.3rem;">—</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Avg Clicks / Link</div>
-                    <div class="stat-value" id="anAvg" style="font-size:1.3rem;">0</div>
-                </div>
-            </div>
-
-            <div class="admin-section-title">Top Performing Links</div>
-            <div id="topLinks"></div>
-        </section>
-
-        <!-- ============================================================
-             QR PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-qr">
-            <h2>QR Code</h2>
-
-            <div class="field">
-                <label for="qrInput">Enter URL to generate QR code</label>
-                <input id="qrInput" type="url" placeholder="https://rblx.pk/xxxxxxx" autocomplete="off" spellcheck="false">
-            </div>
-            <button id="qrGenerateBtn" class="primary-btn">Generate QR Code</button>
-
-            <div id="qrContainer" style="display:none; margin-top:20px; padding:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:14px; text-align:center;">
-                <div id="qrCanvas" style="background:#fff;padding:16px;border-radius:12px;display:inline-block;"></div>
-                <div id="qrUrl" style="margin-top:14px;font-family:'Inter',monospace;font-size:0.8rem;color:#d0d0d0;padding:10px 14px;background:rgba(0,0,0,0.4);border-radius:9px;word-break:break-all;"></div>
-            </div>
-        </section>
-
-        <!-- ============================================================
-             ADMIN DASHBOARD PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-admin">
-            <h2>Admin Dashboard</h2>
-
-            <div class="admin-grid">
-                <div class="admin-stat">
-                    <div class="stat-label">Total Links (All Users)</div>
-                    <div class="stat-value" id="adTotalLinks">0</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Total Clicks (All Users)</div>
-                    <div class="stat-value" id="adTotalClicks">0</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Total Users</div>
-                    <div class="stat-value" id="adTotalUsers">0</div>
-                </div>
-                <div class="admin-stat">
-                    <div class="stat-label">Chat Messages</div>
-                    <div class="stat-value" id="adTotalChat">0</div>
-                </div>
-            </div>
-
-            <div class="admin-section-title">All Links</div>
-            <div id="adminLinksList"></div>
-
-            <div class="admin-section-title" style="margin-top:20px;">Recent Chat Messages</div>
-            <div id="adminChatList"></div>
-        </section>
-
-        <!-- ============================================================
-             ACCOUNT PANEL
-        ============================================================ -->
-        <section class="panel-card" id="panel-account">
-            <h2>Account</h2>
-
-            <div class="field">
-                <label for="accUsername">Username</label>
-                <input id="accUsername" type="text" placeholder="e.g. mortyx" autocomplete="username">
-            </div>
-            <div class="field">
-                <label for="accPassword">Password</label>
-                <input id="accPassword" type="password" placeholder="••••••••" autocomplete="current-password">
-            </div>
-            <button id="accLoginBtn" class="primary-btn">Sign In</button>
-
-            <div id="accountInfo" class="hidden" style="margin-top:20px;">
-                <div class="admin-grid">
-                    <div class="admin-stat">
-                        <div class="stat-label">Your Links</div>
-                        <div class="stat-value" id="accLinks">0</div>
-                    </div>
-                    <div class="admin-stat">
-                        <div class="stat-label">Your Clicks</div>
-                        <div class="stat-value" id="accClicks">0</div>
-                    </div>
-                </div>
-                <button id="accLogoutBtn" class="primary-btn" style="background:rgba(255,255,255,0.06);color:#ccc;border:1px solid rgba(255,255,255,0.1);box-shadow:none;margin-top:10px;">Sign Out</button>
             </div>
         </section>
 
     </main>
 </div>
 
-<!-- Toast -->
 <div class="toast" id="toast">
     <i class="fas fa-check"></i>
     <span id="toastText">Done</span>
@@ -1407,24 +1449,15 @@
         });
 
         // ============================================================
-        // DOM REFS
+        // DOM
         // ============================================================
         const sidebarBtns = document.querySelectorAll('.sidebar-btn[data-panel]');
-        const panels = {
-            overview:  document.getElementById('panel-overview'),
-            generator: document.getElementById('panel-generator'),
-            chat:      document.getElementById('panel-chat'),
-            analytics: document.getElementById('panel-analytics'),
-            qr:        document.getElementById('panel-qr'),
-            admin:     document.getElementById('panel-admin'),
-            account:   document.getElementById('panel-account')
-        };
+        const panels = document.querySelectorAll('.panel');
         const pageTitle = document.getElementById('pageTitle');
         const pageSubtitle = document.getElementById('pageSubtitle');
 
         const toast = document.getElementById('toast');
         const toastText = document.getElementById('toastText');
-
         let toastTimer;
         function showToast(msg) {
             toastText.textContent = msg;
@@ -1457,6 +1490,11 @@
             return String(str).toLowerCase().trim()
                 .replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
         }
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
         function copyToClipboard(text, btn) {
             if (!text) return;
             const original = btn.textContent;
@@ -1478,51 +1516,55 @@
         }
 
         // ============================================================
-        // SIDEBAR
+        // TAB SWITCHING
         // ============================================================
+        const TITLES = {
+            overview:  ['HYPERLINK', 'Overview · MORTYX Dashboard'],
+            generator: ['GENERATE LINK', 'Create · Share · Redirect'],
+            chat:      ['GLOBAL CHAT', 'Talk with everyone live'],
+            analytics: ['ANALYTICS', 'Track your performance'],
+            qr:        ['QR CODE', 'Scan · Share · Redirect'],
+            admin:     ['ADMIN DASHBOARD', 'Manage every link & message'],
+            account:   ['ACCOUNT', 'Sign in to track your links']
+        };
+
         sidebarBtns.forEach(btn => {
             btn.addEventListener('click', () => {
                 const name = btn.getAttribute('data-panel');
                 sidebarBtns.forEach(b => b.classList.toggle('active', b === btn));
-                Object.values(panels).forEach(p => p.classList.remove('active'));
-                if (panels[name]) panels[name].classList.add('active');
+                panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
 
-                const titles = {
-                    overview:  ['HYPERLINK', 'Overview · MORTYX Dashboard'],
-                    generator: ['GENERATE LINK', 'Create · Share · Redirect'],
-                    chat:      ['GLOBAL CHAT', 'Talk with everyone live'],
-                    analytics: ['ANALYTICS', 'Track your performance'],
-                    qr:        ['QR CODE', 'Scan · Share · Redirect'],
-                    admin:     ['ADMIN DASHBOARD', 'Manage every link & message'],
-                    account:   ['ACCOUNT', 'Sign in to track your links']
-                };
-                const [t, s] = titles[name] || ['HYPERLINK', ''];
+                const [t, s] = TITLES[name] || ['HYPERLINK', ''];
                 pageTitle.textContent = t;
                 pageSubtitle.textContent = s;
 
+                // Refresh the content of the panel that just opened
+                if (name === 'overview')  renderOverview();
                 if (name === 'analytics') renderAnalytics();
-                if (name === 'admin') renderAdmin();
-                if (name === 'overview') renderSummary();
-                if (name === 'chat') scrollChatToBottom();
+                if (name === 'admin')     renderAdmin();
+                if (name === 'account')   renderAccount();
+                if (name === 'chat')      scrollChatToBottom();
             });
         });
 
         // ============================================================
-        // SUMMARY / STATS
+        // OVERVIEW
         // ============================================================
-        function renderSummary() {
+        function renderOverview() {
             const totalClicks = links.reduce((s, l) => s + (l.clicks || 0), 0);
-            const todayCount = links.filter(l => Date.now() - l.created < 24 * 60 * 60 * 1000).length;
-            const todayClicks = links.filter(l => Date.now() - l.created < 24 * 60 * 60 * 1000)
+            const todayLinks  = links.filter(l => Date.now() - l.created < 86400000).length;
+            const todayClicks = links.filter(l => Date.now() - l.created < 86400000)
                                      .reduce((s, l) => s + (l.clicks || 0), 0);
 
             document.getElementById('sumTotalLinks').textContent = links.length;
-            document.getElementById('sumTodayLinks').textContent = todayCount;
-            document.getElementById('sumAllClicks').textContent = totalClicks;
-            document.getElementById('sumAllToday').textContent = todayClicks;
-            document.getElementById('sumKeys').textContent = keysTotal;
-            document.getElementById('sumUsers').textContent = totalUsers;
+            document.getElementById('sumTodayLinks').textContent = todayLinks;
+            document.getElementById('sumAllClicks').textContent  = totalClicks;
+            document.getElementById('sumAllToday').textContent   = todayClicks;
+            document.getElementById('sumKeys').textContent       = keysTotal;
+            document.getElementById('sumUsers').textContent      = totalUsers;
             document.getElementById('sumUsersToday').textContent = totalUsers;
+
+            renderChart();
         }
 
         function renderChart() {
@@ -1565,12 +1607,13 @@
             links.slice().reverse().slice(0, 10).forEach(l => {
                 const item = document.createElement('div');
                 item.className = 'history-item';
+
                 const a = document.createElement('a');
                 a.href = l.shortUrl; a.target = '_blank'; a.rel = 'noopener';
                 a.textContent = l.shortUrl.replace(/^https?:\/\//, '');
                 a.addEventListener('click', () => {
                     l.clicks = (l.clicks || 0) + 1;
-                    renderSummary(); renderAnalytics(); renderAdmin();
+                    renderOverview(); renderAnalytics(); renderAdmin(); renderAccount();
                 });
                 item.appendChild(a);
 
@@ -1606,13 +1649,11 @@
             const rawUrl = urlInput.value.trim();
             if (!rawUrl) {
                 errorEl.textContent = 'Please enter a URL.';
-                errorEl.classList.remove('hidden'); urlInput.focus();
-                return;
+                errorEl.classList.remove('hidden'); urlInput.focus(); return;
             }
             if (!/^https?:\/\//i.test(rawUrl)) {
                 errorEl.textContent = 'URL must start with http:// or https://';
-                errorEl.classList.remove('hidden'); urlInput.focus();
-                return;
+                errorEl.classList.remove('hidden'); urlInput.focus(); return;
             }
             errorEl.classList.add('hidden');
 
@@ -1628,9 +1669,7 @@
                     errorEl.textContent = 'That custom short code is already taken.';
                     errorEl.classList.remove('hidden'); return;
                 }
-            } else {
-                slug = generateShortId();
-            }
+            } else { slug = generateShortId(); }
 
             const shortUrl = buildShortLink(slug);
             links.push({
@@ -1640,7 +1679,6 @@
             });
             keysTotal += 1;
 
-            // Populate and reveal the hidden sections
             shortLink.href = shortUrl;
             shortLink.textContent = shortUrl;
             resultSection.classList.remove('hidden');
@@ -1652,7 +1690,7 @@
 
             customSlug.value = '';
             renderHistory();
-            renderSummary();
+            renderOverview();
             showToast('Link generated');
         });
 
@@ -1704,12 +1742,6 @@
             chatMessagesEl.appendChild(el);
         }
 
-        function escapeHtml(s) {
-            return String(s).replace(/[&<>"']/g, c => ({
-                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
-            }[c]));
-        }
-
         function scrollChatToBottom() {
             chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
         }
@@ -1717,10 +1749,9 @@
         function sendChat() {
             const text = chatInput.value.trim();
             if (!text) return;
-            const user = currentUser || 'anonymous';
-            addChatMessage(user, text, true, false);
+            addChatMessage(currentUser || 'anonymous', text, true, false);
             chatInput.value = '';
-            simulateReplies(text);
+            simulateReply(text);
         }
 
         chatSendBtn.addEventListener('click', sendChat);
@@ -1735,7 +1766,7 @@
             'how do I make a custom slug?', 'anyone want to trade?', 'loool'
         ];
 
-        function simulateReplies(trigger) {
+        function simulateReply(trigger) {
             const delay = 1200 + Math.random() * 2200;
             setTimeout(() => {
                 const user = botUsers[Math.floor(Math.random() * botUsers.length)];
@@ -1745,13 +1776,14 @@
                 }
                 const text = replies[Math.floor(Math.random() * replies.length)];
                 addChatMessage(user, text, false, false);
+                renderAdmin();
             }, delay);
         }
 
         function seedChat() {
             addChatMessage('', 'Welcome to the MORTYX Global Chat — be kind, no spam.', false, true);
-            setTimeout(() => addChatMessage('ghostydev', 'just dropped a new link, check the recent tab', false, false), 800);
-            setTimeout(() => addChatMessage('mortyx_fan', 'rblx.pk looks so clean', false, false), 2400);
+            setTimeout(() => { addChatMessage('ghostydev', 'just dropped a new link, check the recent tab', false, false); renderAdmin(); }, 800);
+            setTimeout(() => { addChatMessage('mortyx_fan', 'rblx.pk looks so clean', false, false); renderAdmin(); }, 2400);
         }
 
         // ============================================================
@@ -1773,17 +1805,33 @@
             topLinksEl.innerHTML = '';
             if (!links.length) {
                 topLinksEl.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">No data yet</div>';
-                return;
+            } else {
+                [...links].sort((a, b) => (b.clicks || 0) - (a.clicks || 0)).slice(0, 5).forEach(l => {
+                    const row = document.createElement('div');
+                    row.className = 'admin-row';
+                    row.innerHTML = `
+                        <span class="admin-url">${l.shortUrl.replace(/^https?:\/\//, '')}</span>
+                        <span class="admin-clicks">${l.clicks || 0}</span>
+                    `;
+                    topLinksEl.appendChild(row);
+                });
             }
-            [...links].sort((a, b) => (b.clicks || 0) - (a.clicks || 0)).slice(0, 5).forEach(l => {
-                const row = document.createElement('div');
-                row.className = 'admin-row';
-                row.innerHTML = `
-                    <span class="admin-url">${l.shortUrl.replace(/^https?:\/\//, '')}</span>
-                    <span class="admin-clicks">${l.clicks || 0}</span>
-                `;
-                topLinksEl.appendChild(row);
-            });
+
+            const bd = document.getElementById('typeBreakdown');
+            bd.innerHTML = '';
+            if (!Object.keys(typeCounts).length) {
+                bd.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">No data yet</div>';
+            } else {
+                Object.entries(typeCounts).sort((a,b) => b[1] - a[1]).forEach(([t, c]) => {
+                    const row = document.createElement('div');
+                    row.className = 'admin-row';
+                    row.innerHTML = `
+                        <span class="admin-url">${t}</span>
+                        <span class="admin-clicks">${c} link${c !== 1 ? 's' : ''}</span>
+                    `;
+                    bd.appendChild(row);
+                });
+            }
         }
 
         // ============================================================
@@ -1815,11 +1863,11 @@
         document.getElementById('qrGenerateBtn').addEventListener('click', () => {
             const url = document.getElementById('qrInput').value.trim();
             if (!url) { showToast('Enter a URL first'); return; }
-            const canvas = document.getElementById('qrCanvas');
-            canvas.innerHTML = '';
-            canvas.appendChild(generateQR(url));
+            const box = document.getElementById('qrCanvas');
+            box.innerHTML = '';
+            box.appendChild(generateQR(url));
             document.getElementById('qrUrl').textContent = url;
-            document.getElementById('qrContainer').style.display = 'block';
+            document.getElementById('qrContainer').classList.add('show');
             showToast('QR code generated');
         });
 
@@ -1852,7 +1900,7 @@
                     btn.addEventListener('click', e => {
                         const shortUrl = e.target.getAttribute('data-id');
                         links = links.filter(l => l.shortUrl !== shortUrl);
-                        renderHistory(); renderSummary(); renderAnalytics(); renderAdmin();
+                        renderHistory(); renderOverview(); renderAnalytics(); renderAdmin(); renderAccount();
                         showToast('Link deleted');
                     });
                 });
@@ -1869,7 +1917,7 @@
                     row.className = 'admin-row';
                     const time = m.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
                     row.innerHTML = `
-                        <span class="admin-url"><strong style="color:#fff;">${m.user}</strong> · ${escapeHtml(m.text)}</span>
+                        <span class="admin-url"><strong style="color:#fff;">${escapeHtml(m.user)}</strong> · ${escapeHtml(m.text)}</span>
                         <span class="admin-clicks">${time}</span>
                     `;
                     chatList.appendChild(row);
@@ -1880,23 +1928,54 @@
         // ============================================================
         // ACCOUNT
         // ============================================================
+        const accountLoginForm = document.getElementById('accountLoginForm');
         const accountInfo = document.getElementById('accountInfo');
+
         document.getElementById('accLoginBtn').addEventListener('click', () => {
             const u = document.getElementById('accUsername').value.trim();
             const p = document.getElementById('accPassword').value.trim();
             if (!u || !p) { showToast('Enter username and password'); return; }
             currentUser = u.toLowerCase();
             totalUsers += 1;
+            accountLoginForm.classList.add('hidden');
             accountInfo.classList.remove('hidden');
-            renderSummary();
+            renderAccount();
+            renderOverview();
             showToast('Signed in as ' + currentUser);
         });
 
         document.getElementById('accLogoutBtn').addEventListener('click', () => {
             currentUser = null;
+            accountLoginForm.classList.remove('hidden');
             accountInfo.classList.add('hidden');
+            document.getElementById('accUsername').value = '';
+            document.getElementById('accPassword').value = '';
             showToast('Signed out');
         });
+
+        function renderAccount() {
+            if (!currentUser) return;
+            const mine = links.filter(l => l.owner === currentUser);
+            const clicks = mine.reduce((s, l) => s + (l.clicks || 0), 0);
+            document.getElementById('accLinks').textContent = mine.length;
+            document.getElementById('accClicks').textContent = clicks;
+
+            const listEl = document.getElementById('accLinksList');
+            listEl.innerHTML = '';
+            if (!mine.length) {
+                listEl.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">You haven\'t created any links yet</div>';
+                return;
+            }
+            mine.slice().reverse().forEach(l => {
+                const row = document.createElement('div');
+                row.className = 'admin-row';
+                row.innerHTML = `
+                    <span class="admin-url">${l.shortUrl.replace(/^https?:\/\//, '')}</span>
+                    <span class="admin-clicks">${l.clicks || 0}</span>
+                `;
+                listEl.appendChild(row);
+            });
+        }
 
         // ============================================================
         // TOP-BAR BUTTONS
@@ -1911,11 +1990,7 @@
         // ============================================================
         // INIT
         // ============================================================
-        // Output blocks stay hidden — nothing is populated until the user
-        // clicks Generate. The `resultSection` and `linksSection` elements
-        // already carry the `hidden` class in the HTML above.
-        renderSummary();
-        renderChart();
+        renderOverview();
         renderHistory();
         seedChat();
 
