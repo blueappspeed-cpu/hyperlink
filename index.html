@@ -8,19 +8,11 @@
     <link href="https://fonts.googleapis.com/css2?family=Archivo+Black&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         /* ============================================================
-           MORTYX HYPERLINK — v3.1.0
-           Dashboard layout · Sleek dark UI
+           MORTYX HYPERLINK — v4.0.0
+           Dashboard · Chat · Admin · Live stats
         ============================================================ */
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            width: 100%;
-            overflow-x: hidden;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { width: 100%; overflow-x: hidden; }
 
         body {
             min-height: 100vh;
@@ -33,23 +25,18 @@
             justify-content: center;
             padding: 24px;
             -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
             -webkit-user-select: none;
             user-select: none;
         }
 
-        input, select, textarea, pre, code {
-            -webkit-user-select: text;
-            user-select: text;
-        }
+        input, select, textarea, pre, code { -webkit-user-select: text; user-select: text; }
 
         /* ============================================================
-           APP LAYOUT — SIDEBAR + MAIN
+           APP LAYOUT
         ============================================================ */
         .app {
             display: grid;
             grid-template-columns: 68px 1fr;
-            gap: 0;
             width: 100%;
             max-width: 1400px;
             min-height: calc(100vh - 48px);
@@ -71,7 +58,6 @@
             flex-direction: column;
             align-items: center;
             gap: 8px;
-            position: relative;
         }
 
         .sidebar-logo {
@@ -112,15 +98,8 @@
             position: relative;
         }
 
-        .sidebar-btn:hover {
-            background: rgba(255, 255, 255, 0.05);
-            color: #ccc;
-        }
-
-        .sidebar-btn.active {
-            background: rgba(255, 255, 255, 0.08);
-            color: #fff;
-        }
+        .sidebar-btn:hover { background: rgba(255, 255, 255, 0.05); color: #ccc; }
+        .sidebar-btn.active { background: rgba(255, 255, 255, 0.08); color: #fff; }
 
         .sidebar-btn.active::before {
             content: "";
@@ -134,26 +113,10 @@
             border-radius: 0 3px 3px 0;
         }
 
-        .sidebar-btn .badge {
-            position: absolute;
-            top: 4px;
-            right: 4px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.5rem;
-            font-weight: 800;
-            color: #000;
-            background: #fff;
-            border-radius: 20px;
-            padding: 1px 5px;
-            line-height: 1.2;
-        }
-
-        .sidebar-spacer {
-            flex: 1;
-        }
+        .sidebar-spacer { flex: 1; }
 
         /* ============================================================
-           MAIN AREA
+           MAIN
         ============================================================ */
         .main {
             padding: 28px 32px;
@@ -163,10 +126,7 @@
 
         .main::-webkit-scrollbar { width: 8px; }
         .main::-webkit-scrollbar-track { background: transparent; }
-        .main::-webkit-scrollbar-thumb {
-            background: rgba(255, 255, 255, 0.08);
-            border-radius: 4px;
-        }
+        .main::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 4px; }
 
         /* ============================================================
            TOP BAR
@@ -180,38 +140,28 @@
             gap: 16px;
         }
 
-        .top-bar-left {
-            display: flex;
-            flex-direction: column;
-        }
-
         .top-bar-left h1 {
             font-family: 'Archivo Black', sans-serif;
             font-size: 1.4rem;
             font-weight: 900;
             color: #fff;
             letter-spacing: -0.5px;
+            text-transform: uppercase;
         }
 
         .top-bar-left .sub {
-            font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
             color: #666;
             letter-spacing: 2px;
             text-transform: uppercase;
             margin-top: 4px;
+            display: block;
         }
 
-        .top-bar-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            flex-wrap: wrap;
-        }
+        .top-bar-right { display: flex; align-items: center; gap: 10px; flex-wrap: wrap; }
 
         .top-btn {
-            font-family: 'Inter', sans-serif;
             font-size: 0.75rem;
             font-weight: 700;
             color: #ccc;
@@ -228,23 +178,9 @@
             white-space: nowrap;
         }
 
-        .top-btn:hover {
-            background: rgba(255, 255, 255, 0.09);
-            color: #fff;
-            border-color: rgba(255, 255, 255, 0.18);
-        }
-
-        .top-btn.primary {
-            background: #fff;
-            color: #000;
-            border-color: #fff;
-            font-weight: 800;
-        }
-
-        .top-btn.primary:hover {
-            background: #e6e6e6;
-            color: #000;
-        }
+        .top-btn:hover { background: rgba(255, 255, 255, 0.09); color: #fff; border-color: rgba(255, 255, 255, 0.18); }
+        .top-btn.primary { background: #fff; color: #000; border-color: #fff; font-weight: 800; }
+        .top-btn.primary:hover { background: #e6e6e6; color: #000; }
 
         /* ============================================================
            SUMMARY ROW
@@ -265,17 +201,10 @@
             min-width: 0;
         }
 
-        .summary-card:hover {
-            background: rgba(255, 255, 255, 0.04);
-            border-color: rgba(255, 255, 255, 0.1);
-        }
-
-        .summary-card.large {
-            padding: 20px 22px;
-        }
+        .summary-card:hover { background: rgba(255, 255, 255, 0.04); border-color: rgba(255, 255, 255, 0.1); }
+        .summary-card.large { padding: 20px 22px; }
 
         .summary-label {
-            font-family: 'Inter', sans-serif;
             font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 2px;
@@ -293,30 +222,20 @@
             letter-spacing: -1px;
         }
 
-        .summary-card.large .summary-value {
-            font-size: 2.4rem;
-        }
+        .summary-card.large .summary-value { font-size: 2.4rem; }
 
         .summary-sub {
             display: flex;
             align-items: center;
             gap: 6px;
             margin-top: 8px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 700;
             color: #888;
         }
 
-        .summary-sub .up {
-            color: #6ee76e;
-        }
+        .summary-sub .up { color: #6ee76e; }
 
-        .summary-sub .down {
-            color: #ff6b6b;
-        }
-
-        /* small graph placeholder in cards */
         .mini-graph {
             display: flex;
             align-items: flex-end;
@@ -333,25 +252,15 @@
             transition: all 0.2s;
         }
 
-        .mini-graph span.active {
-            background: rgba(255, 255, 255, 0.5);
-        }
+        .mini-graph span.active { background: rgba(255, 255, 255, 0.5); }
+        .summary-card:hover .mini-graph span { background: rgba(255, 255, 255, 0.15); }
+        .summary-card:hover .mini-graph span.active { background: #fff; }
 
-        .summary-card:hover .mini-graph span {
-            background: rgba(255, 255, 255, 0.15);
-        }
-
-        .summary-card:hover .mini-graph span.active {
-            background: #fff;
-        }
-
-        /* Author row inside first card */
         .author-row {
             display: flex;
             align-items: center;
             gap: 8px;
             margin-top: 8px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             font-weight: 600;
             color: #bbb;
@@ -366,16 +275,12 @@
             flex-shrink: 0;
         }
 
-        .author-row .up {
-            color: #6ee76e;
-            font-weight: 800;
-        }
+        .author-row .up { color: #6ee76e; font-weight: 800; }
 
         .summary-days {
             display: flex;
             justify-content: space-between;
             margin-top: 12px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.55rem;
             font-weight: 700;
             letter-spacing: 0.5px;
@@ -383,18 +288,12 @@
             text-transform: uppercase;
         }
 
-        .summary-days span.active {
-            color: #ccc;
-        }
+        .summary-days span.active { color: #ccc; }
 
         /* ============================================================
-           CONTENT ROW — chart + leaderboard
+           CONTENT ROW
         ============================================================ */
-        .content-row {
-            display: grid;
-            grid-template-columns: 1.5fr 1fr;
-            gap: 16px;
-        }
+        .content-row { display: grid; grid-template-columns: 1fr; gap: 16px; }
 
         /* ============================================================
            CHART CARD
@@ -406,7 +305,7 @@
             padding: 20px;
             display: flex;
             flex-direction: column;
-            min-height: 380px;
+            min-height: 420px;
             position: relative;
         }
 
@@ -418,7 +317,6 @@
         }
 
         .chart-header h3 {
-            font-family: 'Inter', sans-serif;
             font-size: 0.72rem;
             font-weight: 800;
             letter-spacing: 1.6px;
@@ -429,36 +327,16 @@
         .chart-header .chart-legend {
             display: flex;
             gap: 12px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             font-weight: 700;
             color: #666;
         }
 
-        .chart-header .chart-legend span {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-        }
+        .chart-header .chart-legend span { display: inline-flex; align-items: center; gap: 5px; }
+        .chart-header .chart-legend .dot { width: 8px; height: 8px; border-radius: 50%; background: #ab47bc; }
 
-        .chart-header .chart-legend .dot {
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: #ab47bc;
-        }
-
-        .chart-area {
-            flex: 1;
-            position: relative;
-            min-height: 300px;
-        }
-
-        .chart-area svg {
-            width: 100%;
-            height: 100%;
-            overflow: visible;
-        }
+        .chart-area { flex: 1; position: relative; min-height: 340px; }
+        .chart-area svg { width: 100%; height: 100%; overflow: visible; }
 
         .chart-y-labels {
             position: absolute;
@@ -468,7 +346,6 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
-            font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             font-weight: 700;
             color: #555;
@@ -482,7 +359,6 @@
             justify-content: space-between;
             margin-top: 10px;
             padding-left: 40px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.6rem;
             font-weight: 700;
             letter-spacing: 1px;
@@ -490,116 +366,10 @@
             text-transform: uppercase;
         }
 
-        .chart-x-labels span.active {
-            color: #ccc;
-        }
+        .chart-x-labels span.active { color: #ccc; }
 
         /* ============================================================
-           LEADERBOARD CARD
-        ============================================================ */
-        .leaderboard-card {
-            background: rgba(255, 255, 255, 0.02);
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            border-radius: 16px;
-            padding: 20px;
-            display: flex;
-            flex-direction: column;
-            min-height: 380px;
-        }
-
-        .leaderboard-card h3 {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.75rem;
-            font-weight: 800;
-            letter-spacing: 1.5px;
-            text-transform: uppercase;
-            color: #fff;
-            margin-bottom: 18px;
-            padding-bottom: 14px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-        }
-
-        .leaderboard-list {
-            display: flex;
-            flex-direction: column;
-            gap: 4px;
-            overflow-y: auto;
-            flex: 1;
-        }
-
-        .leaderboard-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 10px 8px;
-            border-radius: 10px;
-            transition: all 0.15s ease;
-            cursor: pointer;
-        }
-
-        .leaderboard-item:hover {
-            background: rgba(255, 255, 255, 0.04);
-        }
-
-        .lb-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 8px;
-            background: linear-gradient(135deg, #2a2a30, #15151a);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-family: 'Archivo Black', sans-serif;
-            font-size: 0.85rem;
-            color: #ccc;
-            flex-shrink: 0;
-            position: relative;
-        }
-
-        .lb-avatar.crown::before {
-            content: "👑";
-            position: absolute;
-            top: -10px;
-            left: 50%;
-            transform: translateX(-50%) rotate(-15deg);
-            font-size: 0.9rem;
-            filter: drop-shadow(0 2px 3px rgba(0,0,0,0.5));
-        }
-
-        .lb-info {
-            flex: 1;
-            min-width: 0;
-        }
-
-        .lb-name {
-            font-family: 'Inter', sans-serif;
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: #e8e8e8;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
-        }
-
-        .lb-count {
-            display: flex;
-            align-items: center;
-            gap: 5px;
-            font-family: 'Inter', sans-serif;
-            font-size: 0.8rem;
-            font-weight: 800;
-            color: #fff;
-            flex-shrink: 0;
-        }
-
-        .lb-count i {
-            font-size: 0.7rem;
-            opacity: 0.7;
-        }
-
-        /* ============================================================
-           GENERATOR PANEL (integrated below)
+           PANELS
         ============================================================ */
         .panel-card {
             margin-top: 20px;
@@ -630,13 +400,10 @@
             margin-bottom: 18px;
         }
 
-        .field {
-            margin-bottom: 16px;
-        }
+        .field { margin-bottom: 16px; }
 
         .field label {
             display: block;
-            font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             font-weight: 800;
             letter-spacing: 1.6px;
@@ -646,9 +413,9 @@
         }
 
         .field select,
-        .field input {
+        .field input,
+        .field textarea {
             width: 100%;
-            font-family: 'Inter', sans-serif;
             font-size: 0.9rem;
             font-weight: 500;
             color: #f0f0f0;
@@ -658,6 +425,7 @@
             padding: 13px 16px;
             outline: none;
             transition: all 0.2s ease;
+            font-family: inherit;
             -webkit-appearance: none;
             appearance: none;
         }
@@ -672,10 +440,12 @@
         }
 
         .field select option { background: #1a1a1a; color: #f0f0f0; }
-        .field input::placeholder { color: #444; }
+        .field input::placeholder,
+        .field textarea::placeholder { color: #444; }
 
         .field select:focus,
-        .field input:focus {
+        .field input:focus,
+        .field textarea:focus {
             border-color: rgba(255, 255, 255, 0.3);
             background: rgba(255, 255, 255, 0.06);
             box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
@@ -683,7 +453,6 @@
 
         .primary-btn {
             width: 100%;
-            font-family: 'Inter', sans-serif;
             font-size: 0.85rem;
             font-weight: 800;
             letter-spacing: 3px;
@@ -696,6 +465,7 @@
             cursor: pointer;
             transition: all 0.15s ease;
             box-shadow: 0 4px 14px rgba(255, 255, 255, 0.1);
+            font-family: inherit;
         }
 
         .primary-btn:hover {
@@ -705,11 +475,11 @@
             box-shadow: 0 6px 20px rgba(255, 255, 255, 0.15);
         }
 
-        .primary-btn:active {
-            transform: translateY(1px);
-        }
+        .primary-btn:active { transform: translateY(1px); }
 
-        /* Result blocks */
+        /* ============================================================
+           RESULT BLOCKS — hidden until link generated
+        ============================================================ */
         .result-block {
             margin-top: 18px;
             background: rgba(255, 255, 255, 0.025);
@@ -720,7 +490,6 @@
 
         .result-block .label {
             display: block;
-            font-family: 'Inter', sans-serif;
             font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 1.5px;
@@ -729,12 +498,7 @@
             padding: 8px 12px 4px;
         }
 
-        .result-row {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            padding: 4px;
-        }
+        .result-row { display: flex; align-items: center; gap: 6px; padding: 4px; }
 
         .result-row a {
             flex: 1;
@@ -750,7 +514,6 @@
         }
 
         .result-row button {
-            font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 800;
             letter-spacing: 0.8px;
@@ -762,6 +525,7 @@
             padding: 10px 16px;
             cursor: pointer;
             transition: all 0.15s ease;
+            font-family: inherit;
         }
 
         .result-row button:hover { background: #e0e0e0; }
@@ -778,7 +542,6 @@
         }
 
         .code-item .tag {
-            font-family: 'Inter', sans-serif;
             font-size: 0.6rem;
             font-weight: 800;
             letter-spacing: 1.2px;
@@ -800,7 +563,6 @@
         }
 
         .code-item button {
-            font-family: 'Inter', sans-serif;
             font-size: 0.65rem;
             font-weight: 800;
             letter-spacing: 0.8px;
@@ -812,15 +574,14 @@
             padding: 8px 12px;
             cursor: pointer;
             transition: all 0.15s ease;
+            font-family: inherit;
         }
 
         .code-item button:hover { background: #fff; color: #000; }
 
-        /* Error */
         .error {
             margin-top: 14px;
             padding: 12px 16px;
-            font-family: 'Inter', sans-serif;
             font-size: 0.82rem;
             font-weight: 700;
             color: #ff6b6b;
@@ -829,15 +590,9 @@
             border-radius: 10px;
         }
 
-        /* History */
-        .history {
-            margin-top: 24px;
-            padding-top: 20px;
-            border-top: 1px solid rgba(255, 255, 255, 0.05);
-        }
+        .history { margin-top: 24px; padding-top: 20px; border-top: 1px solid rgba(255, 255, 255, 0.05); }
 
         .history h3 {
-            font-family: 'Inter', sans-serif;
             font-size: 0.7rem;
             font-weight: 800;
             letter-spacing: 2px;
@@ -850,7 +605,7 @@
             display: flex;
             flex-direction: column;
             gap: 5px;
-            max-height: 220px;
+            max-height: 260px;
             overflow-y: auto;
         }
 
@@ -867,9 +622,7 @@
             cursor: pointer;
         }
 
-        .history-item:hover {
-            background: rgba(255, 255, 255, 0.05);
-        }
+        .history-item:hover { background: rgba(255, 255, 255, 0.05); }
 
         .history-item a {
             font-family: 'Inter', monospace;
@@ -882,7 +635,6 @@
         }
 
         .history-item .type {
-            font-family: 'Inter', sans-serif;
             font-size: 0.58rem;
             font-weight: 800;
             letter-spacing: 1px;
@@ -894,7 +646,6 @@
         }
 
         .history-item .clicks {
-            font-family: 'Inter', sans-serif;
             font-size: 0.62rem;
             font-weight: 800;
             color: #000;
@@ -904,7 +655,6 @@
         }
 
         .history .empty {
-            font-family: 'Inter', sans-serif;
             font-size: 0.8rem;
             color: #555;
             text-align: center;
@@ -912,6 +662,272 @@
             border: 1px dashed rgba(255, 255, 255, 0.08);
             border-radius: 10px;
         }
+
+        /* ============================================================
+           GLOBAL CHAT
+        ============================================================ */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 520px;
+            background: rgba(0, 0, 0, 0.35);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            overflow: hidden;
+        }
+
+        .chat-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 14px 18px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .chat-header h3 {
+            font-size: 0.75rem;
+            font-weight: 800;
+            letter-spacing: 1.6px;
+            text-transform: uppercase;
+            color: #fff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chat-header .status {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            letter-spacing: 1px;
+            color: #6ee76e;
+        }
+
+        .chat-header .status::before {
+            content: "";
+            width: 6px;
+            height: 6px;
+            border-radius: 50%;
+            background: #6ee76e;
+            box-shadow: 0 0 8px #6ee76e;
+            animation: pulse 1.6s infinite;
+        }
+
+        @keyframes pulse {
+            0%, 100% { opacity: 1; }
+            50% { opacity: 0.4; }
+        }
+
+        .chat-messages {
+            flex: 1;
+            overflow-y: auto;
+            padding: 16px 18px;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .chat-messages::-webkit-scrollbar { width: 6px; }
+        .chat-messages::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-radius: 3px; }
+
+        .chat-msg {
+            display: flex;
+            gap: 10px;
+            animation: msgIn 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        @keyframes msgIn {
+            from { opacity: 0; transform: translateY(6px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .chat-msg .avatar {
+            width: 32px;
+            height: 32px;
+            border-radius: 8px;
+            background: linear-gradient(135deg, #2a2a30, #15151a);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 0.8rem;
+            color: #ccc;
+            flex-shrink: 0;
+        }
+
+        .chat-msg .content { flex: 1; min-width: 0; }
+
+        .chat-msg .meta {
+            display: flex;
+            align-items: baseline;
+            gap: 8px;
+            margin-bottom: 4px;
+        }
+
+        .chat-msg .name {
+            font-size: 0.78rem;
+            font-weight: 800;
+            color: #fff;
+        }
+
+        .chat-msg .name.self { color: #ab47bc; }
+
+        .chat-msg .time {
+            font-size: 0.6rem;
+            font-weight: 600;
+            color: #555;
+            letter-spacing: 0.5px;
+        }
+
+        .chat-msg .text {
+            font-size: 0.85rem;
+            color: #ccc;
+            line-height: 1.5;
+            word-wrap: break-word;
+            word-break: break-word;
+        }
+
+        .chat-msg.system .text {
+            font-size: 0.75rem;
+            color: #888;
+            font-style: italic;
+            text-align: center;
+        }
+
+        .chat-input-row {
+            display: flex;
+            gap: 8px;
+            padding: 12px 14px;
+            border-top: 1px solid rgba(255, 255, 255, 0.06);
+            background: rgba(255, 255, 255, 0.02);
+        }
+
+        .chat-input-row input {
+            flex: 1;
+            font-size: 0.85rem;
+            font-weight: 500;
+            color: #f0f0f0;
+            background: rgba(255, 255, 255, 0.04);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 10px;
+            padding: 12px 16px;
+            outline: none;
+            transition: all 0.18s;
+            font-family: inherit;
+        }
+
+        .chat-input-row input::placeholder { color: #444; }
+        .chat-input-row input:focus { border-color: rgba(255, 255, 255, 0.25); background: rgba(255, 255, 255, 0.06); }
+
+        .chat-input-row button {
+            font-size: 0.72rem;
+            font-weight: 800;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            color: #000;
+            background: #fff;
+            border: none;
+            border-radius: 10px;
+            padding: 12px 22px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .chat-input-row button:hover { background: #e6e6e6; }
+
+        /* ============================================================
+           ADMIN DASHBOARD
+        ============================================================ */
+        .admin-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .admin-stat {
+            background: rgba(255, 255, 255, 0.025);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            border-radius: 14px;
+            padding: 18px;
+        }
+
+        .admin-stat .stat-label {
+            font-size: 0.6rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .admin-stat .stat-value {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 1.8rem;
+            font-weight: 900;
+            color: #fff;
+            letter-spacing: -1px;
+        }
+
+        .admin-section-title {
+            font-size: 0.7rem;
+            font-weight: 800;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+            color: #777;
+            margin-bottom: 12px;
+            padding-top: 8px;
+        }
+
+        .admin-row {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 12px 14px;
+            background: rgba(255, 255, 255, 0.02);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 10px;
+            margin-bottom: 8px;
+            font-family: 'Inter', monospace;
+            font-size: 0.78rem;
+        }
+
+        .admin-row .admin-url { flex: 1; color: #d0d0d0; word-break: break-all; }
+
+        .admin-row .admin-clicks {
+            font-size: 0.62rem;
+            font-weight: 800;
+            color: #000;
+            background: #fff;
+            padding: 3px 9px;
+            border-radius: 20px;
+        }
+
+        .admin-row .admin-del {
+            font-size: 0.6rem;
+            font-weight: 800;
+            color: #ff6b6b;
+            background: rgba(255, 80, 80, 0.1);
+            border: 1px solid rgba(255, 80, 80, 0.25);
+            border-radius: 6px;
+            padding: 5px 10px;
+            cursor: pointer;
+            transition: all 0.15s;
+            font-family: inherit;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .admin-row .admin-del:hover { background: #ff6b6b; color: #000; }
 
         /* ============================================================
            TOAST
@@ -923,7 +939,6 @@
             transform: translateX(-50%) translateY(100px);
             background: #fff;
             color: #000;
-            font-family: 'Inter', sans-serif;
             font-size: 0.78rem;
             font-weight: 800;
             letter-spacing: 1.5px;
@@ -940,29 +955,24 @@
             pointer-events: none;
         }
 
-        .toast.show {
-            transform: translateX(-50%) translateY(0);
-            opacity: 1;
-        }
+        .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
+
+        /* ============================================================
+           HIDDEN HELPER
+        ============================================================ */
+        .hidden { display: none !important; }
 
         /* ============================================================
            RESPONSIVE
         ============================================================ */
         @media (max-width: 1000px) {
-            .summary-row {
-                grid-template-columns: 1fr 1fr;
-            }
-            .content-row {
-                grid-template-columns: 1fr;
-            }
+            .summary-row { grid-template-columns: 1fr 1fr; }
+            .admin-grid { grid-template-columns: 1fr; }
         }
 
         @media (max-width: 640px) {
             body { padding: 12px; }
-            .app {
-                grid-template-columns: 56px 1fr;
-                border-radius: 16px;
-            }
+            .app { grid-template-columns: 56px 1fr; border-radius: 16px; }
             .sidebar { padding: 14px 0; }
             .sidebar-btn { width: 40px; height: 40px; }
             .main { padding: 18px 16px; }
@@ -1001,40 +1011,38 @@
 
         <div class="sidebar-divider"></div>
 
-        <button class="sidebar-btn" title="Analytics">
+        <button class="sidebar-btn" data-panel="chat" title="Global Chat">
+            <i class="fas fa-comments"></i>
+        </button>
+
+        <button class="sidebar-btn" data-panel="analytics" title="Analytics">
             <i class="fas fa-chart-line"></i>
         </button>
 
-        <button class="sidebar-btn" title="QR">
+        <button class="sidebar-btn" data-panel="qr" title="QR">
             <i class="fas fa-qrcode"></i>
-        </button>
-
-        <button class="sidebar-btn" title="API">
-            <i class="fas fa-code"></i>
         </button>
 
         <div class="sidebar-spacer"></div>
 
-        <button class="sidebar-btn" title="Account">
-            <i class="fas fa-user"></i>
-            <span class="badge">223</span>
+        <button class="sidebar-btn" data-panel="admin" title="Admin Dashboard">
+            <i class="fas fa-shield-alt"></i>
         </button>
 
-        <button class="sidebar-btn" title="Settings">
-            <i class="fas fa-cog"></i>
-            <span class="badge">5374</span>
+        <button class="sidebar-btn" data-panel="account" title="Account">
+            <i class="fas fa-user"></i>
         </button>
     </aside>
 
     <!-- ============================================================
-         MAIN CONTENT
+         MAIN
     ============================================================ -->
     <main class="main">
 
         <!-- TOP BAR -->
         <div class="top-bar">
             <div class="top-bar-left">
-                <h1 id="pageTitle">TRIPLEHOOK TRIPLEHOOKERS</h1>
+                <h1 id="pageTitle">HYPERLINK</h1>
                 <span class="sub" id="pageSubtitle">Overview · MORTYX Dashboard</span>
             </div>
             <div class="top-bar-right">
@@ -1055,12 +1063,11 @@
         ============================================================ -->
         <section id="panel-overview">
 
-            <!-- SUMMARY ROW -->
             <div class="summary-row">
-                <!-- Big total -->
+                <!-- Hyperlink links created -->
                 <div class="summary-card large">
-                    <div class="summary-label">Triplehook Triplehookers</div>
-                    <div class="summary-value" id="sumTotalLinks">1</div>
+                    <div class="summary-label">Hyperlink Links Created</div>
+                    <div class="summary-value" id="sumTotalLinks">0</div>
                     <div class="author-row">
                         <span class="dot"></span>
                         <span>writtenbystraykidz</span>
@@ -1072,13 +1079,13 @@
                     </div>
                 </div>
 
-                <!-- Total links -->
+                <!-- Summary total (clicks) -->
                 <div class="summary-card">
                     <div class="summary-label">Summary Total</div>
-                    <div class="summary-value" id="sumAllLinks">2 697</div>
+                    <div class="summary-value" id="sumAllClicks">0</div>
                     <div class="summary-sub">
-                        <span class="up">+<span id="sumAllToday">2 697</span></span>
-                        <span>today</span>
+                        <span class="up">+<span id="sumAllToday">0</span></span>
+                        <span>clicks today</span>
                     </div>
                     <div class="mini-graph">
                         <span style="height:4px"></span><span style="height:6px"></span>
@@ -1092,10 +1099,10 @@
                     </div>
                 </div>
 
-                <!-- RAP total -->
+                <!-- Keys total -->
                 <div class="summary-card">
-                    <div class="summary-label">Rap Total</div>
-                    <div class="summary-value" id="sumRap">0</div>
+                    <div class="summary-label">Keys Total</div>
+                    <div class="summary-value" id="sumKeys">0</div>
                     <div class="summary-sub">
                         <span class="up">+0</span>
                         <span>today</span>
@@ -1112,12 +1119,12 @@
                     </div>
                 </div>
 
-                <!-- Balance total -->
+                <!-- Total users -->
                 <div class="summary-card">
-                    <div class="summary-label">Balance Total</div>
-                    <div class="summary-value" id="sumBalance">251 R$</div>
+                    <div class="summary-label">Total Users</div>
+                    <div class="summary-value" id="sumUsers">0</div>
                     <div class="summary-sub">
-                        <span class="up">+251 R$</span>
+                        <span class="up">+<span id="sumUsersToday">0</span></span>
                         <span>today</span>
                     </div>
                     <div class="mini-graph">
@@ -1133,10 +1140,8 @@
                 </div>
             </div>
 
-            <!-- CONTENT ROW: CHART + LEADERBOARD -->
+            <!-- CHART -->
             <div class="content-row">
-
-                <!-- LINE CHART -->
                 <div class="chart-card">
                     <div class="chart-header">
                         <h3>Activity Graph</h3>
@@ -1164,7 +1169,6 @@
                                     <stop offset="100%" stop-color="#e91e63"/>
                                 </linearGradient>
                             </defs>
-                            <!-- Grid lines -->
                             <g stroke="rgba(255,255,255,0.04)" stroke-width="1">
                                 <line x1="0" y1="0" x2="700" y2="0"/>
                                 <line x1="0" y1="60" x2="700" y2="60"/>
@@ -1173,9 +1177,7 @@
                                 <line x1="0" y1="240" x2="700" y2="240"/>
                                 <line x1="0" y1="300" x2="700" y2="300"/>
                             </g>
-                            <!-- Area fill -->
                             <path id="chartArea" fill="url(#chartFill)" d=""/>
-                            <!-- Line stroke -->
                             <path id="chartLine" fill="none" stroke="url(#chartStroke)" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" d=""/>
                         </svg>
                     </div>
@@ -1184,13 +1186,6 @@
                         <span>Thu</span><span>Fri</span><span>Sat</span><span>Sun</span>
                     </div>
                 </div>
-
-                <!-- LEADERBOARD -->
-                <div class="leaderboard-card">
-                    <h3>Leaderboards</h3>
-                    <div class="leaderboard-list" id="leaderboardList"></div>
-                </div>
-
             </div>
         </section>
 
@@ -1223,6 +1218,7 @@
             <button id="shortenBtn" class="primary-btn">Generate</button>
             <p id="error" class="error hidden"></p>
 
+            <!-- These start hidden until a link is generated -->
             <section id="resultSection" class="hidden">
                 <div class="result-block">
                     <span class="label">Short link</span>
@@ -1257,6 +1253,134 @@
             </section>
         </section>
 
+        <!-- ============================================================
+             GLOBAL CHAT PANEL
+        ============================================================ -->
+        <section class="panel-card" id="panel-chat">
+            <h2>Global Chat</h2>
+            <div class="chat-container">
+                <div class="chat-header">
+                    <h3><i class="fas fa-globe"></i> Global Room</h3>
+                    <span class="status">LIVE</span>
+                </div>
+                <div class="chat-messages" id="chatMessages"></div>
+                <div class="chat-input-row">
+                    <input id="chatInput" type="text" placeholder="Type a message..." maxlength="200" autocomplete="off">
+                    <button id="chatSendBtn"><i class="fas fa-paper-plane"></i> Send</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             ANALYTICS PANEL
+        ============================================================ -->
+        <section class="panel-card" id="panel-analytics">
+            <h2>Analytics</h2>
+
+            <div class="admin-grid">
+                <div class="admin-stat">
+                    <div class="stat-label">Total Links</div>
+                    <div class="stat-value" id="anTotalLinks">0</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Total Clicks</div>
+                    <div class="stat-value" id="anTotalClicks">0</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Top Type</div>
+                    <div class="stat-value" id="anTopType" style="font-size:1.3rem;">—</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Avg Clicks / Link</div>
+                    <div class="stat-value" id="anAvg" style="font-size:1.3rem;">0</div>
+                </div>
+            </div>
+
+            <div class="admin-section-title">Top Performing Links</div>
+            <div id="topLinks"></div>
+        </section>
+
+        <!-- ============================================================
+             QR PANEL
+        ============================================================ -->
+        <section class="panel-card" id="panel-qr">
+            <h2>QR Code</h2>
+
+            <div class="field">
+                <label for="qrInput">Enter URL to generate QR code</label>
+                <input id="qrInput" type="url" placeholder="https://rblx.pk/xxxxxxx" autocomplete="off" spellcheck="false">
+            </div>
+            <button id="qrGenerateBtn" class="primary-btn">Generate QR Code</button>
+
+            <div id="qrContainer" style="display:none; margin-top:20px; padding:24px; background:rgba(255,255,255,0.02); border:1px solid rgba(255,255,255,0.06); border-radius:14px; text-align:center;">
+                <div id="qrCanvas" style="background:#fff;padding:16px;border-radius:12px;display:inline-block;"></div>
+                <div id="qrUrl" style="margin-top:14px;font-family:'Inter',monospace;font-size:0.8rem;color:#d0d0d0;padding:10px 14px;background:rgba(0,0,0,0.4);border-radius:9px;word-break:break-all;"></div>
+            </div>
+        </section>
+
+        <!-- ============================================================
+             ADMIN DASHBOARD PANEL
+        ============================================================ -->
+        <section class="panel-card" id="panel-admin">
+            <h2>Admin Dashboard</h2>
+
+            <div class="admin-grid">
+                <div class="admin-stat">
+                    <div class="stat-label">Total Links (All Users)</div>
+                    <div class="stat-value" id="adTotalLinks">0</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Total Clicks (All Users)</div>
+                    <div class="stat-value" id="adTotalClicks">0</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Total Users</div>
+                    <div class="stat-value" id="adTotalUsers">0</div>
+                </div>
+                <div class="admin-stat">
+                    <div class="stat-label">Chat Messages</div>
+                    <div class="stat-value" id="adTotalChat">0</div>
+                </div>
+            </div>
+
+            <div class="admin-section-title">All Links</div>
+            <div id="adminLinksList"></div>
+
+            <div class="admin-section-title" style="margin-top:20px;">Recent Chat Messages</div>
+            <div id="adminChatList"></div>
+        </section>
+
+        <!-- ============================================================
+             ACCOUNT PANEL
+        ============================================================ -->
+        <section class="panel-card" id="panel-account">
+            <h2>Account</h2>
+
+            <div class="field">
+                <label for="accUsername">Username</label>
+                <input id="accUsername" type="text" placeholder="e.g. mortyx" autocomplete="username">
+            </div>
+            <div class="field">
+                <label for="accPassword">Password</label>
+                <input id="accPassword" type="password" placeholder="••••••••" autocomplete="current-password">
+            </div>
+            <button id="accLoginBtn" class="primary-btn">Sign In</button>
+
+            <div id="accountInfo" class="hidden" style="margin-top:20px;">
+                <div class="admin-grid">
+                    <div class="admin-stat">
+                        <div class="stat-label">Your Links</div>
+                        <div class="stat-value" id="accLinks">0</div>
+                    </div>
+                    <div class="admin-stat">
+                        <div class="stat-label">Your Clicks</div>
+                        <div class="stat-value" id="accClicks">0</div>
+                    </div>
+                </div>
+                <button id="accLogoutBtn" class="primary-btn" style="background:rgba(255,255,255,0.06);color:#ccc;border:1px solid rgba(255,255,255,0.1);box-shadow:none;margin-top:10px;">Sign Out</button>
+            </div>
+        </section>
+
     </main>
 </div>
 
@@ -1283,48 +1407,25 @@
         });
 
         // ============================================================
-        // SIDEBAR / PANEL SWITCHING
+        // DOM REFS
         // ============================================================
         const sidebarBtns = document.querySelectorAll('.sidebar-btn[data-panel]');
         const panels = {
-            overview: document.getElementById('panel-overview'),
-            generator: document.getElementById('panel-generator')
+            overview:  document.getElementById('panel-overview'),
+            generator: document.getElementById('panel-generator'),
+            chat:      document.getElementById('panel-chat'),
+            analytics: document.getElementById('panel-analytics'),
+            qr:        document.getElementById('panel-qr'),
+            admin:     document.getElementById('panel-admin'),
+            account:   document.getElementById('panel-account')
         };
         const pageTitle = document.getElementById('pageTitle');
         const pageSubtitle = document.getElementById('pageSubtitle');
 
-        sidebarBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.getAttribute('data-panel');
-                sidebarBtns.forEach(b => b.classList.toggle('active', b === btn));
-                Object.values(panels).forEach(p => p.classList.remove('active'));
-                if (panels[name]) panels[name].classList.add('active');
-
-                if (name === 'overview') {
-                    pageTitle.textContent = 'TRIPLEHOOK TRIPLEHOOKERS';
-                    pageSubtitle.textContent = 'Overview · MORTYX Dashboard';
-                } else if (name === 'generator') {
-                    pageTitle.textContent = 'GENERATE LINK';
-                    pageSubtitle.textContent = 'Create · Share · Redirect';
-                }
-            });
-        });
-
-        // Default: show overview
-        panels.overview.classList.add('active');
-        panels.generator.classList.remove('active');
-
-        // ============================================================
-        // STATE
-        // ============================================================
-        let links = [];
-        let toastTimer;
-
-        // ============================================================
-        // TOAST
-        // ============================================================
         const toast = document.getElementById('toast');
         const toastText = document.getElementById('toastText');
+
+        let toastTimer;
         function showToast(msg) {
             toastText.textContent = msg;
             toast.classList.add('show');
@@ -1333,27 +1434,29 @@
         }
 
         // ============================================================
+        // STATE
+        // ============================================================
+        let links = [];
+        let chatMessages = [];
+        let currentUser = null;
+        let totalUsers = 1;
+        let keysTotal = 0;
+
+        // ============================================================
         // HELPERS
         // ============================================================
         function generateShortId() {
             const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
             const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
-            let id = letters.charAt(Math.floor(Math.random() * letters.length));
-            id += '-';
-            for (let i = 0; i < 7; i++) {
-                id += chars.charAt(Math.floor(Math.random() * chars.length));
-            }
+            let id = letters.charAt(Math.floor(Math.random() * letters.length)) + '-';
+            for (let i = 0; i < 7; i++) id += chars.charAt(Math.floor(Math.random() * chars.length));
             return id;
         }
-
         function buildShortLink(id) { return 'https://rblx.pk/' + id; }
-
         function slugify(str) {
             return String(str).toLowerCase().trim()
-                .replace(/[^a-z0-9-]/g, '-')
-                .replace(/-+/g, '-').replace(/^-|-$/g, '');
+                .replace(/[^a-z0-9-]/g, '-').replace(/-+/g, '-').replace(/^-|-$/g, '');
         }
-
         function copyToClipboard(text, btn) {
             if (!text) return;
             const original = btn.textContent;
@@ -1363,12 +1466,9 @@
                 setTimeout(() => btn.textContent = original, 1200);
             };
             if (navigator.clipboard) {
-                navigator.clipboard.writeText(text).then(done).catch(() => {
-                    fallbackCopy(text); done();
-                });
+                navigator.clipboard.writeText(text).then(done).catch(() => { fallbackCopy(text); done(); });
             } else { fallbackCopy(text); done(); }
         }
-
         function fallbackCopy(text) {
             const ta = document.createElement('textarea');
             ta.value = text; ta.style.position = 'fixed'; ta.style.opacity = '0';
@@ -1378,68 +1478,73 @@
         }
 
         // ============================================================
-        // SUMMARY / CHART / LEADERBOARD DATA
+        // SIDEBAR
         // ============================================================
-        const demoLeaderboard = [
-            { name: 'writtenbystraykidz', clicks: 5, crown: true },
-            { name: 'sumonespecial_alt', clicks: 1, crown: false },
-            { name: 'arian.in.love', clicks: 1, crown: false },
-            { name: 'ob061837', clicks: 1, crown: false },
-            { name: 'ghostydev', clicks: 0, crown: false },
-            { name: 'mortyx_fan_01', clicks: 0, crown: false }
-        ];
+        sidebarBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                const name = btn.getAttribute('data-panel');
+                sidebarBtns.forEach(b => b.classList.toggle('active', b === btn));
+                Object.values(panels).forEach(p => p.classList.remove('active'));
+                if (panels[name]) panels[name].classList.add('active');
 
-        function renderLeaderboard() {
-            const list = document.getElementById('leaderboardList');
-            list.innerHTML = '';
-            demoLeaderboard.forEach(u => {
-                const item = document.createElement('div');
-                item.className = 'leaderboard-item';
-                item.innerHTML = `
-                    <div class="lb-avatar ${u.crown ? 'crown' : ''}">${u.name.charAt(0).toUpperCase()}</div>
-                    <div class="lb-info">
-                        <div class="lb-name">${u.name}</div>
-                    </div>
-                    <div class="lb-count">
-                        <i class="fas fa-users"></i> ${u.clicks}
-                    </div>
-                `;
-                list.appendChild(item);
+                const titles = {
+                    overview:  ['HYPERLINK', 'Overview · MORTYX Dashboard'],
+                    generator: ['GENERATE LINK', 'Create · Share · Redirect'],
+                    chat:      ['GLOBAL CHAT', 'Talk with everyone live'],
+                    analytics: ['ANALYTICS', 'Track your performance'],
+                    qr:        ['QR CODE', 'Scan · Share · Redirect'],
+                    admin:     ['ADMIN DASHBOARD', 'Manage every link & message'],
+                    account:   ['ACCOUNT', 'Sign in to track your links']
+                };
+                const [t, s] = titles[name] || ['HYPERLINK', ''];
+                pageTitle.textContent = t;
+                pageSubtitle.textContent = s;
+
+                if (name === 'analytics') renderAnalytics();
+                if (name === 'admin') renderAdmin();
+                if (name === 'overview') renderSummary();
+                if (name === 'chat') scrollChatToBottom();
             });
+        });
+
+        // ============================================================
+        // SUMMARY / STATS
+        // ============================================================
+        function renderSummary() {
+            const totalClicks = links.reduce((s, l) => s + (l.clicks || 0), 0);
+            const todayCount = links.filter(l => Date.now() - l.created < 24 * 60 * 60 * 1000).length;
+            const todayClicks = links.filter(l => Date.now() - l.created < 24 * 60 * 60 * 1000)
+                                     .reduce((s, l) => s + (l.clicks || 0), 0);
+
+            document.getElementById('sumTotalLinks').textContent = links.length;
+            document.getElementById('sumTodayLinks').textContent = todayCount;
+            document.getElementById('sumAllClicks').textContent = totalClicks;
+            document.getElementById('sumAllToday').textContent = todayClicks;
+            document.getElementById('sumKeys').textContent = keysTotal;
+            document.getElementById('sumUsers').textContent = totalUsers;
+            document.getElementById('sumUsersToday').textContent = totalUsers;
         }
 
         function renderChart() {
-            // Generate a bell-curve-ish dataset like the screenshot
             const points = 40;
             const maxVal = 2700;
             const data = [];
             for (let i = 0; i < points; i++) {
                 const x = i / (points - 1);
-                // Bell curve centered around 0.5
                 const gaussian = Math.exp(-Math.pow((x - 0.5) * 3.2, 2));
                 const value = Math.round(gaussian * maxVal * (0.95 + Math.random() * 0.1));
                 data.push(value);
             }
-
             const width = 700, height = 300;
             const max = Math.max(...data, 1);
-
-            // Build smooth path
-            let linePath = '';
-            let areaPath = '';
+            let linePath = '', areaPath = '';
             data.forEach((v, i) => {
                 const x = (i / (data.length - 1)) * width;
                 const y = height - (v / max) * height;
-                if (i === 0) {
-                    linePath = `M ${x} ${y}`;
-                    areaPath = `M ${x} ${height} L ${x} ${y}`;
-                } else {
-                    linePath += ` L ${x} ${y}`;
-                    areaPath += ` L ${x} ${y}`;
-                }
+                if (i === 0) { linePath = `M ${x} ${y}`; areaPath = `M ${x} ${height} L ${x} ${y}`; }
+                else { linePath += ` L ${x} ${y}`; areaPath += ` L ${x} ${y}`; }
             });
             areaPath += ` L ${width} ${height} Z`;
-
             document.getElementById('chartLine').setAttribute('d', linePath);
             document.getElementById('chartArea').setAttribute('d', areaPath);
         }
@@ -1448,7 +1553,6 @@
         // HISTORY
         // ============================================================
         const historyList = document.getElementById('historyList');
-
         function renderHistory() {
             historyList.innerHTML = '';
             if (!links.length) {
@@ -1461,17 +1565,29 @@
             links.slice().reverse().slice(0, 10).forEach(l => {
                 const item = document.createElement('div');
                 item.className = 'history-item';
-                item.innerHTML = `
-                    <a href="${l.shortUrl}" target="_blank" rel="noopener">${l.shortUrl.replace(/^https?:\/\//, '')}</a>
-                    <span class="type">${l.type}</span>
-                    <span class="clicks">${l.clicks || 0}</span>
-                `;
+                const a = document.createElement('a');
+                a.href = l.shortUrl; a.target = '_blank'; a.rel = 'noopener';
+                a.textContent = l.shortUrl.replace(/^https?:\/\//, '');
+                a.addEventListener('click', () => {
+                    l.clicks = (l.clicks || 0) + 1;
+                    renderSummary(); renderAnalytics(); renderAdmin();
+                });
+                item.appendChild(a);
+
+                const type = document.createElement('span');
+                type.className = 'type'; type.textContent = l.type;
+                item.appendChild(type);
+
+                const clicks = document.createElement('span');
+                clicks.className = 'clicks'; clicks.textContent = l.clicks || 0;
+                item.appendChild(clicks);
+
                 historyList.appendChild(item);
             });
         }
 
         // ============================================================
-        // GENERATE
+        // GENERATOR
         // ============================================================
         const shortenBtn = document.getElementById('shortenBtn');
         const urlInput = document.getElementById('urlInput');
@@ -1490,14 +1606,12 @@
             const rawUrl = urlInput.value.trim();
             if (!rawUrl) {
                 errorEl.textContent = 'Please enter a URL.';
-                errorEl.classList.remove('hidden');
-                urlInput.focus();
+                errorEl.classList.remove('hidden'); urlInput.focus();
                 return;
             }
             if (!/^https?:\/\//i.test(rawUrl)) {
                 errorEl.textContent = 'URL must start with http:// or https://';
-                errorEl.classList.remove('hidden');
-                urlInput.focus();
+                errorEl.classList.remove('hidden'); urlInput.focus();
                 return;
             }
             errorEl.classList.add('hidden');
@@ -1508,13 +1622,11 @@
                 slug = slugify(slug);
                 if (!slug) {
                     errorEl.textContent = 'Custom short code contains no valid characters.';
-                    errorEl.classList.remove('hidden');
-                    return;
+                    errorEl.classList.remove('hidden'); return;
                 }
                 if (links.some(l => l.shortUrl.endsWith('/' + slug))) {
                     errorEl.textContent = 'That custom short code is already taken.';
-                    errorEl.classList.remove('hidden');
-                    return;
+                    errorEl.classList.remove('hidden'); return;
                 }
             } else {
                 slug = generateShortId();
@@ -1523,9 +1635,12 @@
             const shortUrl = buildShortLink(slug);
             links.push({
                 originalUrl: rawUrl, shortUrl, type,
-                clicks: 0, created: Date.now()
+                clicks: 0, created: Date.now(),
+                owner: currentUser || 'guest'
             });
+            keysTotal += 1;
 
+            // Populate and reveal the hidden sections
             shortLink.href = shortUrl;
             shortLink.textContent = shortUrl;
             resultSection.classList.remove('hidden');
@@ -1537,11 +1652,8 @@
 
             customSlug.value = '';
             renderHistory();
+            renderSummary();
             showToast('Link generated');
-
-            // Update the summary count
-            const sumTotalLinks = document.getElementById('sumTotalLinks');
-            sumTotalLinks.textContent = links.length;
         });
 
         urlInput.addEventListener('keydown', e => {
@@ -1549,58 +1661,263 @@
         });
 
         copyShortBtn.addEventListener('click', () => copyToClipboard(shortLink.textContent, copyShortBtn));
-
         linksSection.addEventListener('click', e => {
             const btn = e.target.closest('button[data-copy]');
             if (!btn) return;
-            const id = btn.getAttribute('data-copy');
-            const el = document.getElementById(id);
+            const el = document.getElementById(btn.getAttribute('data-copy'));
             if (el) copyToClipboard(el.textContent, btn);
         });
 
         // ============================================================
-        // SEED DEMO DATA
+        // GLOBAL CHAT
         // ============================================================
-        function seedDemo() {
-            const demos = [
-                { url: 'https://www.roblox.com/users/388805058/profile', type: 'Profile' },
-                { url: 'https://www.roblox.com/games/920587237/Adopt-Me', type: 'Community' },
-                { url: 'https://www.roblox.com/users/123/profile', type: 'Profile' }
-            ];
-            demos.forEach(d => {
-                links.push({
-                    originalUrl: d.url,
-                    shortUrl: buildShortLink(generateShortId()),
-                    type: d.type,
-                    clicks: Math.floor(Math.random() * 25),
-                    created: Date.now() - Math.floor(Math.random() * 7 * 24 * 60 * 60 * 1000)
-                });
-            });
-            renderHistory();
+        const chatMessagesEl = document.getElementById('chatMessages');
+        const chatInput = document.getElementById('chatInput');
+        const chatSendBtn = document.getElementById('chatSendBtn');
+
+        function addChatMessage(user, text, isSelf, isSystem) {
+            const msg = { user, text, time: new Date(), isSelf, system: isSystem };
+            chatMessages.push(msg);
+            renderChatMessage(msg);
+            scrollChatToBottom();
+            if (chatMessages.length > 200) chatMessages.shift();
+        }
+
+        function renderChatMessage(m) {
+            const el = document.createElement('div');
+            el.className = 'chat-msg' + (m.system ? ' system' : '');
+            const time = m.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+            if (m.system) {
+                el.innerHTML = `<div class="text">${m.text}</div>`;
+            } else {
+                el.innerHTML = `
+                    <div class="avatar">${m.user.charAt(0).toUpperCase()}</div>
+                    <div class="content">
+                        <div class="meta">
+                            <span class="name ${m.isSelf ? 'self' : ''}">${m.user}</span>
+                            <span class="time">${time}</span>
+                        </div>
+                        <div class="text">${escapeHtml(m.text)}</div>
+                    </div>
+                `;
+            }
+            chatMessagesEl.appendChild(el);
+        }
+
+        function escapeHtml(s) {
+            return String(s).replace(/[&<>"']/g, c => ({
+                '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+            }[c]));
+        }
+
+        function scrollChatToBottom() {
+            chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight;
+        }
+
+        function sendChat() {
+            const text = chatInput.value.trim();
+            if (!text) return;
+            const user = currentUser || 'anonymous';
+            addChatMessage(user, text, true, false);
+            chatInput.value = '';
+            simulateReplies(text);
+        }
+
+        chatSendBtn.addEventListener('click', sendChat);
+        chatInput.addEventListener('keydown', e => {
+            if (e.key === 'Enter') { e.preventDefault(); sendChat(); }
+        });
+
+        const botUsers = ['straykidz', 'ghostydev', 'mortyx_fan', 'sumone', 'rblxgod'];
+        const botReplies = [
+            'nice link!', 'that rblx.pk short is clean', 'anyone got a good profile?',
+            'mortyx is the goat fr', 'let me try that', 'works perfectly 💯',
+            'how do I make a custom slug?', 'anyone want to trade?', 'loool'
+        ];
+
+        function simulateReplies(trigger) {
+            const delay = 1200 + Math.random() * 2200;
+            setTimeout(() => {
+                const user = botUsers[Math.floor(Math.random() * botUsers.length)];
+                const replies = [...botReplies];
+                if (trigger.toLowerCase().includes('hi') || trigger.toLowerCase().includes('hello')) {
+                    replies.unshift('yo ' + (currentUser || 'there') + '!');
+                }
+                const text = replies[Math.floor(Math.random() * replies.length)];
+                addChatMessage(user, text, false, false);
+            }, delay);
+        }
+
+        function seedChat() {
+            addChatMessage('', 'Welcome to the MORTYX Global Chat — be kind, no spam.', false, true);
+            setTimeout(() => addChatMessage('ghostydev', 'just dropped a new link, check the recent tab', false, false), 800);
+            setTimeout(() => addChatMessage('mortyx_fan', 'rblx.pk looks so clean', false, false), 2400);
         }
 
         // ============================================================
-        // TUTORIAL / CHANGELOG — simple alerts for now
+        // ANALYTICS
+        // ============================================================
+        function renderAnalytics() {
+            const totalClicks = links.reduce((s, l) => s + (l.clicks || 0), 0);
+            document.getElementById('anTotalLinks').textContent = links.length;
+            document.getElementById('anTotalClicks').textContent = totalClicks;
+            document.getElementById('anAvg').textContent = links.length ? (totalClicks / links.length).toFixed(1) : '0';
+
+            const typeCounts = {};
+            links.forEach(l => typeCounts[l.type] = (typeCounts[l.type] || 0) + 1);
+            let topType = '—', topCount = 0;
+            Object.entries(typeCounts).forEach(([t, c]) => { if (c > topCount) { topCount = c; topType = t; } });
+            document.getElementById('anTopType').textContent = topType;
+
+            const topLinksEl = document.getElementById('topLinks');
+            topLinksEl.innerHTML = '';
+            if (!links.length) {
+                topLinksEl.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">No data yet</div>';
+                return;
+            }
+            [...links].sort((a, b) => (b.clicks || 0) - (a.clicks || 0)).slice(0, 5).forEach(l => {
+                const row = document.createElement('div');
+                row.className = 'admin-row';
+                row.innerHTML = `
+                    <span class="admin-url">${l.shortUrl.replace(/^https?:\/\//, '')}</span>
+                    <span class="admin-clicks">${l.clicks || 0}</span>
+                `;
+                topLinksEl.appendChild(row);
+            });
+        }
+
+        // ============================================================
+        // QR
+        // ============================================================
+        function generateQR(text) {
+            const size = 220, modules = 25, cell = size / modules;
+            const canvas = document.createElement('canvas');
+            canvas.width = size; canvas.height = size;
+            const ctx = canvas.getContext('2d');
+            ctx.fillStyle = '#fff'; ctx.fillRect(0, 0, size, size);
+            let hash = 0;
+            for (let i = 0; i < text.length; i++) { hash = ((hash << 5) - hash) + text.charCodeAt(i); hash |= 0; }
+            ctx.fillStyle = '#000';
+            const drawFinder = (x, y) => {
+                ctx.fillRect(x, y, 7 * cell, 7 * cell);
+                ctx.fillStyle = '#fff'; ctx.fillRect(x + cell, y + cell, 5 * cell, 5 * cell);
+                ctx.fillStyle = '#000'; ctx.fillRect(x + 2 * cell, y + 2 * cell, 3 * cell, 3 * cell);
+            };
+            drawFinder(0, 0); drawFinder((modules - 7) * cell, 0); drawFinder(0, (modules - 7) * cell);
+            for (let y = 0; y < modules; y++) for (let x = 0; x < modules; x++) {
+                if ((x < 8 && y < 8) || (x > modules - 9 && y < 8) || (x < 8 && y > modules - 9)) continue;
+                const seed = Math.abs((hash * (x + 1) * (y + 1)) % 1000);
+                if (seed % 2 === 0) ctx.fillRect(x * cell, y * cell, cell, cell);
+            }
+            return canvas;
+        }
+
+        document.getElementById('qrGenerateBtn').addEventListener('click', () => {
+            const url = document.getElementById('qrInput').value.trim();
+            if (!url) { showToast('Enter a URL first'); return; }
+            const canvas = document.getElementById('qrCanvas');
+            canvas.innerHTML = '';
+            canvas.appendChild(generateQR(url));
+            document.getElementById('qrUrl').textContent = url;
+            document.getElementById('qrContainer').style.display = 'block';
+            showToast('QR code generated');
+        });
+
+        // ============================================================
+        // ADMIN
+        // ============================================================
+        function renderAdmin() {
+            const totalClicks = links.reduce((s, l) => s + (l.clicks || 0), 0);
+            document.getElementById('adTotalLinks').textContent = links.length;
+            document.getElementById('adTotalClicks').textContent = totalClicks;
+            document.getElementById('adTotalUsers').textContent = totalUsers;
+            document.getElementById('adTotalChat').textContent = chatMessages.filter(m => !m.system).length;
+
+            const list = document.getElementById('adminLinksList');
+            list.innerHTML = '';
+            if (!links.length) {
+                list.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">No links created yet</div>';
+            } else {
+                links.slice().reverse().forEach(l => {
+                    const row = document.createElement('div');
+                    row.className = 'admin-row';
+                    row.innerHTML = `
+                        <span class="admin-url">${l.shortUrl.replace(/^https?:\/\//, '')}</span>
+                        <span class="admin-clicks">${l.clicks || 0} clicks</span>
+                        <button class="admin-del" data-id="${l.shortUrl}">Delete</button>
+                    `;
+                    list.appendChild(row);
+                });
+                list.querySelectorAll('.admin-del').forEach(btn => {
+                    btn.addEventListener('click', e => {
+                        const shortUrl = e.target.getAttribute('data-id');
+                        links = links.filter(l => l.shortUrl !== shortUrl);
+                        renderHistory(); renderSummary(); renderAnalytics(); renderAdmin();
+                        showToast('Link deleted');
+                    });
+                });
+            }
+
+            const chatList = document.getElementById('adminChatList');
+            chatList.innerHTML = '';
+            const recent = chatMessages.filter(m => !m.system).slice(-8).reverse();
+            if (!recent.length) {
+                chatList.innerHTML = '<div style="color:#555;font-size:0.8rem;padding:16px;text-align:center;">No chat messages yet</div>';
+            } else {
+                recent.forEach(m => {
+                    const row = document.createElement('div');
+                    row.className = 'admin-row';
+                    const time = m.time.toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' });
+                    row.innerHTML = `
+                        <span class="admin-url"><strong style="color:#fff;">${m.user}</strong> · ${escapeHtml(m.text)}</span>
+                        <span class="admin-clicks">${time}</span>
+                    `;
+                    chatList.appendChild(row);
+                });
+            }
+        }
+
+        // ============================================================
+        // ACCOUNT
+        // ============================================================
+        const accountInfo = document.getElementById('accountInfo');
+        document.getElementById('accLoginBtn').addEventListener('click', () => {
+            const u = document.getElementById('accUsername').value.trim();
+            const p = document.getElementById('accPassword').value.trim();
+            if (!u || !p) { showToast('Enter username and password'); return; }
+            currentUser = u.toLowerCase();
+            totalUsers += 1;
+            accountInfo.classList.remove('hidden');
+            renderSummary();
+            showToast('Signed in as ' + currentUser);
+        });
+
+        document.getElementById('accLogoutBtn').addEventListener('click', () => {
+            currentUser = null;
+            accountInfo.classList.add('hidden');
+            showToast('Signed out');
+        });
+
+        // ============================================================
+        // TOP-BAR BUTTONS
         // ============================================================
         document.getElementById('tutorialBtn').addEventListener('click', () => {
             showToast('Paste URL · Generate · Copy');
         });
-
         document.getElementById('changelogBtn').addEventListener('click', () => {
-            showToast('v3.1.0 · Dashboard + Generator');
+            showToast('v4.0.0 · Dashboard · Chat · Admin');
         });
 
         // ============================================================
         // INIT
         // ============================================================
-        seedDemo();
-        renderLeaderboard();
+        // Output blocks stay hidden — nothing is populated until the user
+        // clicks Generate. The `resultSection` and `linksSection` elements
+        // already carry the `hidden` class in the HTML above.
+        renderSummary();
         renderChart();
-
-        // Update summary numbers
-        document.getElementById('sumTotalLinks').textContent = links.length;
-        document.getElementById('sumAllLinks').textContent = (2697 + links.length).toLocaleString();
-        document.getElementById('sumAllToday').textContent = (2697 + links.length).toLocaleString();
+        renderHistory();
+        seedChat();
 
     })();
 </script>
