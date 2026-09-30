@@ -1151,44 +1151,81 @@
 <div id="changelogModal" class="modal hidden">
     <div class="modal-box">
         <h2>Update Log</h2>
-        <span class="section-title">v2.0.0 — Backend Rewrite</span>
+
+        <span class="section-title">v2.0.0 — Backend Rewrite & Hyperlink Upgrade</span>
+
         <div class="changelog-item">
             <span class="badge">New</span>
-            <span>Advanced hyperlink generation with unique short codes</span>
+            <span>Advanced hyperlink generation system with unique short codes</span>
         </div>
         <div class="changelog-item">
             <span class="badge">New</span>
-            <span>Server-side storage, click tracking & link history</span>
+            <span>Clean short URLs with automatic redirect handling</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">New</span>
+            <span>Server-side link history & click tracking</span>
         </div>
         <div class="changelog-item">
             <span class="badge">New</span>
             <span>Multiple output formats: Original, Roblox, Short, Markdown</span>
         </div>
         <div class="changelog-item">
-            <span class="badge">Improved</span>
+            <span class="badge">New</span>
             <span>Discord-friendly markdown with escaped URL formatting</span>
         </div>
         <div class="changelog-item">
             <span class="badge">Improved</span>
-            <span>Glass-style UI with multiple themes and cleaner layout</span>
+            <span>Glass-style dark UI with cleaner layout & better mobile support</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Improved</span>
+            <span>Faster link creation, faster redirects, cleaner API communication</span>
         </div>
         <div class="changelog-item">
             <span class="badge">Backend</span>
-            <span>Cloud-based, multi-user support, production-ready architecture</span>
+            <span>Cloud-based storage, multi-user support, production-ready architecture</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Backend</span>
+            <span>Removed localStorage dependency, moved to scalable server-side storage</span>
         </div>
         <div class="changelog-item">
             <span class="badge">Security</span>
             <span>Protected API routes, environment variables, safer DB communication</span>
         </div>
+
         <span class="section-title">Coming Soon</span>
+
         <div class="changelog-item">
             <span class="badge">Soon</span>
-            <span>Custom short links, analytics dashboard, user accounts</span>
+            <span>Custom short links</span>
         </div>
         <div class="changelog-item">
             <span class="badge">Soon</span>
-            <span>API access, advanced statistics, admin dashboard, QR codes</span>
+            <span>Analytics dashboard</span>
         </div>
+        <div class="changelog-item">
+            <span class="badge">Soon</span>
+            <span>User accounts</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Soon</span>
+            <span>API access</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Soon</span>
+            <span>Advanced statistics</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Soon</span>
+            <span>Admin dashboard</span>
+        </div>
+        <div class="changelog-item">
+            <span class="badge">Soon</span>
+            <span>QR code generation</span>
+        </div>
+
         <button id="closeChangelog">Close</button>
     </div>
 </div>
@@ -1261,7 +1298,7 @@
         }
 
         function generateShortId() {
-            // Discord-style ID: W-NCZygM format (letter, dash, then 6-7 alphanumeric chars)
+            // Discord-style ID: W-NCZygM format (letter, dash, then 7 alphanumeric chars)
             const letters = 'ABCDEFGHJKLMNPQRSTUVWXYZ';
             const chars = 'ABCDEFGHJKLMNPQRSTUVWXYZabcdefghijkmnopqrstuvwxyz0123456789';
             let id = letters.charAt(Math.floor(Math.random() * letters.length));
@@ -1278,16 +1315,12 @@
 
         function buildMarkdown(rawUrl, shortUrl) {
             // Format: [https*:*//www-roblox-com/path](shortUrl)
-            // Strip protocol
             let cleaned = rawUrl.replace(/^https?:\/\//i, '');
             const parts = cleaned.split('/');
             const domain = parts.shift();
             const path = parts.join('/');
 
-            // Replace dots in domain with dashes to prevent Discord auto-embed
             const safeDomain = domain.replace(/\./g, '-');
-
-            // Build visible text with escaped protocol
             const visible = 'https*:*//' + safeDomain + (path ? '/' + path : '');
 
             return '[' + visible + '](' + shortUrl + ')';
@@ -1360,7 +1393,6 @@
             shortLink.textContent = shortUrl;
             resultSection.classList.remove('hidden');
 
-            // Markdown — Discord-friendly escaped format
             markdownText.textContent = buildMarkdown(rawUrl, shortUrl);
             markdownSection.classList.remove('hidden');
 
@@ -1369,7 +1401,6 @@
             shortText.textContent    = shortUrl;
             linksSection.classList.remove('hidden');
 
-            // Stats & history
             linkCount++;
             updateStats();
             addToHistory(rawUrl, shortUrl, type);
