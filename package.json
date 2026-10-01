@@ -1,9 +1,8 @@
 {
-  "name": "voidlure-hyperlink",
+  "name": "mortyx-hyperlink",
   "version": "1.0.0",
-  "private": true,
-  "type": "module",
   "dependencies": {
-    "postgres": "^3.4.7"
+    "pusher": "^5.2.0",
+    "cookie": "^0.6.0"
   }
 }
