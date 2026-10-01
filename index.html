@@ -64,18 +64,18 @@
         .top-btn:hover { background: rgba(255,255,255,0.09); color: #fff; border-color: rgba(255,255,255,0.18); }
         .top-btn.primary { background: #fff; color: #000; border-color: #fff; font-weight: 800; }
         .top-btn.primary:hover { background: #e6e6e6; color: #000; }
-        .top-btn.discord-login { background: #5865F2; color: #fff; border-color: #5865F2; }
-        .top-btn.discord-login:hover { background: #4752c4; border-color: #4752c4; color: #fff; }
 
-        /* User chip in top bar */
         .user-chip {
-            display: flex; align-items: center; gap: 8px; padding: 6px 12px 6px 6px;
-            background: rgba(88,101,242,0.15); border: 1px solid rgba(88,101,242,0.4);
+            display: flex; align-items: center; gap: 8px; padding: 6px 14px 6px 6px;
+            background: rgba(100,200,100,0.15); border: 1px solid rgba(100,200,100,0.4);
             border-radius: 20px; cursor: pointer; transition: all 0.15s;
         }
-        .user-chip:hover { background: rgba(88,101,242,0.25); }
-        .user-chip img {
-            width: 28px; height: 28px; border-radius: 50%; border: 2px solid #5865F2;
+        .user-chip:hover { background: rgba(100,200,100,0.25); }
+        .user-chip .avatar {
+            width: 26px; height: 26px; border-radius: 50%;
+            background: linear-gradient(135deg,#6ee76e,#2e7d32); color: #000;
+            display: flex; align-items: center; justify-content: center;
+            font-family: 'Archivo Black', sans-serif; font-size: 0.8rem; font-weight: 900;
         }
         .user-chip .uname { font-size: 0.75rem; font-weight: 800; color: #fff; }
 
@@ -146,7 +146,7 @@
             font-size: 0.7rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase;
             color: #ccc; background: rgba(255,255,255,0.06); border: 1px solid rgba(255,255,255,0.1);
             border-radius: 10px; padding: 12px 18px; cursor: pointer; font-family: inherit;
-            display: inline-flex; align-items: center; gap: 7px;
+            display: inline-flex; align-items: center; gap: 7px; text-decoration: none;
         }
         .secondary-btn:hover { background: rgba(255,255,255,0.12); color: #fff; }
 
@@ -184,8 +184,7 @@
         .chat-messages::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.08); border-radius: 3px; }
         .chat-msg { display: flex; gap: 10px; animation: msgIn 0.3s cubic-bezier(0.16,1,0.3,1); }
         @keyframes msgIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
-        .chat-msg .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#2a2a30,#15151a); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; color: #ccc; flex-shrink: 0; overflow: hidden; }
-        .chat-msg .avatar img { width: 100%; height: 100%; object-fit: cover; }
+        .chat-msg .avatar { width: 34px; height: 34px; border-radius: 50%; background: linear-gradient(135deg,#2a2a30,#15151a); border: 1px solid rgba(255,255,255,0.08); display: flex; align-items: center; justify-content: center; font-family: 'Archivo Black', sans-serif; font-size: 0.85rem; color: #ccc; flex-shrink: 0; }
         .chat-msg .content { flex: 1; min-width: 0; }
         .chat-msg .meta { display: flex; align-items: baseline; gap: 8px; margin-bottom: 4px; flex-wrap: wrap; }
         .chat-msg .name { font-size: 0.78rem; font-weight: 800; color: #fff; }
@@ -196,24 +195,8 @@
         .chat-input-row { display: flex; gap: 8px; padding: 12px 14px; border-top: 1px solid rgba(255,255,255,0.06); background: rgba(255,255,255,0.02); }
         .chat-input-row input { flex: 1; font-size: 0.85rem; color: #f0f0f0; background: rgba(255,255,255,0.04); border: 1px solid rgba(255,255,255,0.08); border-radius: 10px; padding: 12px 16px; outline: none; font-family: inherit; }
         .chat-input-row input::placeholder { color: #444; }
-        .chat-input-row input:disabled { opacity: 0.5; cursor: not-allowed; }
         .chat-input-row button { font-size: 0.72rem; font-weight: 800; letter-spacing: 1px; text-transform: uppercase; color: #000; background: #fff; border: none; border-radius: 10px; padding: 12px 22px; cursor: pointer; font-family: inherit; }
         .chat-input-row button:hover { background: #e6e6e6; }
-        .chat-input-row button:disabled { opacity: 0.4; cursor: not-allowed; }
-
-        .signin-prompt {
-            display: flex; flex-direction: column; align-items: center; justify-content: center;
-            padding: 40px 20px; text-align: center; gap: 14px;
-        }
-        .signin-prompt .icon { font-size: 3rem; opacity: 0.4; }
-        .signin-prompt h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; color: #fff; text-transform: uppercase; }
-        .signin-prompt p { font-size: 0.85rem; color: #888; max-width: 320px; }
-        .signin-prompt a {
-            background: #5865F2; color: #fff; text-decoration: none; font-size: 0.8rem; font-weight: 800;
-            letter-spacing: 1px; text-transform: uppercase; padding: 13px 24px; border-radius: 10px;
-            display: inline-flex; align-items: center; gap: 8px; transition: all 0.15s;
-        }
-        .signin-prompt a:hover { background: #4752c4; }
 
         .stats-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 12px; margin-bottom: 20px; }
         .stat-card { background: rgba(255,255,255,0.025); border: 1px solid rgba(255,255,255,0.06); border-radius: 14px; padding: 18px; }
@@ -270,6 +253,17 @@
         .qr-canvas-box { background: #fff; padding: 16px; border-radius: 12px; display: inline-block; }
         .qr-url { margin-top: 14px; font-family: 'Inter', monospace; font-size: 0.8rem; color: #d0d0d0; padding: 10px 14px; background: rgba(0,0,0,0.4); border-radius: 9px; word-break: break-all; }
 
+        .signin-prompt { display: flex; flex-direction: column; align-items: center; justify-content: center; padding: 40px 20px; text-align: center; gap: 14px; }
+        .signin-prompt .icon { font-size: 3rem; opacity: 0.4; }
+        .signin-prompt h3 { font-family: 'Archivo Black', sans-serif; font-size: 1.1rem; color: #fff; text-transform: uppercase; }
+        .signin-prompt p { font-size: 0.85rem; color: #888; max-width: 320px; }
+        .signin-prompt button {
+            background: #fff; color: #000; font-size: 0.8rem; font-weight: 800; letter-spacing: 1px;
+            text-transform: uppercase; padding: 13px 24px; border-radius: 10px; border: none;
+            cursor: pointer; display: inline-flex; align-items: center; gap: 8px; font-family: inherit;
+        }
+        .signin-prompt button:hover { background: #e6e6e6; }
+
         @media (max-width: 1000px) { .summary-row { grid-template-columns: 1fr 1fr; } .stats-grid { grid-template-columns: 1fr; } }
         @media (max-width: 640px) {
             body { padding: 12px; }
@@ -306,7 +300,7 @@
         <button class="sidebar-btn" data-panel="analytics" title="Analytics"><i class="fas fa-chart-line"></i></button>
         <button class="sidebar-btn" data-panel="qr" title="QR"><i class="fas fa-qrcode"></i></button>
         <div class="sidebar-spacer"></div>
-        <button class="sidebar-btn" data-panel="admin" title="Admin Dashboard"><i class="fas fa-shield-alt"></i></button>
+        <button class="sidebar-btn" data-panel="admin" title="Admin"><i class="fas fa-shield-alt"></i></button>
         <button class="sidebar-btn" data-panel="account" title="Account"><i class="fas fa-user"></i></button>
     </aside>
 
@@ -320,11 +314,10 @@
                 <button class="top-btn" id="tutorialBtn"><i class="fas fa-book-open"></i> Tutorial</button>
                 <button class="top-btn" id="changelogBtn"><i class="fas fa-code-branch"></i> Updates</button>
                 <a href="https://discord.gg/bestmethods" target="_blank" class="top-btn primary"><i class="fab fa-discord"></i> Server</a>
-                <a href="/api/auth/login" class="top-btn discord-login" id="loginBtn"><i class="fab fa-discord"></i> Sign in</a>
+                <button class="top-btn" id="signInBtn"><i class="fas fa-user"></i> Sign in</button>
             </div>
         </div>
 
-        <!-- OVERVIEW -->
         <section class="panel active" id="panel-overview">
             <div class="summary-row">
                 <div class="summary-card large">
@@ -360,7 +353,7 @@
                 <div class="chart-header"><h3>Activity Graph</h3><div class="chart-legend"><span><span class="dot"></span> Clicks</span></div></div>
                 <div class="chart-area">
                     <div class="chart-y-labels"><span>3,000</span><span>2,500</span><span>2,000</span><span>1,500</span><span>1,000</span><span>500</span></div>
-                    <svg viewBox="0 0 700 300" preserveAspectRatio="none" id="lineChart">
+                    <svg viewBox="0 0 700 300" preserveAspectRatio="none">
                         <defs>
                             <linearGradient id="chartFill" x1="0" y1="0" x2="0" y2="1"><stop offset="0%" stop-color="#ab47bc" stop-opacity="0.5"/><stop offset="100%" stop-color="#ab47bc" stop-opacity="0"/></linearGradient>
                             <linearGradient id="chartStroke" x1="0" y1="0" x2="1" y2="0"><stop offset="0%" stop-color="#ab47bc"/><stop offset="100%" stop-color="#e91e63"/></linearGradient>
@@ -377,7 +370,6 @@
             </div>
         </section>
 
-        <!-- GENERATOR -->
         <section class="panel" id="panel-generator">
             <div class="panel-card">
                 <h2>Generate Link</h2>
@@ -406,7 +398,6 @@
             </div>
         </section>
 
-        <!-- CHAT -->
         <section class="panel" id="panel-chat">
             <div class="panel-card">
                 <h2>Global Chat</h2>
@@ -417,14 +408,13 @@
                     </div>
                     <div class="chat-messages" id="chatMessages"></div>
                     <div class="chat-input-row">
-                        <input id="chatInput" type="text" placeholder="Sign in with Discord to chat..." maxlength="200" autocomplete="off" disabled>
-                        <button id="chatSendBtn" disabled><i class="fas fa-paper-plane"></i> Send</button>
+                        <input id="chatInput" type="text" placeholder="Type a message..." maxlength="200" autocomplete="off">
+                        <button id="chatSendBtn"><i class="fas fa-paper-plane"></i> Send</button>
                     </div>
                 </div>
             </div>
         </section>
 
-        <!-- ANALYTICS -->
         <section class="panel" id="panel-analytics">
             <div class="panel-card">
                 <h2>Analytics</h2>
@@ -441,7 +431,6 @@
             </div>
         </section>
 
-        <!-- QR -->
         <section class="panel" id="panel-qr">
             <div class="panel-card">
                 <h2>QR Code Generator</h2>
@@ -456,7 +445,6 @@
             </div>
         </section>
 
-        <!-- ADMIN -->
         <section class="panel" id="panel-admin">
             <div class="admin-lock" id="adminLock">
                 <div class="lock-icon">🔒</div>
@@ -491,15 +479,15 @@
             </div>
         </section>
 
-        <!-- ACCOUNT -->
         <section class="panel" id="panel-account">
             <div class="panel-card">
                 <h2>Account</h2>
                 <div id="accountSignedOut" class="signin-prompt">
                     <div class="icon">👤</div>
-                    <h3>Sign in with Discord</h3>
-                    <p>Sign in to chat globally, track your links, and unlock your personal dashboard.</p>
-                    <a href="/api/auth/login"><i class="fab fa-discord"></i> Continue with Discord</a>
+                    <h3>Set your username</h3>
+                    <p>Pick a name to chat globally and track your links. No password needed.</p>
+                    <div class="field" style="width:100%;max-width:320px;"><input id="accountUsernameInput" type="text" placeholder="e.g. mortyx" maxlength="24" autocomplete="off"></div>
+                    <button id="accountSetUserBtn"><i class="fas fa-check"></i> Continue</button>
                 </div>
                 <div id="accountSignedIn" class="hidden">
                     <div class="stats-grid" style="margin-bottom:16px;">
@@ -508,7 +496,7 @@
                     </div>
                     <div class="panel-section-title">Your Recent Links</div>
                     <div id="accLinksList"></div>
-                    <a href="/api/auth/logout" class="secondary-btn" style="width:100%;justify-content:center;margin-top:14px;text-decoration:none;"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+                    <button id="accLogoutBtn" class="secondary-btn" style="width:100%;justify-content:center;margin-top:14px;"><i class="fas fa-sign-out-alt"></i> Sign Out</button>
                 </div>
             </div>
         </section>
@@ -522,7 +510,7 @@
         'use strict';
 
         // ============================================================
-        // PUSHER — PUBLIC CONFIG
+        // PUSHER — public config only (secret lives on the server)
         // ============================================================
         const PUSHER_KEY = 'b03bee410cd683a1a310';
         const PUSHER_CLUSTER = 'us2';
@@ -545,8 +533,7 @@
         let isAdminSession = false;
         let links = [];
         let chatMessages = [];
-        let currentUser = null;
-        let currentUserObj = null;
+        let currentUser = localStorage.getItem('mortyx_username') || null;
         let totalUsers = 1;
         let keysTotal = 0;
         let maintenanceOn = false;
@@ -594,64 +581,58 @@
         }
 
         // ============================================================
-        // DISCORD AUTH — CHECK SESSION
+        // USERNAME / ACCOUNT (no Discord needed)
         // ============================================================
-        function avatarUrl(user) {
-            if (!user.avatar) {
-                const n = parseInt(user.id.slice(-1)) || 0;
-                return `https://cdn.discordapp.com/embed/avatars/${n % 6}.png`;
-            }
-            return `https://cdn.discordapp.com/avatars/${user.id}/${user.avatar}.png?size=128`;
-        }
+        function applyUsername() {
+            const topBar = document.getElementById('topBarRight');
+            const signInBtn = document.getElementById('signInBtn');
+            const accountSignedOut = document.getElementById('accountSignedOut');
+            const accountSignedIn = document.getElementById('accountSignedIn');
 
-        async function checkDiscordSession() {
-            try {
-                const res = await fetch('/api/auth/me');
-                const data = await res.json();
-                if (data.signedIn) {
-                    currentUserObj = data.user;
-                    currentUser = data.user.global_name || data.user.username;
-                    applyDiscordUser();
+            if (currentUser) {
+                // Replace sign-in button with a chip
+                if (signInBtn) {
+                    const chip = document.createElement('div');
+                    chip.className = 'user-chip';
+                    chip.innerHTML = `
+                        <div class="avatar">${escapeHtml(currentUser.charAt(0).toUpperCase())}</div>
+                        <span class="uname">${escapeHtml(currentUser)}</span>
+                    `;
+                    chip.addEventListener('click', () => switchPanel('account'));
+                    signInBtn.replaceWith(chip);
                 }
-            } catch (e) { console.warn('Auth check failed', e); }
-        }
-
-        function applyDiscordUser() {
-            // Replace Sign In button with user chip
-            const loginBtn = document.getElementById('loginBtn');
-            if (loginBtn && currentUserObj) {
-                const chip = document.createElement('div');
-                chip.className = 'user-chip';
-                chip.title = 'Click to open account';
-                chip.innerHTML = `
-                    <img src="${avatarUrl(currentUserObj)}" alt="${escapeHtml(currentUser)}">
-                    <span class="uname">${escapeHtml(currentUser)}</span>
-                `;
-                chip.addEventListener('click', () => {
-                    // Navigate to account panel
-                    document.querySelectorAll('.sidebar-btn').forEach(b => b.classList.remove('active'));
-                    document.querySelectorAll('.panel').forEach(p => p.classList.remove('active'));
-                    document.querySelector('[data-panel="account"]').classList.add('active');
-                    document.getElementById('panel-account').classList.add('active');
-                    pageTitle.textContent = 'ACCOUNT';
-                    pageSubtitle.textContent = 'Signed in with Discord';
-                    renderAccount();
-                });
-                loginBtn.replaceWith(chip);
-            }
-
-            // Enable chat
-            const chatInput = document.getElementById('chatInput');
-            const chatSendBtn = document.getElementById('chatSendBtn');
-            if (currentUserObj) {
-                chatInput.disabled = false;
-                chatSendBtn.disabled = false;
-                chatInput.placeholder = 'Message as ' + currentUser;
                 document.getElementById('sumAuthor').textContent = currentUser;
+                accountSignedOut.classList.add('hidden');
+                accountSignedIn.classList.remove('hidden');
+                renderAccount();
             }
-
-            renderAccount();
         }
+
+        document.getElementById('accountSetUserBtn').addEventListener('click', () => {
+            const input = document.getElementById('accountUsernameInput');
+            const val = input.value.trim();
+            if (!val) { showToast('Enter a username'); return; }
+            if (!/^[a-zA-Z0-9_.-]{2,24}$/.test(val)) {
+                showToast('2–24 chars · letters, numbers, . _ -');
+                return;
+            }
+            currentUser = val;
+            localStorage.setItem('mortyx_username', val);
+            totalUsers += 1;
+            applyUsername();
+            showToast('Signed in as ' + val);
+        });
+
+        document.getElementById('signInBtn').addEventListener('click', () => {
+            switchPanel('account');
+        });
+
+        document.getElementById('accLogoutBtn').addEventListener('click', () => {
+            currentUser = null;
+            localStorage.removeItem('mortyx_username');
+            showToast('Signed out');
+            setTimeout(() => location.reload(), 400);
+        });
 
         // ============================================================
         // TABS
@@ -668,23 +649,24 @@
             analytics: ['ANALYTICS', 'Track your performance'],
             qr:        ['QR CODE', 'Scan · Share · Redirect'],
             admin:     ['ADMIN DASHBOARD', 'Manage every link & message'],
-            account:   ['ACCOUNT', 'Sign in to track your links']
+            account:   ['ACCOUNT', 'Set your username']
         };
 
+        function switchPanel(name) {
+            sidebarBtns.forEach(b => b.classList.toggle('active', b.getAttribute('data-panel') === name));
+            panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
+            const [t, s] = TITLES[name] || ['HYPERLINK', ''];
+            pageTitle.textContent = t;
+            pageSubtitle.textContent = s;
+            if (name === 'overview') renderOverview();
+            if (name === 'analytics') renderAnalytics();
+            if (name === 'admin') renderAdmin();
+            if (name === 'account') renderAccount();
+            if (name === 'chat') scrollChatToBottom();
+        }
+
         sidebarBtns.forEach(btn => {
-            btn.addEventListener('click', () => {
-                const name = btn.getAttribute('data-panel');
-                sidebarBtns.forEach(b => b.classList.toggle('active', b === btn));
-                panels.forEach(p => p.classList.toggle('active', p.id === 'panel-' + name));
-                const [t, s] = TITLES[name] || ['HYPERLINK', ''];
-                pageTitle.textContent = t;
-                pageSubtitle.textContent = s;
-                if (name === 'overview') renderOverview();
-                if (name === 'analytics') renderAnalytics();
-                if (name === 'admin') renderAdmin();
-                if (name === 'account') renderAccount();
-                if (name === 'chat') scrollChatToBottom();
-            });
+            btn.addEventListener('click', () => switchPanel(btn.getAttribute('data-panel')));
         });
 
         // ============================================================
@@ -821,16 +803,11 @@
 
         channel.bind('new-message', (data) => {
             renderChatMessage({
-                user: data.user, avatar: data.avatar, text: data.text,
+                user: data.user, text: data.text,
                 time: new Date(data.time), isSelf: false, system: false
             });
             scrollChatToBottom();
             renderAdmin();
-        });
-
-        channel.bind('system-message', (data) => {
-            renderChatMessage({ user: '', text: data.text, time: new Date(), isSelf: false, system: true });
-            scrollChatToBottom();
         });
 
         function renderChatMessage(m) {
@@ -840,11 +817,8 @@
             if (m.system) {
                 el.innerHTML = `<div class="text">${escapeHtml(m.text)}</div>`;
             } else {
-                const av = m.avatar
-                    ? `<img src="${m.avatar}" alt="">`
-                    : escapeHtml((m.user || '?').charAt(0).toUpperCase());
                 el.innerHTML = `
-                    <div class="avatar">${av}</div>
+                    <div class="avatar">${escapeHtml((m.user || '?').charAt(0).toUpperCase())}</div>
                     <div class="content">
                         <div class="meta">
                             <span class="name ${m.isSelf ? 'self' : ''}">${escapeHtml(m.user)}</span>
@@ -860,19 +834,16 @@
         function scrollChatToBottom() { chatMessagesEl.scrollTop = chatMessagesEl.scrollHeight; }
 
         function sendChat() {
-            if (!currentUserObj) { showToast('Sign in with Discord to chat'); return; }
+            if (!currentUser) { showToast('Set a username first'); switchPanel('account'); return; }
             const text = chatInput.value.trim();
             if (!text) return;
             if (text.length > 200) return;
             // optimistic local render
-            renderChatMessage({
-                user: currentUser, avatar: avatarUrl(currentUserObj), text,
-                time: new Date(), isSelf: true, system: false
-            });
+            renderChatMessage({ user: currentUser, text, time: new Date(), isSelf: true, system: false });
             scrollChatToBottom();
             fetch('/api/chat-send', {
                 method: 'POST', headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({ text })
+                body: JSON.stringify({ user: currentUser, text })
             }).catch(err => console.error('Send failed', err));
             chatInput.value = '';
         }
@@ -972,7 +943,11 @@
                     adminLock.classList.add('hidden');
                     adminDashboard.classList.remove('hidden');
                     adminPasscode.value = '';
-                    if (maintenanceOn) { document.body.classList.remove('maint-on'); document.getElementById('maintOverlay').classList.remove('show'); }
+                    // If maintenance is on, hide overlay for this admin
+                    if (maintenanceOn) {
+                        document.body.classList.remove('maint-on');
+                        document.getElementById('maintOverlay').classList.remove('show');
+                    }
                     renderAdmin();
                     showToast('Admin unlocked');
                 } else if (res.status === 429) {
@@ -990,7 +965,10 @@
             sessionStorage.removeItem('mortyx_admin_pass');
             adminLock.classList.remove('hidden');
             adminDashboard.classList.add('hidden');
-            if (maintenanceOn) { document.body.classList.add('maint-on'); document.getElementById('maintOverlay').classList.add('show'); }
+            if (maintenanceOn) {
+                document.body.classList.add('maint-on');
+                document.getElementById('maintOverlay').classList.add('show');
+            }
             showToast('Admin locked');
         });
 
@@ -1035,7 +1013,7 @@
         function renderAccount() {
             const signedOut = document.getElementById('accountSignedOut');
             const signedIn = document.getElementById('accountSignedIn');
-            if (currentUserObj) {
+            if (currentUser) {
                 signedOut.classList.add('hidden');
                 signedIn.classList.remove('hidden');
                 const mine = links.filter(l => l.owner === currentUser);
@@ -1059,10 +1037,10 @@
         // TOP-BAR BUTTONS
         // ============================================================
         document.getElementById('tutorialBtn').addEventListener('click', () => showToast('Paste URL · Generate · Copy'));
-        document.getElementById('changelogBtn').addEventListener('click', () => showToast('v6.0 · Discord login · Real-time chat'));
+        document.getElementById('changelogBtn').addEventListener('click', () => showToast('v6.0 · Real-time chat'));
 
         // ============================================================
-        // MAINTENANCE
+        // MAINTENANCE — SERVER-SYNCED
         // ============================================================
         const maintToggle = document.getElementById('maintToggle');
         const maintCard = document.getElementById('maintCard');
@@ -1088,6 +1066,7 @@
             maintToggle.checked = on;
             maintCard.classList.toggle('on', on);
             maintStatus.textContent = on ? 'ON' : 'OFF';
+            // Hide overlay only for the admin session
             const shouldShow = on && !isAdminSession;
             document.body.classList.toggle('maint-on', shouldShow);
             maintOverlay.classList.toggle('show', shouldShow);
@@ -1099,8 +1078,19 @@
             maintToggle.disabled = false;
             if (result === null) { maintToggle.checked = !desired; showToast('Failed to update'); return; }
             applyMaintenanceUI(result);
-            if (result) { document.body.classList.remove('maint-on'); maintOverlay.classList.remove('show'); showToast('Maintenance ON'); }
-            else showToast('Maintenance OFF');
+            if (result) {
+                // admin keeps browsing
+                document.body.classList.remove('maint-on');
+                maintOverlay.classList.remove('show');
+                showToast('Maintenance ON — everyone else is locked out');
+            } else showToast('Maintenance OFF — site is live');
+        });
+
+        // Also re-check maintenance when the page regains focus
+        window.addEventListener('focus', async () => {
+            if (isAdminSession) return; // admins don't get locked
+            const on = await fetchMaintenanceState();
+            if (on !== maintenanceOn) applyMaintenanceUI(on);
         });
 
         // ============================================================
@@ -1109,7 +1099,7 @@
         (async function init() {
             renderOverview();
             renderHistory();
-            await checkDiscordSession();
+            applyUsername();
             const on = await fetchMaintenanceState();
             applyMaintenanceUI(on);
         })();
