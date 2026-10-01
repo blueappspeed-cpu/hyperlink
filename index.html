@@ -244,7 +244,7 @@
         .maint-overlay .m-footer a { font-size: 0.75rem; font-weight: 700; text-transform: uppercase; color: #ccc; background: rgba(255,255,255,0.05); border: 1px solid rgba(255,255,255,0.1); padding: 10px 18px; border-radius: 10px; text-decoration: none; }
         body.maint-on .app { display: none; }
 
-        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #fff; color: #000; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 22px; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); z-index: 6000; opacity: 0; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); display: flex; align-items: center; gap: 8px; pointer-events: none; }
+        .toast { position: fixed; bottom: 24px; left: 50%; transform: translateX(-50%) translateY(100px); background: #fff; color: #000; font-size: 0.78rem; font-weight: 800; letter-spacing: 1.5px; text-transform: uppercase; padding: 12px 22px; border-radius: 10px; box-shadow: 0 20px 40px rgba(0,0,0,0.5); z-index: 6000; opacity: 0; transition: all 0.3s cubic-bezier(0.16,1,0.3,1); display: flex; align-items: center; gap: 8px; pointer-events: none; max-width: 90vw; text-align: center; }
         .toast.show { transform: translateX(-50%) translateY(0); opacity: 1; }
         .hidden { display: none !important; }
 
@@ -510,7 +510,7 @@
         'use strict';
 
         // ============================================================
-        // PUSHER — public config only (secret lives on the server)
+        // PUSHER — public config only
         // ============================================================
         const PUSHER_KEY = 'b03bee410cd683a1a310';
         const PUSHER_CLUSTER = 'us2';
@@ -545,7 +545,7 @@
             toastText.textContent = msg;
             toast.classList.add('show');
             clearTimeout(toastTimer);
-            toastTimer = setTimeout(() => toast.classList.remove('show'), 1800);
+            toastTimer = setTimeout(() => toast.classList.remove('show'), 2500);
         }
 
         // ============================================================
@@ -581,16 +581,14 @@
         }
 
         // ============================================================
-        // USERNAME / ACCOUNT (no Discord needed)
+        // USERNAME
         // ============================================================
         function applyUsername() {
-            const topBar = document.getElementById('topBarRight');
             const signInBtn = document.getElementById('signInBtn');
             const accountSignedOut = document.getElementById('accountSignedOut');
             const accountSignedIn = document.getElementById('accountSignedIn');
 
             if (currentUser) {
-                // Replace sign-in button with a chip
                 if (signInBtn) {
                     const chip = document.createElement('div');
                     chip.className = 'user-chip';
@@ -613,7 +611,7 @@
             const val = input.value.trim();
             if (!val) { showToast('Enter a username'); return; }
             if (!/^[a-zA-Z0-9_.-]{2,24}$/.test(val)) {
-                showToast('2–24 chars · letters, numbers, . _ -');
+                showToast('2-24 chars: letters, numbers, . _ -');
                 return;
             }
             currentUser = val;
@@ -783,7 +781,7 @@
         });
 
         // ============================================================
-        // GLOBAL CHAT — REAL PUSHER
+        // GLOBAL CHAT
         // ============================================================
         const chatMessagesEl = document.getElementById('chatMessages');
         const chatInput = document.getElementById('chatInput');
@@ -838,7 +836,6 @@
             const text = chatInput.value.trim();
             if (!text) return;
             if (text.length > 200) return;
-            // optimistic local render
             renderChatMessage({ user: currentUser, text, time: new Date(), isSelf: true, system: false });
             scrollChatToBottom();
             fetch('/api/chat-send', {
@@ -942,8 +939,7 @@
                     sessionStorage.setItem('mortyx_admin_pass', entered);
                     adminLock.classList.add('hidden');
                     adminDashboard.classList.remove('hidden');
-                    adminPasscode.value = '';
-                    // If maintenance is on, hide overlay for this admin
+                    // Keep the input filled so the maint toggle can read it
                     if (maintenanceOn) {
                         document.body.classList.remove('maint-on');
                         document.getElementById('maintOverlay').classList.remove('show');
@@ -1037,10 +1033,10 @@
         // TOP-BAR BUTTONS
         // ============================================================
         document.getElementById('tutorialBtn').addEventListener('click', () => showToast('Paste URL · Generate · Copy'));
-        document.getElementById('changelogBtn').addEventListener('click', () => showToast('v6.0 · Real-time chat'));
+        document.getElementById('changelogBtn').addEventListener('click', () => showToast('v6.1 · Fixed maintenance toggle'));
 
         // ============================================================
-        // MAINTENANCE — SERVER-SYNCED
+        // MAINTENANCE — FIXED HANDLER
         // ============================================================
         const maintToggle = document.getElementById('maintToggle');
         const maintCard = document.getElementById('maintCard');
@@ -1051,44 +1047,72 @@
             try { const r = await fetch('/api/maintenance'); if (r.ok) { const d = await r.json(); return !!d.on; } } catch (e) {}
             return false;
         }
-        async function setMaintenanceState(on) {
-            try {
-                const r = await fetch('/api/maintenance', {
-                    method: 'POST', headers: { 'Content-Type': 'application/json' },
-                    body: JSON.stringify({ on, passcode: sessionStorage.getItem('mortyx_admin_pass') || '' })
-                });
-                if (r.ok) { const d = await r.json(); return !!d.on; }
-            } catch (e) {}
-            return null;
-        }
         function applyMaintenanceUI(on) {
             maintenanceOn = on;
             maintToggle.checked = on;
             maintCard.classList.toggle('on', on);
             maintStatus.textContent = on ? 'ON' : 'OFF';
-            // Hide overlay only for the admin session
             const shouldShow = on && !isAdminSession;
             document.body.classList.toggle('maint-on', shouldShow);
             maintOverlay.classList.toggle('show', shouldShow);
         }
+
         maintToggle.addEventListener('change', async () => {
             const desired = maintToggle.checked;
+            // Read passcode from the input field (still populated after unlock)
+            // or fall back to sessionStorage
+            const passcode = (adminPasscode.value || '').trim()
+                          || sessionStorage.getItem('mortyx_admin_pass')
+                          || '';
+
+            if (!passcode) {
+                maintToggle.checked = !desired;
+                showToast('Unlock admin first');
+                return;
+            }
+
             maintToggle.disabled = true;
-            const result = await setMaintenanceState(desired);
-            maintToggle.disabled = false;
-            if (result === null) { maintToggle.checked = !desired; showToast('Failed to update'); return; }
-            applyMaintenanceUI(result);
-            if (result) {
-                // admin keeps browsing
-                document.body.classList.remove('maint-on');
-                maintOverlay.classList.remove('show');
-                showToast('Maintenance ON — everyone else is locked out');
-            } else showToast('Maintenance OFF — site is live');
+
+            try {
+                const res = await fetch('/api/maintenance', {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({ on: desired, passcode: passcode })
+                });
+
+                const data = await res.json().catch(() => ({}));
+
+                if (res.ok && data.ok) {
+                    applyMaintenanceUI(data.on);
+                    if (data.on) {
+                        document.body.classList.remove('maint-on');
+                        maintOverlay.classList.remove('show');
+                        showToast('Maintenance ON — everyone else is locked out');
+                    } else {
+                        showToast('Maintenance OFF — site is live');
+                    }
+                } else {
+                    maintToggle.checked = !desired;
+                    if (res.status === 401) {
+                        showToast('Wrong passcode — lock and unlock admin');
+                    } else if (res.status === 500) {
+                        showToast('Server missing ADMIN_PASSCODE env var');
+                    } else {
+                        showToast('Failed: ' + (data.error || ('HTTP ' + res.status)));
+                    }
+                }
+            } catch (e) {
+                maintToggle.checked = !desired;
+                showToast('Network error — try again');
+                console.error('Maintenance POST failed:', e);
+            } finally {
+                maintToggle.disabled = false;
+            }
         });
 
-        // Also re-check maintenance when the page regains focus
+        // Re-check maintenance state when tab regains focus
         window.addEventListener('focus', async () => {
-            if (isAdminSession) return; // admins don't get locked
+            if (isAdminSession) return;
             const on = await fetchMaintenanceState();
             if (on !== maintenanceOn) applyMaintenanceUI(on);
         });
